@@ -4,11 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
-    darwin-stubs.url = "github:bbarker/darwin-stubs";
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, darwin-stubs, home-manager }:
+  outputs = { self, nixpkgs, nix-darwin, home-manager }:
     let
       darwinSystem = "x86_64-darwin";
       nixosSystem = "x86_64-linux";
@@ -18,7 +17,7 @@
         allowBroken = true;
       };
 
-      pkgsDarwin = nixpkgs.legacyPackages.${darwinSystem}.extend nix-darwin.overlay.extend darwin-stubs.overlay;
+      pkgsDarwin = nixpkgs.legacyPackages.${darwinSystem}.extend nix-darwin.overlay;
       pkgsNixOS = nixpkgs.legacyPackages.${nixosSystem};
 
       darwinConfig = { pkgs, ... }: {
