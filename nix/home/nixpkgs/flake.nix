@@ -54,7 +54,7 @@
 
       nixosConfigurations.ChrisPC = nixpkgs.lib.nixosSystem {
         modules = [
-          { config, pkgs, ... }: {
+          {
             imports = [
               (home-manager-config { system = nixosSystem; pkgs = pkgsNixOS; })
             ];
@@ -65,6 +65,7 @@
         ];
         system = nixosSystem;
       };
+
 
       home-manager = home-manager.lib.homeManagerConfiguration {
         configuration = { pkgs, ... }: {
