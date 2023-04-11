@@ -1,79 +1,62 @@
 {
-  description = "A flake for my personal configuration with home-manager on MacOS and NixOS";
+  description = "Shared Home Manager configuration for MacOS and NixOS";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager }:
+  outputs = { self, nixpkgs, home-manager }:
     let
-      darwinSystem = "x86_64-darwin";
-      nixosSystem = "x86_64-linux";
+      # Select the correct nixpkgs based on the system
+      pkgsFor = system: import nixpkgs { inherit system; overlays = [ home-manager.overlay ]; };
 
-      commonConfig = {
-        allowUnfree = true;
-        allowBroken = true;
-      };
+      # Import 'lib' attribute from Nixpkgs
+      lib = nixpkgs.lib;
 
-      pkgsDarwin = nixpkgs.legacyPackages.${darwinSystem}.extend nix-darwin.overlay;
-      pkgsNixOS = nixpkgs.legacyPackages.${nixosSystem};
-
-      darwinConfig = { pkgs, ... }: {
-        nix.darwinConfig = {
-          overlays = [ nix-darwin.overlay ];
-          system.stateVersion = 4;
-          system.activationScripts = { };
-          environment.systemPackages = with pkgs; [ ];
+      # System-specific values
+      systemValues = {
+        "x86_64-darwin" = {
+          homeDirPrefix = "/Users";
+          extraPrograms = { kitty = { enable = true; }; };
+        };
+        "x86_64-linux" = {
+          homeDirPrefix = "/home";
+          extraPrograms = { alacritty = { enable = true; }; };
         };
       };
 
-      home-manager-config = { system, pkgs, ... }: {
-        imports = [
-          "${home-manager}/modules/home-manager/home-manager.nix"
-        ];
-
-        home-manager.users.cwilliams = { config, pkgs, ... }: {
-          home.packages = with pkgs; [
-          ];
-
-          home.stateVersion = "22.11";
+      # Define the Home Manager configuration for a specific system
+      homeConfigFor = system: let
+        values = systemValues.${system};
+        commonPrograms = {
+          vim = { enable = true; };
+          git = { enable = true; };
         };
-      };
+      in {
+        imports = [ (pkgsFor system).home-manager.lib.hmModulesPath ];
 
+        home = {
+          username = "cwilliams";
+          homeDirectory = "${values.homeDirPrefix}/cwilliams";
+          stateVersion = "23.05";
+        };
+
+        programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
+      };
     in {
-      nix-darwin = nix-darwin.lib.darwinSystem {
-        modules = [
-          darwinConfig
-          (home-manager-config { system = darwinSystem; pkgs = pkgsDarwin; })
-        ];
-        system = darwinSystem;
+      # Home Manager configurations for MacOS and NixOS
+      darwinConfigurations = {
+        atlassian-mbp = homeConfigFor "x86_64-darwin";
+      };
+      nixosConfigurations = {
+        personal-nixos-desktop = homeConfigFor "x86_64-linux";
       };
 
-      nixosConfigurations.ChrisPC = nixpkgs.lib.nixosSystem {
-        modules = [
-          {
-            imports = [
-              (home-manager-config { system = nixosSystem; pkgs = pkgsNixOS; })
-            ];
-
-            # Please set your desired hostname
-            networking.hostName = "ChrisPC";
-          }
-        ];
-        system = nixosSystem;
-      };
-
-
-      home-manager = home-manager.lib.homeManagerConfiguration {
-        configuration = { pkgs, ... }: {
-          imports = [
-            (home-manager-config { system = darwinSystem; pkgs = pkgsDarwin; })
-          ];
-        };
-        system = darwinSystem;
-        username = "cwilliams";
+      # Basic checks for Flake
+      checks = {
+        darwin = nixpkgs.lib.tests.runTests nixpkgs darwinConfigurations.atlassian-mbp.config;
+        nixos = nixpkgs.lib.tests.runTests nixpkgs nixosConfigurations.personal-nixos-desktop.config;
       };
     };
 }
