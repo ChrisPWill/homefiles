@@ -31,11 +31,7 @@
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [{
-          home = {
-            username = shared.userName;
-            homeDirectory = "${values.homeDirPrefix}/${shared.userName}";
-            stateVersion = "23.05";
-          };
+          home = import ./shared/home.nix { inherit (shared) userName homeDirPrefix; };
 
           # Merge common and system-specific programs
           programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
