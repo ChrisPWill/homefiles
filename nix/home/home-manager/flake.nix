@@ -23,7 +23,7 @@
       lib = nixpkgs.lib;
 
       # System-specific values
-      systemValues = system: let pkgs = pkgsFor system; in import ./systems/darwin.nix { inherit pkgs lib; };
+      systemValues = system: let pkgs = pkgsFor system; in import ./systems/nixos.nix { inherit pkgs lib; };
 
       # Define the Home Manager configuration for a specific system
       homeConfigFor = system: let
@@ -32,6 +32,7 @@
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = machineConfig.userEmail; };
+	  firefox = import ./programs/firefox.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -40,6 +41,19 @@
 
           # Merge common and system-specific programs
           programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
+
+          # xsession
+          xsession = {
+            enable = true;
+            windowManager = {
+              awesome = {
+                enable = true;
+                luaModules = with pkgs.luaPackages; [
+                  luarocks
+                ];
+              };
+            };
+          };
         }];
       };
 
