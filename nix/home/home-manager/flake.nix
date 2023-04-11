@@ -31,6 +31,8 @@
           neovim = import ./programs/neovim.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = machineConfig.userEmail; };
 	  firefox = import ./programs/firefox.nix;
+	  ripgrep = import ./programs/ripgrep.nix;
+	  vscode = import ./programs/vscode.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
