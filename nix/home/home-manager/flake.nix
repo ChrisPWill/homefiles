@@ -1,5 +1,5 @@
 {
-  description = "Shared Home Manager configuration for MacOS";
+  description = "Shared Home Manager configuration for MacOS and Linux";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -59,8 +59,11 @@
       darwinConfigurations = {
         ${shared.userName} = homeConfigFor shared.darwinSystem;
       };
+      nixosConfigurations = {
+        ${shared.userName} = homeConfigFor shared.linuxSystem;
+      };
 
     in {
-      homeConfigurations = darwinConfigurations;
+      homeConfigurations = nixosConfigurations;
     };
 }
