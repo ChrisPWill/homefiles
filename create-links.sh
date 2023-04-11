@@ -10,4 +10,4 @@ function link_and_backup_destination {
 }
 
 link_and_backup_destination "nix/etc/nix/nix.conf" "/etc/nix/nix.conf"
-link_and_backup_destination "nix/home/nixpkgs/flake.nix" "$HOME/.config/nixpkgs/flake.nix"
+link_and_backup_destination "nix/home/home-manager" "$HOME/.config/home-manager"
