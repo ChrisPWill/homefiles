@@ -17,7 +17,7 @@
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
         inherit system;
-	config.allowUnfree = true;
+        config.allowUnfree = true;
       };
 
       # Import 'lib' attribute from Nixpkgs
@@ -33,8 +33,8 @@
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = machineConfig.userEmail; };
-	  firefox = import ./programs/firefox.nix;
-	  vscode = import ./programs/vscode.nix;
+          firefox = import ./programs/firefox.nix;
+          vscode = import ./programs/vscode.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
