@@ -8,11 +8,8 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      # Constants
-      darwinSystem = "x86_64-darwin";
-      userName = "cwilliams";
-      userFullName = "Chris Williams";
-      userEmail = "cwilliams@atlassian.com";
+      # Import shared constants
+      shared = import ./shared/constants.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: nixpkgs.legacyPackages.${system};
@@ -21,43 +18,22 @@
       lib = nixpkgs.lib;
 
       # System-specific values
-      systemValues = system: {
-        x86_64-darwin = {
-          homeDirPrefix = "/Users";
-          extraPrograms = {
-            kitty = { enable = true; };
-            home-manager = { enable = true; };
-          };
-        };
-      }.${system};
+      systemValues = system: let pkgs = pkgsFor system; in import ./systems/darwin.nix { inherit pkgs lib; };
 
       # Define the Home Manager configuration for a specific system
       homeConfigFor = system: let
         values = systemValues system;
         pkgs = pkgsFor system;
         commonPrograms = {
-          neovim = {
-            enable = true;
-            defaultEditor = true;
-            extraConfig = ''
-              " Neovim example configuration
-              set number
-              set background=dark
-              colorscheme default
-            '';
-          };
-          git = {
-            enable = true;
-            userName = userFullName;
-            userEmail = userEmail;
-          };
+          neovim = import ./programs/neovim.nix;
+          git = import ./programs/git.nix { inherit (shared) userFullName userEmail; };
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [{
           home = {
-            username = userName;
-            homeDirectory = "${values.homeDirPrefix}/${userName}";
+            username = shared.userName;
+            homeDirectory = "${values.homeDirPrefix}/${shared.userName}";
             stateVersion = "23.05";
           };
 
@@ -68,7 +44,7 @@
 
       # Darwin configurations
       darwinConfigurations = {
-        ${userName} = homeConfigFor darwinSystem;
+        ${shared.userName} = homeConfigFor shared.darwinSystem;
       };
 
     in {
