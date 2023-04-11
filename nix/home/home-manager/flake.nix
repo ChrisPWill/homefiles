@@ -68,6 +68,9 @@
       };
 
     in {
-      homeConfigurations = nixosConfigurations;
+      homeConfigurations = {
+        "cwilliams-work-mbp" = darwinConfigurations;
+        "personal-pc" = darwinConfigurations;
+      };
     };
 }
