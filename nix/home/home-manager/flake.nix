@@ -12,7 +12,7 @@
       shared = import ./shared/constants.nix;
 
       # Import machine configuration
-      machineConfig = import ./current-machine.nix;
+      machineConfig = import ./machines/personal-pc.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: nixpkgs.legacyPackages.${system};
