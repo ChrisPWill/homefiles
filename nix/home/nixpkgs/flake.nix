@@ -51,6 +51,6 @@
       };
 
     in {
-      darwinConfigurations = darwinConfigurations;
+      homeConfigurations = darwinConfigurations;
     };
 }
