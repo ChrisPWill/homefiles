@@ -26,14 +26,17 @@
         };
       }.${system};
 
-      # Define the Home Manager configuration for a specific system
-      homeConfigFor = system: let
-        values = systemValues system;
-        commonPrograms = {
-          vim = { enable = true; };
-          git = { enable = true; };
-        };
-      in {
+    # Define the Home Manager configuration for a specific system
+    homeConfigFor = system: let
+      values = systemValues system;
+      pkgs = pkgsFor system;
+      commonPrograms = {
+        vim = { enable = true; };
+        git = { enable = true; };
+      };
+    in home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [{
         home = {
           username = userName;
           homeDirectory = "${values.homeDirPrefix}/${userName}";
@@ -41,16 +44,12 @@
         };
 
         programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
-      };
+      }];
+    };
 
-      darwinConfigurations = {
-        ${userName} = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgsFor darwinSystem;
-          modules = [
-            homeConfigFor darwinSystem
-          ];
-        };
-      };
+    darwinConfigurations = {
+      ${userName} = homeConfigFor darwinSystem;
+    };
 
     in {
       homeConfigurations = darwinConfigurations;
