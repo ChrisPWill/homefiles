@@ -47,7 +47,10 @@
       };
 
       darwinConfigurations = {
-        atlassian-mbp = homeConfigFor darwinSystem;
+        cwilliams = home-manager.lib.mkHomeConfiguration {
+          system = darwinSystem;
+          configuration = homeConfigFor darwinSystem;
+        };
       };
 
     in {
