@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    # Use the current-machine.nix symbolic link
+    machine = { url = "./current-machine.nix"; };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -11,8 +13,8 @@
       # Import shared constants
       shared = import ./shared/constants.nix;
 
-      # Import machine configuration using the absolute path
-      machineConfig = import ./current-machine.nix;
+      # Import machine configuration
+      machineConfig = import inputs.machine;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: nixpkgs.legacyPackages.${system};
