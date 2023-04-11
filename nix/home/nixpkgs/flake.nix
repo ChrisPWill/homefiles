@@ -8,38 +8,35 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      # System name constant
+      # Constants
       darwinSystem = "x86_64-darwin";
+      userName = "cwilliams";
 
       # Select the correct nixpkgs based on the system
-      pkgsFor = system: import nixpkgs {
-        inherit system;
-      };
+      pkgsFor = system: nixpkgs.legacyPackages.${system};
 
       # Import 'lib' attribute from Nixpkgs
       lib = nixpkgs.lib;
 
       # System-specific values
-      systemValues = {
-        ${darwinSystem} = {
+      systemValues = system: {
+        x86_64-darwin = {
           homeDirPrefix = "/Users";
           extraPrograms = { kitty = { enable = true; }; };
         };
-      };
+      }.${system};
 
       # Define the Home Manager configuration for a specific system
       homeConfigFor = system: let
-        values = systemValues.${system};
+        values = systemValues system;
         commonPrograms = {
           vim = { enable = true; };
           git = { enable = true; };
         };
       in {
-        imports = [ (pkgsFor system).home-manager.lib.hmModulesPath ];
-
         home = {
-          username = "cwilliams";
-          homeDirectory = "${values.homeDirPrefix}/cwilliams";
+          username = userName;
+          homeDirectory = "${values.homeDirPrefix}/${userName}";
           stateVersion = "23.05";
         };
 
@@ -47,10 +44,11 @@
       };
 
       darwinConfigurations = {
-        cwilliams = home-manager.lib.homeManagerConfiguration {
-          system = darwinSystem;
+        ${userName} = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgsFor darwinSystem;
-          configuration = homeConfigFor darwinSystem;
+          modules = [
+            homeConfigFor darwinSystem
+          ];
         };
       };
 
