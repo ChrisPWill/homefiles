@@ -47,7 +47,7 @@
       };
 
       darwinConfigurations = {
-        cwilliams = home-manager.lib.mkHomeConfiguration {
+        cwilliams = home-manager.lib.homeManagerConfiguration {
           system = darwinSystem;
           configuration = homeConfigFor darwinSystem;
         };
