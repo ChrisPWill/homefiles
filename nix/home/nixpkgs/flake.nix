@@ -11,6 +11,8 @@
       # Constants
       darwinSystem = "x86_64-darwin";
       userName = "cwilliams";
+      userFullName = "Chris Williams";
+      userEmail = "cwilliams@atlassian.com";
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: nixpkgs.legacyPackages.${system};
@@ -22,7 +24,10 @@
       systemValues = system: {
         x86_64-darwin = {
           homeDirPrefix = "/Users";
-          extraPrograms = { kitty = { enable = true; }; };
+          extraPrograms = {
+            kitty = { enable = true; };
+            home-manager = { enable = true; };
+          };
         };
       }.${system};
 
@@ -31,8 +36,21 @@
         values = systemValues system;
         pkgs = pkgsFor system;
         commonPrograms = {
-          vim = { enable = true; };
-          git = { enable = true; };
+          neovim = {
+            enable = true;
+            defaultEditor = true;
+            extraConfig = ''
+              " Neovim example configuration
+              set number
+              set background=dark
+              colorscheme default
+            '';
+          };
+          git = {
+            enable = true;
+            userName = userFullName;
+            userEmail = userEmail;
+          };
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
