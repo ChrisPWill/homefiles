@@ -8,19 +8,23 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
+      # System name constants
+      darwinSystem = "x86_64-darwin";
+      linuxSystem = "x86_64-linux";
+
       # Select the correct nixpkgs based on the system
-      pkgsFor = system: import nixpkgs { inherit system; overlays = [ home-manager.overlay ]; };
+      pkgsFor = system: import nixpkgs { inherit system; overlays = home-manager.overlays; };
 
       # Import 'lib' attribute from Nixpkgs
       lib = nixpkgs.lib;
 
       # System-specific values
       systemValues = {
-        "x86_64-darwin" = {
+        ${darwinSystem} = {
           homeDirPrefix = "/Users";
           extraPrograms = { kitty = { enable = true; }; };
         };
-        "x86_64-linux" = {
+        ${linuxSystem} = {
           homeDirPrefix = "/home";
           extraPrograms = { alacritty = { enable = true; }; };
         };
@@ -44,19 +48,20 @@
 
         programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
       };
-    in {
-      # Home Manager configurations for MacOS and NixOS
+
       darwinConfigurations = {
-        atlassian-mbp = homeConfigFor "x86_64-darwin";
-      };
-      nixosConfigurations = {
-        personal-nixos-desktop = homeConfigFor "x86_64-linux";
+        atlassian-mbp = homeConfigFor darwinSystem;
       };
 
+      nixosConfigurations = {
+        personal-nixos-desktop = homeConfigFor linuxSystem;
+      };
+
+    in {
       # Basic checks for Flake
       checks = {
-        darwin = nixpkgs.lib.tests.runTests nixpkgs darwinConfigurations.atlassian-mbp.config;
-        nixos = nixpkgs.lib.tests.runTests nixpkgs nixosConfigurations.personal-nixos-desktop.config;
+        "${darwinSystem}-userEnv" = (pkgsFor darwinSystem).home-manager.buildUser home-manager.darwinConfigurations.atlassian-mbp.config;
+        "${linuxSystem}-userEnv" = (pkgsFor linuxSystem).home-manager.buildUser home-manager.nixosConfigurations.personal-nixos-desktop.config;
       };
     };
 }
