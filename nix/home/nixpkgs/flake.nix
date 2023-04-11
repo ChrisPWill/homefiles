@@ -13,7 +13,9 @@
       linuxSystem = "x86_64-linux";
 
       # Select the correct nixpkgs based on the system
-      pkgsFor = system: import nixpkgs { inherit system; overlays = home-manager.overlays; };
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+      };
 
       # Import 'lib' attribute from Nixpkgs
       lib = nixpkgs.lib;
@@ -58,10 +60,7 @@
       };
 
     in {
-      # Basic checks for Flake
-      checks = {
-        "${darwinSystem}-userEnv" = (pkgsFor darwinSystem).home-manager.buildUser home-manager.darwinConfigurations.atlassian-mbp.config;
-        "${linuxSystem}-userEnv" = (pkgsFor linuxSystem).home-manager.buildUser home-manager.nixosConfigurations.personal-nixos-desktop.config;
-      };
+      darwinConfigurations = darwinConfigurations;
+      nixosConfigurations = nixosConfigurations;
     };
 }
