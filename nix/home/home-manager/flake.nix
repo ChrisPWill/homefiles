@@ -15,7 +15,10 @@
       machineConfig = import ./machines/personal-pc.nix;
 
       # Select the correct nixpkgs based on the system
-      pkgsFor = system: nixpkgs.legacyPackages.${system};
+      pkgsFor = system: import nixpkgs {
+        inherit system;
+	config.allowUnfree = true;
+      };
 
       # Import 'lib' attribute from Nixpkgs
       lib = nixpkgs.lib;
