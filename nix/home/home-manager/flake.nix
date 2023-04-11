@@ -6,10 +6,13 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       # Import shared constants
       shared = import ./shared/constants.nix;
+
+      # Import machine configuration using the absolute path
+      machineConfig = import ./current-machine.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: nixpkgs.legacyPackages.${system};
@@ -26,7 +29,7 @@
         pkgs = pkgsFor system;
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
-          git = import ./programs/git.nix { inherit (shared) userFullName userEmail; };
+          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = machineConfig.userEmail; };
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
