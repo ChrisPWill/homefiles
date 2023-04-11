@@ -1,5 +1,5 @@
 {
-  description = "Shared Home Manager configuration for MacOS and NixOS";
+  description = "Shared Home Manager configuration for MacOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,9 +8,8 @@
 
   outputs = { self, nixpkgs, home-manager }:
     let
-      # System name constants
+      # System name constant
       darwinSystem = "x86_64-darwin";
-      linuxSystem = "x86_64-linux";
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -25,10 +24,6 @@
         ${darwinSystem} = {
           homeDirPrefix = "/Users";
           extraPrograms = { kitty = { enable = true; }; };
-        };
-        ${linuxSystem} = {
-          homeDirPrefix = "/home";
-          extraPrograms = { alacritty = { enable = true; }; };
         };
       };
 
@@ -55,12 +50,7 @@
         atlassian-mbp = homeConfigFor darwinSystem;
       };
 
-      nixosConfigurations = {
-        personal-nixos-desktop = homeConfigFor linuxSystem;
-      };
-
     in {
       darwinConfigurations = darwinConfigurations;
-      nixosConfigurations = nixosConfigurations;
     };
 }
