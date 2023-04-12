@@ -25,7 +25,7 @@
       };
     };
 
-    firefox = import ./programs/firefox.nix;
+    firefox = import ../programs/firefox.nix;
   };
 
   extraModules = [{
