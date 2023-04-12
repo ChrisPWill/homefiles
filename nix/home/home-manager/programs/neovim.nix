@@ -9,6 +9,7 @@
 
   plugins = with pkgs.vimPlugins; [
     bufferline-nvim
+    leap-nvim
     mini-nvim
     noice-nvim
     nui-nvim
@@ -24,7 +25,13 @@
   '';
 
   extraLuaConfig = ''
+    -- Theming
     vim.opt.termguicolors = true
-    require("bufferline").setup{}
+
+    -- bufferline config
+    require('bufferline').setup{}
+
+    -- leap
+    require('leap').add_default_mappings()
   '';
 }
