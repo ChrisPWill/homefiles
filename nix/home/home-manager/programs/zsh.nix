@@ -121,7 +121,7 @@ autoload -U colors && colors
 generate_ps1 26 196
 
 zle-keymap-select () {
-if [[ $TERM == "rxvt-unicode" || $TERM == "rxvt-unicode-256color" ]]; then
+if [[ $TERM == "rxvt-unicode" || $TERM == "rxvt-unicode-256color" || $TERM == "xterm-256color" ]]; then
     if [ $KEYMAP = vicmd ]; then
         generate_ps1 40 196
         () { return $__prompt_status }
@@ -137,7 +137,7 @@ zle -N zle-keymap-select
 
 zle-line-init () {
     zle -K viins
-    if [[ $TERM == "rxvt-unicode" || $TERM = "rxvt-unicode-256color" ]]; then
+    if [[ $TERM == "rxvt-unicode" || $TERM = "rxvt-unicode-256color" || $TERM == "xterm-256color" ]]; then
         generate_ps1 26 196
         () { return $__prompt_status }
         zle reset-prompt
