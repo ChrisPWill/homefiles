@@ -9,16 +9,13 @@
   };
 
   packages = with pkgs; [
-    docker
     fasd
     fd
     fx
     kondo
     (pkgs.nerdfonts.override { fonts = ["FantasqueSansMono"]; })
     powerline-go
-    python3Full
     ripgrep
-    rustup
     tealdeer
   ];
 }
