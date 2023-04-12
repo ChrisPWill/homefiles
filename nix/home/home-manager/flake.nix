@@ -35,6 +35,7 @@
         commonPrograms = {
 	  bat = import ./programs/bat.nix;
           exa = import ./programs/exa.nix;
+	  fzf = import ./programs/fzf.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
           neovim = import ./programs/neovim.nix { inherit pkgs; };
           vscode = import ./programs/vscode.nix;
