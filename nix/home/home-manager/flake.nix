@@ -40,25 +40,16 @@
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [{
-          home = import ./shared/home.nix { inherit (shared) userName; inherit (values) homeDirPrefix; };
+        modules = [
+          {
+            home = import ./shared/home.nix { inherit (shared) userName; inherit (values) homeDirPrefix; };
 
-          # Merge common and system-specific programs
-          programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
+            # Merge common and system-specific programs
+            programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
 
-          # xsession
-          xsession = {
-            enable = true;
-            windowManager = {
-              awesome = {
-                enable = true;
-                luaModules = with pkgs.luaPackages; [
-                  luarocks
-                ];
-              };
-            };
-          };
-        }];
+          }
+          (if system == shared.linuxSystem then values.xsession else { }) 
+        ];
       };
 
     in {
