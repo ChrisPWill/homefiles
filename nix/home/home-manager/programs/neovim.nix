@@ -8,8 +8,11 @@
   vimdiffAlias = true;
 
   plugins = with pkgs.vimPlugins; [
+    bufferline-nvim
+    mini-nvim
     noice-nvim
     nui-nvim
+    nvim-notify
     nvim-treesitter.withAllGrammars
   ];
 
