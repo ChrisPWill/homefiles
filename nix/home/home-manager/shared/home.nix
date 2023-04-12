@@ -9,8 +9,9 @@
   };
 
   packages = with pkgs; [
-    ripgrep
+    fasd
     (pkgs.nerdfonts.override { fonts = ["FantasqueSansMono"]; })
     powerline-go
+    ripgrep
   ];
 }
