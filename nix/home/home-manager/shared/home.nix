@@ -10,8 +10,7 @@
 
   packages = with pkgs; [
     ripgrep
-    nerdfonts
-    powerline-fonts
+    (pkgs.nerdfonts.override { fonts = ["FantasqueSansMono"]; })
     powerline-go
   ];
 }
