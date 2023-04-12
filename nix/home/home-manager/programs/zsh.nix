@@ -103,6 +103,49 @@ bindkey "^I" expand-or-complete-with-dots
 
   initExtra = ''
 # }}}
+# Prompt Style {{{
+# -----------------------------------------------------------------------------
+# This changes PS1 dynamically depending on insert or command mode.
+#
+
+
+# Generates PS1 given background colour arguments
+# $1 = user bgcolour
+# $2 = directory bgcolour
+generate_ps1() {
+    setopt PROMPT_SUBST
+    PS1="%{[38;05;230;48;05;''\${1}m%} %(!.%S-ROOT-%s.%n) %{[38;05;''\${1};48;05;''\${2}m%}⮀%{[00m%}%{[38;05;230;48;05;''\${2}m%} %1~ %{[00m%}%{[38;05;''\${2}m%}⮀ %{[00m%}"
+}
+
+autoload -U colors && colors
+generate_ps1 26 196
+
+zle-keymap-select () {
+if [[ $TERM == "rxvt-unicode" || $TERM == "rxvt-unicode-256color" ]]; then
+    if [ $KEYMAP = vicmd ]; then
+        generate_ps1 40 196
+        () { return $__prompt_status }
+        zle reset-prompt
+    else
+        generate_ps1 26 196
+        () { return $__prompt_status }
+        zle reset-prompt
+    fi
+fi
+}
+zle -N zle-keymap-select
+
+zle-line-init () {
+    zle -K viins
+    if [[ $TERM == "rxvt-unicode" || $TERM = "rxvt-unicode-256color" ]]; then
+        generate_ps1 26 196
+        () { return $__prompt_status }
+        zle reset-prompt
+    fi
+}
+zle -N zle-line-init
+
+# }}}
 # zle widgets {{{
 # -----------------------------------------------------------------------------
 # The ZLE widges are all followed by "zle -<MODE> <NAME>" and bound below in the "Key Bindings" section.
