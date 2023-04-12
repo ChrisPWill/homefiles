@@ -183,6 +183,8 @@ bindkey -M vicmd "ga" what-cursor-position      # ga
 # Search backwards and forwards with a pattern
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   '';
 
   profileExtra = ''
