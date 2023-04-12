@@ -36,6 +36,7 @@
           neovim = import ./programs/neovim.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
           vscode = import ./programs/vscode.nix;
+          exa = import ./programs/exa.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
