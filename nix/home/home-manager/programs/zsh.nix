@@ -1,6 +1,55 @@
 {
   enable = true;
 
+  history = {
+    size = 10000;
+    save = 10000;
+    path = "~/.zshinfo";
+    share = true;
+
+    ignoreSpace = true;
+    ignoreDups = true;
+    extended = true;
+    expireDuplicatesFirst = true;
+  };
+
+  shellAliases = {
+    home-update = "home-manager switch";
+
+    # Disable autocorrection for these
+    ln = "nocorrect ln";
+    mv = "nocorrect mv";
+    mkdir = "nocorrect mkdir";
+    sudo = "nocorrect sudo";
+
+    # Directory navigation
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    "-- -" = "cd -";
+    "-- --" = "cd -2";
+    "-- ---" = "cd -3";
+  };
+
+  initExtraFirst = ''
+#
+# General Settings {{{
+# -----------------------------------------------------------------------------
+
+setopt auto_name_dirs
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+setopt multios
+setopt cdablevarS
+setopt autocd
+setopt extendedglob
+setopt interactivecomments
+setopt nobeep
+setopt nocheckjobs
+setopt correct
+  '';
+
   initExtraBeforeCompInit = ''
 CACHEDIR="$HOME/.cache/zsh-cache"
 fasd_cache="$HOME/.cache/.fasd-init-cache"
@@ -52,37 +101,7 @@ zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 '';
 
-  history = {
-    size = 10000;
-    save = 10000;
-    path = "~/.zshinfo";
-    share = true;
-
-    ignoreSpace = true;
-    ignoreDups = true;
-    extended = true;
-    expireDuplicatesFirst = true;
-  };
-
-  shellAliases = {
-    home-update = "home-manager switch";
-
-    # Disable autocorrection for these
-    ln = "nocorrect ln";
-    mv = "nocorrect mv";
-    mkdir = "nocorrect mkdir";
-    sudo = "nocorrect sudo";
-
-    # Directory navigation
-    ".." = "cd ..";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
-    "-- -" = "cd -";
-    "-- --" = "cd -2";
-    "-- ---" = "cd -3";
-  };
-
-  interactiveShellInit = ''
+  initExtra = ''
 # }}}
 # The Vim setup {{{
 # -----------------------------------------------------------------------------
