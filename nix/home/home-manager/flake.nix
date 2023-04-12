@@ -43,7 +43,7 @@
         inherit pkgs;
         modules = [
           {
-            home = import ./shared/home.nix { inherit (shared) userName; inherit (systemConfig) homeDirPrefix; };
+            home = import ./shared/home.nix { inherit (shared) userName; inherit (systemConfig) homeDirPrefix; inherit pkgs; };
 
             # Merge common and system-specific programs
             programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);

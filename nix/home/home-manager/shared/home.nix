@@ -1,4 +1,4 @@
-{ userName, homeDirPrefix }:
+{ userName, homeDirPrefix, pkgs }:
 
 {
   username = userName;
@@ -7,4 +7,8 @@
   sessionVariables = {
     EDITOR = "nvim";
   };
+
+  packages = with pkgs; [
+    ripgrep
+  ];
 }
