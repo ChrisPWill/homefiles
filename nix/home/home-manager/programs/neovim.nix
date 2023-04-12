@@ -24,6 +24,9 @@
     set number
     set background=dark
     colorscheme default
+
+    " Work around for telescope colour issue
+    :hi NormalFloat ctermfg=LightGrey
   '';
 
   extraLuaConfig = ''
