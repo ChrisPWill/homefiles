@@ -15,6 +15,7 @@
     noice-nvim
     nui-nvim
     nvim-notify
+    nvim-surround
     nvim-treesitter.withAllGrammars
     telescope-nvim
     vim-illuminate
@@ -45,8 +46,9 @@
     require('mini.comment').setup()
     require('mini.map').setup()
     require('mini.pairs').setup()
-    require('mini.surround').setup()
     require('mini.trailspace').setup()
+
+    require('nvim-surround').setup({})
 
     -- telescope
     local builtin = require('telescope.builtin')
