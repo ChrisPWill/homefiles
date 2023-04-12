@@ -38,6 +38,7 @@
           vscode = import ./programs/vscode.nix;
           exa = import ./programs/exa.nix;
           zsh = import ./programs/zsh.nix;
+	  bat = import ./programs/bat.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
