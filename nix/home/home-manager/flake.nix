@@ -33,12 +33,12 @@
         systemConfig = systemValues hostname system;
         pkgs = pkgsFor system;
         commonPrograms = {
-          neovim = import ./programs/neovim.nix { inherit pkgs; };
-          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
-          vscode = import ./programs/vscode.nix;
-          exa = import ./programs/exa.nix;
-          zsh = import ./programs/zsh.nix;
 	  bat = import ./programs/bat.nix;
+          exa = import ./programs/exa.nix;
+          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
+          neovim = import ./programs/neovim.nix { inherit pkgs; };
+          vscode = import ./programs/vscode.nix;
+          zsh = import ./programs/zsh.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
