@@ -9,15 +9,21 @@
 
   plugins = with pkgs.vimPlugins; [
     bufferline-nvim
+    cmp-nvim-lsp
     flit-nvim
+    luasnip
     leap-nvim
+    lsp-zero-nvim
     mini-nvim
     noice-nvim
     nui-nvim
+    nvim-cmp
+    nvim-lspconfig
     nvim-notify
     nvim-surround
     nvim-treesitter.withAllGrammars
     telescope-nvim
+    trouble-nvim
     vim-illuminate
   ];
 
@@ -61,5 +67,17 @@
     vim.keymap.set('n', '<leader>fgb', builtin.git_branches, {})
     vim.keymap.set('n', '<leader>fgcc', builtin.git_commits, {})
     vim.keymap.set('n', '<leader>fgcb', builtin.git_bcommits, {})
+
+    -- LSP, linters, etc.
+    -- Linter
+    require("trouble").setup {}
+    -- LSP
+    local lsp = require('lsp-zero').preset({})
+
+    lsp.on_attach(function(client, bufnr)
+      lsp.default_keymaps({buffer = bufnr})
+    end)
+
+    lsp.setup()
   '';
 }
