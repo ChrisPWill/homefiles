@@ -14,6 +14,7 @@
     nui-nvim
     nvim-notify
     nvim-treesitter.withAllGrammars
+    vim-illuminate
   ];
 
   extraConfig = ''
