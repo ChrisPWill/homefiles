@@ -24,6 +24,8 @@
         scrollOnOutput = false;
       };
     };
+
+    firefox = import ./programs/firefox.nix;
   };
 
   # xsession

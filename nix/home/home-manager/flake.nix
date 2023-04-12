@@ -12,7 +12,7 @@
       shared = import ./shared/constants.nix;
 
       # Import machine configuration based on hostname
-      machineConfig = hostname: import ./machines/${hostname}.nix;
+      machineConfig = hostname: import ./hosts/${hostname}.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -35,7 +35,6 @@
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (machineConfig hostname).userEmail; };
-          firefox = import ./programs/firefox.nix;
           vscode = import ./programs/vscode.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
