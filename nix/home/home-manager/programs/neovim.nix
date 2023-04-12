@@ -21,4 +21,9 @@
     set background=dark
     colorscheme default
   '';
+
+  extraLuaConfig = ''
+    vim.opt.termguicolors = true
+    require("bufferline").setup{}
+  '';
 }
