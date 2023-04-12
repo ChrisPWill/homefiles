@@ -26,7 +26,7 @@
       # System-specific values based on hostname
       systemValues = hostname: system: let
         pkgs = pkgsFor system;
-      in import ./systems/${hostname}.nix { inherit pkgs lib; };
+      in import ./systems/${system}.nix { inherit pkgs lib; };
 
       # Define the Home Manager configuration for a specific system
       homeConfigFor = hostname: system: let
