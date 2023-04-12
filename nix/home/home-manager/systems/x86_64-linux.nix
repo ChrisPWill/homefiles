@@ -11,9 +11,6 @@
     urxvt = {
       enable = true;
       fonts = ["xft:FantasqueSansMono Nerd Font Mono:size=10"];
-      extraConfig = {
-        "perl-ext" = "default,tabbedex";
-      };
       scroll = {
         bar.enable = false;
         keepPosition = true;
@@ -137,7 +134,6 @@ URxvt*cursorUnderline: true
 ! Keybindings
 !##############################################################################
 
-URxvt.iso14755: False
 URxvt.perl-ext-common: default,clipboard
 
 !##############################################################################
