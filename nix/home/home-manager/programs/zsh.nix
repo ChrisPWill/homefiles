@@ -61,7 +61,7 @@ unset fasd_cache
 fpath+=~/.zfunc
   '';
   completionInit = ''
-autload -U compinit && compinit -d $CACHEDIR/zcompdump 2>/dev/null
+autoload -U compinit && compinit -d $CACHEDIR/zcompdump 2>/dev/null
 
 # Use cache to speed completion up and set cache folder path.
 zstyle ':completion:*' use-cache on
