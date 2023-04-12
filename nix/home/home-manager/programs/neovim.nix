@@ -37,8 +37,11 @@
     require('flit').setup{}
 
     -- mini plugins
+    require('mini.bracketed').setup()
     require('mini.comment').setup()
+    require('mini.map').setup()
     require('mini.pairs').setup()
     require('mini.surround').setup()
+    require('mini.trailspace').setup()
   '';
 }
