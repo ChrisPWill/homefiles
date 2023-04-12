@@ -11,8 +11,8 @@
       # Import shared constants
       shared = import ./shared/constants.nix;
 
-      # Import machine configuration
-      machineConfig = import ./machines/personal-pc.nix;
+      # Import machine configuration based on hostname
+      machineConfig = hostname: import ./hosts/${hostname}.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -23,16 +23,18 @@
       # Import 'lib' attribute from Nixpkgs
       lib = nixpkgs.lib;
 
-      # System-specific values
-      systemValues = system: let pkgs = pkgsFor system; in import ./systems/nixos.nix { inherit pkgs lib; };
+      # System-specific values based on hostname
+      systemValues = hostname: system: let
+        pkgs = pkgsFor system;
+      in import ./systems/${hostname}.nix { inherit pkgs lib; };
 
       # Define the Home Manager configuration for a specific system
-      homeConfigFor = system: let
-        values = systemValues system;
+      homeConfigFor = hostname: system: let
+        values = systemValues hostname system;
         pkgs = pkgsFor system;
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
-          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = machineConfig.userEmail; };
+          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (machineConfig hostname).userEmail; };
           firefox = import ./programs/firefox.nix;
           vscode = import ./programs/vscode.nix;
         };
@@ -59,18 +61,10 @@
         }];
       };
 
-      # Darwin configurations
-      darwinConfigurations = {
-        ${shared.userName} = homeConfigFor shared.darwinSystem;
-      };
-      nixosConfigurations = {
-        ${shared.userName} = homeConfigFor shared.linuxSystem;
-      };
-
     in {
       homeConfigurations = {
-        "cwilliams-work-mbp" = darwinConfigurations;
-        "personal-pc" = nixosConfigurations;
+        "cwilliams-work-mbp" = homeConfigFor "cwilliams-work-mbp" shared.darwinSystem;
+        "personal-pc" = homeConfigFor "personal-pc" shared.linuxSystem;
       };
     };
 }
