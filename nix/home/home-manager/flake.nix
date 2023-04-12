@@ -12,7 +12,7 @@
       shared = import ./shared/constants.nix;
 
       # Import machine configuration based on hostname
-      machineConfig = hostname: import ./hosts/${hostname}.nix;
+      hostConfig = hostname: import ./hosts/${hostname}.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -30,25 +30,24 @@
 
       # Define the Home Manager configuration for a specific system
       homeConfigFor = hostname: system: let
-        values = systemValues hostname system;
+        systemConfig = systemValues hostname system;
         pkgs = pkgsFor system;
         commonPrograms = {
           neovim = import ./programs/neovim.nix;
-          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (machineConfig hostname).userEmail; };
+          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
           vscode = import ./programs/vscode.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           {
-            home = import ./shared/home.nix { inherit (shared) userName; inherit (values) homeDirPrefix; };
+            home = import ./shared/home.nix { inherit (shared) userName; inherit (systemConfig) homeDirPrefix; };
 
             # Merge common and system-specific programs
-            programs = lib.mkForce (lib.mergeAttrs commonPrograms values.extraPrograms);
+            programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
 
           }
-          (if system == shared.linuxSystem then values.xsession else { }) 
-        ];
+        ] ++ systemConfig.extraModules ++ (hostConfig hostname).extraModules; # Include extra modules from system and machine files
       };
 
     in {

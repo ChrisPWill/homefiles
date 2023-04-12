@@ -5,4 +5,5 @@
   extraPrograms = {
     home-manager = { enable = true; };
   };
+  extraModules = [];
 }
