@@ -37,6 +37,7 @@
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
           vscode = import ./programs/vscode.nix;
           exa = import ./programs/exa.nix;
+          ripgrep = import ./programs/ripgrep.nix;
         };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
