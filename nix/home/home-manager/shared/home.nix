@@ -10,5 +10,6 @@
 
   packages = with pkgs; [
     ripgrep
+    powerline-go
   ];
 }
