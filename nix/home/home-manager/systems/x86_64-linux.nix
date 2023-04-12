@@ -10,6 +10,7 @@
 
     urxvt = {
       enable = true;
+      fonts = ["xft:FantasqueSansMono Nerd Font Mono:size=10"];
       extraConfig = {
         "perl-ext" = "default,tabbedex";
       };
