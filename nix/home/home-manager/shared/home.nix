@@ -10,6 +10,7 @@
 
   packages = with pkgs; [
     ripgrep
+    nerdfonts
     powerline-fonts
     powerline-go
   ];

@@ -33,7 +33,7 @@
         systemConfig = systemValues hostname system;
         pkgs = pkgsFor system;
         commonPrograms = {
-          neovim = import ./programs/neovim.nix;
+          neovim = import ./programs/neovim.nix { inherit pkgs; };
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
           vscode = import ./programs/vscode.nix;
           exa = import ./programs/exa.nix;
@@ -43,11 +43,12 @@
         inherit pkgs;
         modules = [
           {
+            fonts.fontconfig.enable = true;
+
             home = import ./shared/home.nix { inherit (shared) userName; inherit (systemConfig) homeDirPrefix; inherit pkgs; };
 
             # Merge common and system-specific programs
             programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
-
           }
         ] ++ systemConfig.extraModules ++ (hostConfig hostname).extraModules; # Include extra modules from system and machine files
       };
