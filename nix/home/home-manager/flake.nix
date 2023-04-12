@@ -63,8 +63,12 @@
 
     in {
       homeConfigurations = {
-        "${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
-        "${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
+        "${shared.hostnames.workMbp}" = {
+          ${shared.userName} = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
+        };
+        "${shared.hostnames.personalPc}" = {
+          ${shared.userName} = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
+        };
       };
     };
 }
