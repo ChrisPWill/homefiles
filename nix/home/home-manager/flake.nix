@@ -12,7 +12,7 @@
       shared = import ./shared/constants.nix;
 
       # Import machine configuration based on hostname
-      machineConfig = hostname: import ./hosts/${hostname}.nix;
+      machineConfig = hostname: import ./machines/${hostname}.nix;
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -63,8 +63,8 @@
 
     in {
       homeConfigurations = {
-        "cwilliams-work-mbp" = homeConfigFor "cwilliams-work-mbp" shared.darwinSystem;
-        "personal-pc" = homeConfigFor "personal-pc" shared.linuxSystem;
+        "${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
+        "${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
       };
     };
 }
