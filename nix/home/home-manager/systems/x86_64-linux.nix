@@ -7,9 +7,6 @@
     bash = {
       enable = true;
     };
-    zsh = {
-      enable = true;
-    };
 
     urxvt = {
       enable = true;
