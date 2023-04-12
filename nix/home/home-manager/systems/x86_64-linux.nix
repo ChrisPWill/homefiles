@@ -28,16 +28,17 @@
     firefox = import ./programs/firefox.nix;
   };
 
-  # xsession
-  xsession = {
-    enable = true;
-    windowManager = {
-      awesome = {
-        enable = true;
-        luaModules = with pkgs.luaPackages; [
-          luarocks
-        ];
+  extraModules = [{
+    xsession = {
+      enable = true;
+      windowManager = {
+        awesome = {
+          enable = true;
+          luaModules = with pkgs.luaPackages; [
+            luarocks
+          ];
+        };
       };
     };
-  };
+  }];
 }
