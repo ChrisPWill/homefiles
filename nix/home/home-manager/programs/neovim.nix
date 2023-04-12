@@ -9,6 +9,7 @@
 
   plugins = with pkgs.vimPlugins; [
     bufferline-nvim
+    flit-nvim
     leap-nvim
     mini-nvim
     noice-nvim
@@ -31,7 +32,13 @@
     -- bufferline config
     require('bufferline').setup{}
 
-    -- leap
+    -- movement plugins
     require('leap').add_default_mappings()
+    require('flit').setup{}
+
+    -- mini plugins
+    require('mini.comment').setup()
+    require('mini.pairs').setup()
+    require('mini.surround').setup()
   '';
 }
