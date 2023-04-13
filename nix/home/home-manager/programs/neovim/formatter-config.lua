@@ -64,9 +64,10 @@ require("formatter").setup {
   filetype = filetype
 }
 
+
+vim.keymap.set('n', '<M-f>', 'Format<CR>', { noremap = true })
+vim.keymap.set('n', '<M-F>', 'FormatWrite<CR>', { noremap = true })
 vim.cmd([[
-  nnoremap <silent> <leader>f :Format<CR>
-  nnoremap <silent> <leader>F :FormatWrite<CR>
   augroup FormatAutogroup
     autocmd!
     autocmd BufWritePost * FormatWrite
