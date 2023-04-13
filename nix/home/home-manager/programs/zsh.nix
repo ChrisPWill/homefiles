@@ -57,6 +57,9 @@ fpath+=~/.zfunc
   completionInit = ''
 autoload -U compinit && compinit -d $CACHEDIR/zcompdump 2>/dev/null
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # Use cache to speed completion up and set cache folder path.
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $CACHEDIR
