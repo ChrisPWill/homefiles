@@ -50,6 +50,7 @@ in {
     leap-nvim
     telescope-nvim
     fzf-vim
+    which-key-nvim
 
     # LSP, linters, and language tooling
     lsp-zero-nvim
@@ -105,11 +106,18 @@ in {
       -- Mini plugins
       require('mini.bracketed').setup()
       require('mini.comment').setup()
-      require('mini.indentscope').setup()
+      require('mini.indentscope').setup().gen_animation().none()
       require('mini.map').setup()
       require('mini.pairs').setup()
       require('mini.splitjoin').setup()
       require('mini.trailspace').setup()
+
+      -- Which key
+      require("which-key").setup({})
+      vim.keymap.set('n', '<M-k>', '<cmd>WhichKey<cr>', { noremap = true })
+      vim.keymap.set('v', '<M-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
+      vim.keymap.set('i', '<M-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
+      vim.keymap.set('c', '<M-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
 
       -- Surround plugin
       require('nvim-surround').setup({})
