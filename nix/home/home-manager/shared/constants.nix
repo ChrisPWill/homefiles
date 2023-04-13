@@ -8,4 +8,11 @@
     workMbp = "cwilliams-work-mbp";
     personalPc = "personal-pc";
   };
+  enabledLanguages = [
+    "diff"
+    "json"
+    "markdown"
+    "nix"
+    "yaml"
+  ];
 }

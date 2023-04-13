@@ -34,7 +34,7 @@
       homeConfigFor = hostname: system: let
         systemConfig = systemValues hostname system;
         pkgs = pkgsFor system;
-        hostLanguages = (hostConfig hostname system).enabledLanguages or [];
+        combinedEnabledLanguages = lib.unique (shared.enabledLanguages ++ (hostConfig hostname system).enabledLanguages or []);
         commonPrograms = {
           bat = import ./programs/bat.nix;
           exa = import ./programs/exa.nix;
@@ -42,7 +42,7 @@
           git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname system).userEmail; };
           neovim = import ./programs/neovim.nix {
             inherit pkgs;
-            enabledLanguages = hostLanguages;
+            enabledLanguages = combinedEnabledLanguages;
           };
           vscode = import ./programs/vscode.nix;
           zsh = import ./programs/zsh.nix;
