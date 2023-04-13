@@ -88,14 +88,14 @@
     require("trouble").setup {}
 
     -- LSP
-    local lsp = require('lsp-zero').preset({})
+    local lsp = require('lsp-zero').preset('manual-setup')
 
     lsp.on_attach(function(client, bufnr)
       lsp.default_keymaps({buffer = bufnr})
     end)
 
-    lsp.setup()
-
     ${tsserverConfig}
+
+    lsp.setup()
     '';
 }
