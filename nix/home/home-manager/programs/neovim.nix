@@ -104,8 +104,10 @@ in {
       -- Mini plugins
       require('mini.bracketed').setup()
       require('mini.comment').setup()
+      require('mini.indentscope').setup()
       require('mini.map').setup()
       require('mini.pairs').setup()
+      require('mini.splitjoin').setup()
       require('mini.trailspace').setup()
 
       -- Surround plugin
