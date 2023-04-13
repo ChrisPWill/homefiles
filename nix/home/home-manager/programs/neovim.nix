@@ -106,7 +106,11 @@ in {
       -- Mini plugins
       require('mini.bracketed').setup()
       require('mini.comment').setup()
-      require('mini.indentscope').setup().gen_animation().none()
+      require('mini.indentscope').setup({
+        draw = {
+          animation = require('mini.indentscope').gen_animation.none()
+        }
+      })
       require('mini.map').setup()
       require('mini.pairs').setup()
       require('mini.splitjoin').setup()
