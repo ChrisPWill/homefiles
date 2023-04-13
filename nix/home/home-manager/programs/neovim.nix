@@ -1,5 +1,27 @@
-{ pkgs, enabledLanguages ? [] }:
 {
+  pkgs,
+  enabledLanguages ? [],
+}: let
+  luaConfigs =
+    [
+      (builtins.readFile ./neovim/formatter-config.lua)
+      (builtins.readFile ./neovim/bufferline-config.lua)
+      (builtins.readFile ./neovim/telescope-config.lua)
+      (builtins.readFile ./neovim/formatter-config.lua)
+    ]
+    ++ (
+      if builtins.elem "typescript" enabledLanguages
+      then [(builtins.readFile ./neovim/tsserver-config.lua)]
+      else []
+    );
+  languageToTreesitterName = language:
+    {
+      # Add language name mappings here if treesitter uses a different name
+      # "sourceLanguage" = "treesitterLanguage";
+    }
+    .${language}
+    or language;
+in {
   enable = true;
   defaultEditor = true;
 
@@ -8,94 +30,110 @@
   vimdiffAlias = true;
 
   plugins = with pkgs.vimPlugins; [
-    bufferline-nvim
+    # Completion and snippets
     cmp-nvim-lsp
-    flit-nvim
     luasnip
-    leap-nvim
-    lsp-zero-nvim
-    mini-nvim
-    noice-nvim
-    nui-nvim
     nvim-cmp
-    nvim-lspconfig
-    nvim-notify
-    nvim-surround
-    nvim-treesitter.withAllGrammars
+
+    # Movement, navigation, and finding
+    flit-nvim
+    leap-nvim
     telescope-nvim
+
+    # LSP, linters, and language tooling
+    lsp-zero-nvim
+    nvim-lspconfig
+    (nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
     trouble-nvim
+    formatter-nvim
+
+    # Notifications and messages
+    nvim-notify
+
+    # User Interface Components
+    nui-nvim
+    bufferline-nvim
+    noice-nvim
     vim-illuminate
+    vim-gitgutter
+    vim-airline
+    vim-fugitive
+
+    # Editing, text manipulation, and utilities
+    mini-nvim
+    nvim-surround
   ];
 
   extraConfig = ''
     set number
     set background=dark
+    set updatetime=100
     colorscheme default
 
     " Work around for telescope colour issue
     :hi NormalFloat ctermfg=LightGrey
   '';
 
-  extraLuaConfig = let
-    enableTsserver = builtins.elem "typescript" enabledLanguages;
-
-    tsserverConfig = if enableTsserver then ''
-      -- TypeScript language server
-      local lspconfig = require('lspconfig')
-      lspconfig.tsserver.setup {
-        on_attach = function(client, bufnr)
-          lsp.default_keymaps({buffer = bufnr})
-        end,
-      }
-    '' else "";
-    in
+  extraLuaConfig =
     ''
-    -- Global settings
-    vim.opt.termguicolors = true
+      -- Global settings
+      local opt = vim.opt
+      opt.termguicolors = true
 
-    -- Bufferline configuration
-    require('bufferline').setup{}
+      -- Tabs
+      opt.tabstop = 2
+      opt.smartindent = true
+      opt.shiftwidth = 2
+      opt.expandtab = true
 
-    -- Movement plugins
-    require('leap').add_default_mappings()
-    require('flit').setup{}
+      -- Movement plugins
+      require('leap').add_default_mappings()
+      require('flit').setup{}
 
-    -- Mini plugins
-    require('mini.bracketed').setup()
-    require('mini.comment').setup()
-    require('mini.map').setup()
-    require('mini.pairs').setup()
-    require('mini.trailspace').setup()
+      -- Mini plugins
+      require('mini.bracketed').setup()
+      require('mini.comment').setup()
+      require('mini.map').setup()
+      require('mini.pairs').setup()
+      require('mini.trailspace').setup()
 
-    -- Surround plugin
-    require('nvim-surround').setup({})
+      -- Surround plugin
+      require('nvim-surround').setup({})
 
-    -- Telescope configuration
-    -- Set up telescope key mappings
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-    vim.keymap.set('n', '<leader>ft', builtin.treesitter, {})
-    vim.keymap.set('n', '<leader>fgs', builtin.git_status, {})
-    vim.keymap.set('n', '<leader>fgb', builtin.git_branches, {})
-    vim.keymap.set('n', '<leader>fgcc', builtin.git_commits, {})
-    vim.keymap.set('n', '<leader>fgcb', builtin.git_bcommits, {})
+      -- LSP, linters, and other language tooling configuration
+      -- Linter
+      require("trouble").setup {}
 
-    -- LSP, linters, and other language tooling configuration
-    -- Linter
-    require("trouble").setup {}
+      -- LSP
+      local lsp = require('lsp-zero').preset('manual-setup')
 
-    -- LSP
-    local lsp = require('lsp-zero').preset('manual-setup')
+      lsp.on_attach(function(client, bufnr)
+        lsp.default_keymaps({buffer = bufnr})
+      end)
 
-    lsp.on_attach(function(client, bufnr)
-      lsp.default_keymaps({buffer = bufnr})
-    end)
+      lsp.setup()
 
-    ${tsserverConfig}
+      -- vim-gitgutter setup
+      vim.cmd('let g:gitgutter_enabled = 1')
+      vim.cmd('let g:gitgutter_map_keys = 1')
+      vim.cmd('let g:gitgutter_sign_added = "+"')
+      vim.cmd('let g:gitgutter_sign_modified = "~"')
+      vim.cmd('let g:gitgutter_sign_removed = "_"')
 
-    lsp.setup()
-    '';
+      -- vim-airline setup
+      vim.cmd('let g:airline_powerline_fonts = 1')
+
+      -- enabled languages for later config
+      local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
+      local function contains(list, value)
+        for _, v in ipairs(list) do
+          if v == value then
+            return true
+          end
+        end
+        return false
+      end
+
+    ''
+    + (builtins.concatStringsSep "\n" luaConfigs);
 }

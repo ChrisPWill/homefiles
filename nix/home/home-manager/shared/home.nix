@@ -1,6 +1,9 @@
-{ userName, homeDirPrefix, pkgs, extraPackages ? [] }:
-
 {
+  userName,
+  homeDirPrefix,
+  pkgs,
+  extraPackages ? [],
+}: {
   username = userName;
   homeDirectory = "${homeDirPrefix}/${userName}";
   stateVersion = "23.05";
@@ -8,14 +11,17 @@
     EDITOR = "nvim";
   };
 
-  packages = with pkgs; [
-    fasd
-    fd
-    fx
-    kondo
-    (pkgs.nerdfonts.override { fonts = ["FantasqueSansMono"]; })
-    powerline-go
-    ripgrep
-    tealdeer
-  ] ++ extraPackages;
+  packages = with pkgs;
+    [
+      fasd
+      fd
+      fx
+      kondo
+      (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
+      powerline-go
+      ripgrep
+      tealdeer
+      alejandra
+    ]
+    ++ extraPackages;
 }
