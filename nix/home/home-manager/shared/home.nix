@@ -14,7 +14,6 @@
   packages = with pkgs;
     [
       eureka-ideas
-      fasd
       fd
       fx
       kondo

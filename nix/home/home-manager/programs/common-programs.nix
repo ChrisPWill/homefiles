@@ -17,5 +17,9 @@
   };
   vscode = import ./vscode.nix;
   zellij = import ./zellij.nix;
+  zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   zsh = import ./zsh.nix;
 }
