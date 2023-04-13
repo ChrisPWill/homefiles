@@ -12,7 +12,9 @@
       shared = import ./shared/constants.nix;
 
       # Import machine configuration based on hostname
-      hostConfig = hostname: import ./hosts/${hostname}.nix;
+      hostConfig = hostname: system: let
+        pkgs = pkgsFor system;
+      in import ./hosts/${hostname}.nix { inherit pkgs; };
 
       # Select the correct nixpkgs based on the system
       pkgsFor = system: import nixpkgs {
@@ -32,12 +34,16 @@
       homeConfigFor = hostname: system: let
         systemConfig = systemValues hostname system;
         pkgs = pkgsFor system;
+        hostLanguages = (hostConfig hostname system).enabledLanguages or [];
         commonPrograms = {
           bat = import ./programs/bat.nix;
           exa = import ./programs/exa.nix;
           fzf = import ./programs/fzf.nix;
-          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname).userEmail; };
-          neovim = import ./programs/neovim.nix { inherit pkgs; };
+          git = import ./programs/git.nix { inherit (shared) userFullName; userEmail = (hostConfig hostname system).userEmail; };
+          neovim = import ./programs/neovim.nix {
+            inherit pkgs;
+            enabledLanguages = hostLanguages;
+          };
           vscode = import ./programs/vscode.nix;
           zsh = import ./programs/zsh.nix;
         };
@@ -51,13 +57,13 @@
               inherit (shared) userName;
               inherit (systemConfig) homeDirPrefix;
               inherit pkgs;
-              extraPackages = systemConfig.extraPackages ++ (hostConfig hostname).extraPackages;
+              extraPackages = systemConfig.extraPackages ++ (hostConfig hostname system).extraPackages;
             };
       
             # Merge common and system-specific programs
             programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
           }
-        ] ++ systemConfig.extraModules ++ (hostConfig hostname).extraModules; # Include extra modules from system and machine files
+        ] ++ systemConfig.extraModules ++ (hostConfig hostname system).extraModules; # Include extra modules from system and machine files
       };
 
     in {

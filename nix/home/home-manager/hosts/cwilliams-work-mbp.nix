@@ -1,7 +1,11 @@
+{ pkgs }:
 {
   userEmail = "cwilliams@atlassian.com";
   extraModules = [];
-  extraPackages = [
-    nodePackages.tsserver
+  enabledLanguages = [
+    "typescript"
+  ];
+  extraPackages = with pkgs; [
+    nodePackages.typescript-language-server
   ];
 }

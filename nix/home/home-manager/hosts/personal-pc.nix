@@ -1,5 +1,6 @@
+{ pkgs }:
 {
   userEmail = "chris@chrispwill.com";
   extraModules = [];
-  extraPackages = [];
+  extraPackages = with pkgs; [];
 }
