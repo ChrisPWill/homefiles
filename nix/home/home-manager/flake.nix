@@ -65,6 +65,10 @@
 
               # Merge common and system-specific programs
               programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
+
+              services = {
+                pueue.enable = true;
+              };
             }
           ]
           ++ systemConfig.extraModules

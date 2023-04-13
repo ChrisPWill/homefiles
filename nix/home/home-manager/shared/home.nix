@@ -13,12 +13,14 @@
 
   packages = with pkgs;
     [
+      eureka-ideas
       fasd
       fd
       fx
       kondo
       (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
       powerline-go
+      rargs
       ripgrep
       tealdeer
       alejandra
