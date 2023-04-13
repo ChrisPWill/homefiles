@@ -42,21 +42,11 @@
       systemConfig = systemValues hostname system;
       pkgs = pkgsFor system;
       combinedEnabledLanguages = lib.unique (shared.enabledLanguages ++ (hostConfig hostname system).enabledLanguages or []);
-      commonPrograms = {
-        bat = import ./programs/bat.nix;
-        exa = import ./programs/exa.nix;
-        fzf = import ./programs/fzf.nix;
-        git = import ./programs/git.nix {
-          inherit (shared) userFullName;
-          userEmail = (hostConfig hostname system).userEmail;
-        };
-        neovim = import ./programs/neovim.nix {
-          inherit pkgs;
-          enabledLanguages = combinedEnabledLanguages;
-        };
-        vscode = import ./programs/vscode.nix;
-        zellij = import ./programs/zellij.nix;
-        zsh = import ./programs/zsh.nix;
+      commonPrograms = import ./programs/common-programs.nix {
+        inherit pkgs;
+        enabledLanguages = combinedEnabledLanguages;
+        inherit (shared) userFullName;
+        userEmail = (hostConfig hostname system).userEmail;
       };
     in
       home-manager.lib.homeManagerConfiguration {
