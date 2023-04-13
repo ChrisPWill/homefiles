@@ -55,6 +55,7 @@
           enabledLanguages = combinedEnabledLanguages;
         };
         vscode = import ./programs/vscode.nix;
+        zellij = import ./programs/zellij.nix;
         zsh = import ./programs/zsh.nix;
       };
     in
