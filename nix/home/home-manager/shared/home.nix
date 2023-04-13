@@ -17,5 +17,6 @@
     powerline-go
     ripgrep
     tealdeer
+    alejandra
   ] ++ extraPackages;
 }
