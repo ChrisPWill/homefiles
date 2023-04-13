@@ -55,7 +55,12 @@ CACHEDIR="$HOME/.cache/zsh-cache"
 fpath+=~/.zfunc
   '';
   completionInit = ''
-autoload -U compinit && compinit -d $CACHEDIR/zcompdump 2>/dev/null
+autoload -Uz compinit
+if [[ -n ''\${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit -d $CACHEDIR/zcompdump 2>/dev/null
+else
+	compinit -C;
+fi;
 
 # zoxide
 eval "$(zoxide init zsh)"
