@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, enabledLanguages ? [] }:
 {
   enable = true;
   defaultEditor = true;
@@ -36,7 +36,20 @@
     :hi NormalFloat ctermfg=LightGrey
   '';
 
-  extraLuaConfig = ''
+  extraLuaConfig = let
+    enableTsserver = builtins.elem "typescript" enabledLanguages;
+
+    tsserverConfig = if enableTsserver then ''
+      -- TypeScript language server
+      local lspconfig = require('lspconfig')
+      lspconfig.tsserver.setup {
+        on_attach = function(client, bufnr)
+          lsp.default_keymaps({buffer = bufnr})
+        end,
+      }
+    '' else "";
+    in
+    ''
     -- Global settings
     vim.opt.termguicolors = true
 
@@ -83,12 +96,6 @@
 
     lsp.setup()
 
-    -- TypeScript language server
-    local lspconfig = require('lspconfig')
-    lspconfig.tsserver.setup({
-      on_attach = function(client, bufnr)
-        lsp.default_keymaps({buffer = bufnr})
-      end,
-    })
+    ${tsserverConfig}
     '';
 }
