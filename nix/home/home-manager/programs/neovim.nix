@@ -1,8 +1,10 @@
 { pkgs, enabledLanguages ? [] }:
 let
   luaConfigs = [
+    (builtins.readFile ./neovim/formatter-config.lua)
     (builtins.readFile ./neovim/bufferline-config.lua)
     (builtins.readFile ./neovim/telescope-config.lua)
+    (builtins.readFile ./neovim/formatter-config.lua)
   ] ++ (if builtins.elem "typescript" enabledLanguages then [(builtins.readFile ./neovim/tsserver-config.lua)] else []);
   languageToTreesitterName = language: {
     # Add language name mappings here if treesitter uses a different name
@@ -33,6 +35,7 @@ in
     nvim-lspconfig
     (nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
     trouble-nvim
+    formatter-nvim
 
     # Notifications and messages
     nvim-notify
@@ -101,5 +104,17 @@ in
 
     -- vim-airline setup
     vim.cmd('let g:airline_powerline_fonts = 1')
+
+    -- enabled languages for later config
+    local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
+    local function contains(list, value)
+      for _, v in ipairs(list) do
+        if v == value then
+          return true
+        end
+      end
+      return false
+    end
+
   '' + (builtins.concatStringsSep "\n" luaConfigs);
 }
