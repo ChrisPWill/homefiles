@@ -4,7 +4,7 @@
   history = {
     size = 10000;
     save = 10000;
-    path = "~/.zshinfo";
+    path = "$HOME/.zshinfo";
     share = true;
 
     ignoreSpace = true;
