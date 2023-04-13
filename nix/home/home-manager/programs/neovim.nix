@@ -49,6 +49,7 @@ in {
     flit-nvim
     leap-nvim
     telescope-nvim
+    fzf-vim
 
     # LSP, linters, and language tooling
     lsp-zero-nvim
