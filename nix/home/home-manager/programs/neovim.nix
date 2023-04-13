@@ -77,7 +77,14 @@ in {
   extraLuaConfig =
     ''
       -- Global settings
-      vim.opt.termguicolors = true
+      local opt = vim.opt
+      opt.termguicolors = true
+
+      -- Tabs
+      opt.tabstop = 2
+      opt.smartindent = true
+      opt.shiftwidth = 2
+      opt.expandtab = true
 
       -- Movement plugins
       require('leap').add_default_mappings()
