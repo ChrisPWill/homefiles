@@ -1,4 +1,10 @@
 { pkgs, enabledLanguages ? [] }:
+let
+  luaConfigs = [
+    (builtins.readFile ./neovim/bufferline-config.lua)
+    (builtins.readFile ./neovim/telescope-config.lua)
+  ] ++ (if builtins.elem "typescript" enabledLanguages then [(builtins.readFile ./neovim/tsserver-config.lua)] else []);
+in
 {
   enable = true;
   defaultEditor = true;
@@ -8,22 +14,31 @@
   vimdiffAlias = true;
 
   plugins = with pkgs.vimPlugins; [
+    # Buffer and tab management
     bufferline-nvim
+
+    # Completion and snippets
     cmp-nvim-lsp
-    flit-nvim
     luasnip
+    nvim-cmp
+
+    # Movement and navigation
+    flit-nvim
     leap-nvim
+    telescope-nvim
+
+    # LSP, linters, and language tooling
     lsp-zero-nvim
+    nvim-lspconfig
+    nvim-notify
+    nvim-treesitter.withAllGrammars
+    trouble-nvim
+
+    # Editing and text manipulation
     mini-nvim
     noice-nvim
     nui-nvim
-    nvim-cmp
-    nvim-lspconfig
-    nvim-notify
     nvim-surround
-    nvim-treesitter.withAllGrammars
-    telescope-nvim
-    trouble-nvim
     vim-illuminate
   ];
 
@@ -36,25 +51,9 @@
     :hi NormalFloat ctermfg=LightGrey
   '';
 
-  extraLuaConfig = let
-    enableTsserver = builtins.elem "typescript" enabledLanguages;
-
-    tsserverConfig = if enableTsserver then ''
-      -- TypeScript language server
-      local lspconfig = require('lspconfig')
-      lspconfig.tsserver.setup {
-        on_attach = function(client, bufnr)
-          lsp.default_keymaps({buffer = bufnr})
-        end,
-      }
-    '' else "";
-    in
-    ''
+  extraLuaConfig = ''
     -- Global settings
     vim.opt.termguicolors = true
-
-    -- Bufferline configuration
-    require('bufferline').setup{}
 
     -- Movement plugins
     require('leap').add_default_mappings()
@@ -70,19 +69,6 @@
     -- Surround plugin
     require('nvim-surround').setup({})
 
-    -- Telescope configuration
-    -- Set up telescope key mappings
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-    vim.keymap.set('n', '<leader>ft', builtin.treesitter, {})
-    vim.keymap.set('n', '<leader>fgs', builtin.git_status, {})
-    vim.keymap.set('n', '<leader>fgb', builtin.git_branches, {})
-    vim.keymap.set('n', '<leader>fgcc', builtin.git_commits, {})
-    vim.keymap.set('n', '<leader>fgcb', builtin.git_bcommits, {})
-
     -- LSP, linters, and other language tooling configuration
     -- Linter
     require("trouble").setup {}
@@ -94,8 +80,6 @@
       lsp.default_keymaps({buffer = bufnr})
     end)
 
-    ${tsserverConfig}
-
     lsp.setup()
-    '';
+  '' + (builtins.concatStringsSep "\n" luaConfigs);
 }
