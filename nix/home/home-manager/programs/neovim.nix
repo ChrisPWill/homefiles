@@ -13,6 +13,11 @@
       if builtins.elem "typescript" enabledLanguages
       then [(builtins.readFile ./neovim/tsserver-config.lua)]
       else []
+    )
+    ++ (
+      if builtins.elem "dockerfile" enabledLanguages
+      then [(builtins.readFile ./neovim/dockerfile-language-server-config.lua)]
+      else []
     );
   languageToTreesitterName = language:
     {
@@ -134,6 +139,8 @@ in {
         return false
       end
 
+      -- lspconfig for later config
+      local lspconfig = require('lspconfig')
     ''
     + (builtins.concatStringsSep "\n" luaConfigs);
 }
