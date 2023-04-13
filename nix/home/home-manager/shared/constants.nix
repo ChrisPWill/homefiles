@@ -14,5 +14,6 @@
     "markdown"
     "nix"
     "yaml"
+    "lua"
   ];
 }

@@ -1,5 +1,7 @@
 {pkgs}: {
   userEmail = "chris@chrispwill.com";
   extraModules = [];
-  extraPackages = with pkgs; [];
+  extraPackages = with pkgs; [
+    nodePackages.prettier
+  ];
 }
