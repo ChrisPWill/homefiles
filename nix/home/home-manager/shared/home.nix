@@ -22,6 +22,7 @@
       ripgrep
       tealdeer
       alejandra
+      lua-language-server
     ]
     ++ extraPackages;
 }

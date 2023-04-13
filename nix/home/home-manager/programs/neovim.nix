@@ -15,6 +15,11 @@
       else []
     )
     ++ (
+      if builtins.elem "lua" enabledLanguages
+      then [(builtins.readFile ./neovim/lua-language-server-config.lua)]
+      else []
+    )
+    ++ (
       if builtins.elem "dockerfile" enabledLanguages
       then [(builtins.readFile ./neovim/dockerfile-language-server-config.lua)]
       else []
