@@ -68,6 +68,7 @@ in {
     vim-gitgutter
     vim-airline
     vim-fugitive
+    nvim-web-devicons
 
     # Editing, text manipulation, and utilities
     mini-nvim
