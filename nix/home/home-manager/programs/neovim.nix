@@ -14,15 +14,12 @@ in
   vimdiffAlias = true;
 
   plugins = with pkgs.vimPlugins; [
-    # Buffer and tab management
-    bufferline-nvim
-
     # Completion and snippets
     cmp-nvim-lsp
     luasnip
     nvim-cmp
 
-    # Movement and navigation
+    # Movement, navigation, and finding
     flit-nvim
     leap-nvim
     telescope-nvim
@@ -30,16 +27,21 @@ in
     # LSP, linters, and language tooling
     lsp-zero-nvim
     nvim-lspconfig
-    nvim-notify
     nvim-treesitter.withAllGrammars
     trouble-nvim
 
-    # Editing and text manipulation
-    mini-nvim
-    noice-nvim
+    # Notifications and messages
+    nvim-notify
+
+    # User Interface Components
     nui-nvim
-    nvim-surround
+    bufferline-nvim
+    noice-nvim
     vim-illuminate
+
+    # Editing, text manipulation, and utilities
+    mini-nvim
+    nvim-surround
   ];
 
   extraConfig = ''
