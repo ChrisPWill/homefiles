@@ -4,6 +4,10 @@ let
     (builtins.readFile ./neovim/bufferline-config.lua)
     (builtins.readFile ./neovim/telescope-config.lua)
   ] ++ (if builtins.elem "typescript" enabledLanguages then [(builtins.readFile ./neovim/tsserver-config.lua)] else []);
+  languageToTreesitterName = language: {
+    "typescript" = "typescript";
+    # Add more languages here as needed
+  }.${language};
 in
 {
   enable = true;
@@ -27,7 +31,7 @@ in
     # LSP, linters, and language tooling
     lsp-zero-nvim
     nvim-lspconfig
-    nvim-treesitter.withAllGrammars
+    (nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
     trouble-nvim
 
     # Notifications and messages
