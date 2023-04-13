@@ -1,17 +1,27 @@
-{ pkgs, enabledLanguages ? [] }:
-let
-  luaConfigs = [
-    (builtins.readFile ./neovim/formatter-config.lua)
-    (builtins.readFile ./neovim/bufferline-config.lua)
-    (builtins.readFile ./neovim/telescope-config.lua)
-    (builtins.readFile ./neovim/formatter-config.lua)
-  ] ++ (if builtins.elem "typescript" enabledLanguages then [(builtins.readFile ./neovim/tsserver-config.lua)] else []);
-  languageToTreesitterName = language: {
-    # Add language name mappings here if treesitter uses a different name
-    # "sourceLanguage" = "treesitterLanguage";
-  }.${language} or language;
-in
 {
+  pkgs,
+  enabledLanguages ? [],
+}: let
+  luaConfigs =
+    [
+      (builtins.readFile ./neovim/formatter-config.lua)
+      (builtins.readFile ./neovim/bufferline-config.lua)
+      (builtins.readFile ./neovim/telescope-config.lua)
+      (builtins.readFile ./neovim/formatter-config.lua)
+    ]
+    ++ (
+      if builtins.elem "typescript" enabledLanguages
+      then [(builtins.readFile ./neovim/tsserver-config.lua)]
+      else []
+    );
+  languageToTreesitterName = language:
+    {
+      # Add language name mappings here if treesitter uses a different name
+      # "sourceLanguage" = "treesitterLanguage";
+    }
+    .${language}
+    or language;
+in {
   enable = true;
   defaultEditor = true;
 
@@ -64,57 +74,59 @@ in
     :hi NormalFloat ctermfg=LightGrey
   '';
 
-  extraLuaConfig = ''
-    -- Global settings
-    vim.opt.termguicolors = true
+  extraLuaConfig =
+    ''
+      -- Global settings
+      vim.opt.termguicolors = true
 
-    -- Movement plugins
-    require('leap').add_default_mappings()
-    require('flit').setup{}
+      -- Movement plugins
+      require('leap').add_default_mappings()
+      require('flit').setup{}
 
-    -- Mini plugins
-    require('mini.bracketed').setup()
-    require('mini.comment').setup()
-    require('mini.map').setup()
-    require('mini.pairs').setup()
-    require('mini.trailspace').setup()
+      -- Mini plugins
+      require('mini.bracketed').setup()
+      require('mini.comment').setup()
+      require('mini.map').setup()
+      require('mini.pairs').setup()
+      require('mini.trailspace').setup()
 
-    -- Surround plugin
-    require('nvim-surround').setup({})
+      -- Surround plugin
+      require('nvim-surround').setup({})
 
-    -- LSP, linters, and other language tooling configuration
-    -- Linter
-    require("trouble").setup {}
+      -- LSP, linters, and other language tooling configuration
+      -- Linter
+      require("trouble").setup {}
 
-    -- LSP
-    local lsp = require('lsp-zero').preset('manual-setup')
+      -- LSP
+      local lsp = require('lsp-zero').preset('manual-setup')
 
-    lsp.on_attach(function(client, bufnr)
-      lsp.default_keymaps({buffer = bufnr})
-    end)
+      lsp.on_attach(function(client, bufnr)
+        lsp.default_keymaps({buffer = bufnr})
+      end)
 
-    lsp.setup()
+      lsp.setup()
 
-    -- vim-gitgutter setup
-    vim.cmd('let g:gitgutter_enabled = 1')
-    vim.cmd('let g:gitgutter_map_keys = 1')
-    vim.cmd('let g:gitgutter_sign_added = "+"')
-    vim.cmd('let g:gitgutter_sign_modified = "~"')
-    vim.cmd('let g:gitgutter_sign_removed = "_"')
+      -- vim-gitgutter setup
+      vim.cmd('let g:gitgutter_enabled = 1')
+      vim.cmd('let g:gitgutter_map_keys = 1')
+      vim.cmd('let g:gitgutter_sign_added = "+"')
+      vim.cmd('let g:gitgutter_sign_modified = "~"')
+      vim.cmd('let g:gitgutter_sign_removed = "_"')
 
-    -- vim-airline setup
-    vim.cmd('let g:airline_powerline_fonts = 1')
+      -- vim-airline setup
+      vim.cmd('let g:airline_powerline_fonts = 1')
 
-    -- enabled languages for later config
-    local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
-    local function contains(list, value)
-      for _, v in ipairs(list) do
-        if v == value then
-          return true
+      -- enabled languages for later config
+      local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
+      local function contains(list, value)
+        for _, v in ipairs(list) do
+          if v == value then
+            return true
+          end
         end
+        return false
       end
-      return false
-    end
 
-  '' + (builtins.concatStringsSep "\n" luaConfigs);
+    ''
+    + (builtins.concatStringsSep "\n" luaConfigs);
 }

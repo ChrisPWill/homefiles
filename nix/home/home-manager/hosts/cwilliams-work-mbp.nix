@@ -1,5 +1,4 @@
-{ pkgs }:
-{
+{pkgs}: {
   userEmail = "cwilliams@atlassian.com";
   extraModules = [];
   enabledLanguages = [
