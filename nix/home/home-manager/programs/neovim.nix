@@ -4,10 +4,10 @@ let
     (builtins.readFile ./neovim/bufferline-config.lua)
     (builtins.readFile ./neovim/telescope-config.lua)
   ] ++ (if builtins.elem "typescript" enabledLanguages then [(builtins.readFile ./neovim/tsserver-config.lua)] else []);
-  languageToTreesitterName = language: {
-    "typescript" = "typescript";
-    # Add more languages here as needed
-  }.${language};
+  languageToTreesitterName = language: builtins.getAttr language {
+    # Add language name mappings here if treesitter uses a different name
+    # "sourceLanguage" = "treesitterLanguage";
+  } language;
 in
 {
   enable = true;
