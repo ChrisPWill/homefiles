@@ -46,9 +46,14 @@
         modules = [
           {
             fonts.fontconfig.enable = true;
-
-            home = import ./shared/home.nix { inherit (shared) userName; inherit (systemConfig) homeDirPrefix; inherit pkgs; };
-
+      
+            home = import ./shared/home.nix {
+              inherit (shared) userName;
+              inherit (systemConfig) homeDirPrefix;
+              inherit pkgs;
+              extraPackages = systemConfig.extraPackages ++ (hostConfig hostname).extraPackages;
+            };
+      
             # Merge common and system-specific programs
             programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
           }
