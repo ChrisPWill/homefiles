@@ -50,6 +50,7 @@ in
   extraConfig = ''
     set number
     set background=dark
+    set updatetime=100
     colorscheme default
 
     " Work around for telescope colour issue
