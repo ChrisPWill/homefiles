@@ -18,3 +18,10 @@ require("formatter").setup {
   log_level = vim.log.levels.WARN,
   filetype = filetype
 }
+
+vim.cmd([[
+  augroup FormatAutogroup
+    autocmd!
+    autocmd BufWritePost * FormatWrite
+  augroup END
+]])
