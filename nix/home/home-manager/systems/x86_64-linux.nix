@@ -23,6 +23,8 @@
     firefox = import ../programs/firefox.nix;
   };
 
+  extraPackages = [];
+
   extraModules = [{
     xsession = {
       enable = true;
