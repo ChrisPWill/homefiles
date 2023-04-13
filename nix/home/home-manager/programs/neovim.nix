@@ -38,6 +38,9 @@ in
     bufferline-nvim
     noice-nvim
     vim-illuminate
+    vim-gitgutter
+    vim-airline
+    vim-fugitive
 
     # Editing, text manipulation, and utilities
     mini-nvim
@@ -83,5 +86,15 @@ in
     end)
 
     lsp.setup()
+
+    -- vim-gitgutter setup
+    vim.cmd('let g:gitgutter_enabled = 1')
+    vim.cmd('let g:gitgutter_map_keys = 1')
+    vim.cmd('let g:gitgutter_sign_added = "+"')
+    vim.cmd('let g:gitgutter_sign_modified = "~"')
+    vim.cmd('let g:gitgutter_sign_removed = "_"')
+
+    -- vim-airline setup
+    vim.cmd('let g:airline_powerline_fonts = 1')
   '' + (builtins.concatStringsSep "\n" luaConfigs);
 }
