@@ -1,4 +1,4 @@
-{ userName, homeDirPrefix, pkgs }:
+{ userName, homeDirPrefix, pkgs, extraPackages ? [] }:
 
 {
   username = userName;
@@ -17,5 +17,5 @@
     powerline-go
     ripgrep
     tealdeer
-  ];
+  ] ++ extraPackages;
 }

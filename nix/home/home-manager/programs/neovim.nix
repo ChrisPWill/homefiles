@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, enabledLanguages ? [] }:
 {
   enable = true;
   defaultEditor = true;
@@ -36,27 +36,42 @@
     :hi NormalFloat ctermfg=LightGrey
   '';
 
-  extraLuaConfig = ''
-    -- Theming
+  extraLuaConfig = let
+    enableTsserver = builtins.elem "typescript" enabledLanguages;
+
+    tsserverConfig = if enableTsserver then ''
+      -- TypeScript language server
+      local lspconfig = require('lspconfig')
+      lspconfig.tsserver.setup {
+        on_attach = function(client, bufnr)
+          lsp.default_keymaps({buffer = bufnr})
+        end,
+      }
+    '' else "";
+    in
+    ''
+    -- Global settings
     vim.opt.termguicolors = true
 
-    -- bufferline config
+    -- Bufferline configuration
     require('bufferline').setup{}
 
-    -- movement plugins
+    -- Movement plugins
     require('leap').add_default_mappings()
     require('flit').setup{}
 
-    -- mini plugins
+    -- Mini plugins
     require('mini.bracketed').setup()
     require('mini.comment').setup()
     require('mini.map').setup()
     require('mini.pairs').setup()
     require('mini.trailspace').setup()
 
+    -- Surround plugin
     require('nvim-surround').setup({})
 
-    -- telescope
+    -- Telescope configuration
+    -- Set up telescope key mappings
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
     vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})
@@ -68,9 +83,10 @@
     vim.keymap.set('n', '<leader>fgcc', builtin.git_commits, {})
     vim.keymap.set('n', '<leader>fgcb', builtin.git_bcommits, {})
 
-    -- LSP, linters, etc.
+    -- LSP, linters, and other language tooling configuration
     -- Linter
     require("trouble").setup {}
+
     -- LSP
     local lsp = require('lsp-zero').preset({})
 
@@ -79,5 +95,7 @@
     end)
 
     lsp.setup()
-  '';
+
+    ${tsserverConfig}
+    '';
 }
