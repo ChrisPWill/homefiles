@@ -20,6 +20,8 @@ require("formatter").setup {
 }
 
 vim.cmd([[
+  nnoremap <silent> <leader>f :Format<CR>
+  nnoremap <silent> <leader>F :FormatWrite<CR>
   augroup FormatAutogroup
     autocmd!
     autocmd BufWritePost * FormatWrite
