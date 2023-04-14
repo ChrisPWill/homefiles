@@ -31,10 +31,10 @@
     "-- ---" = "cd -3";
 
     # zellij
-    zz = "zellij";
+    zz = "f() { zellij attach -c ''\${1:-default} };f";
     zr = "zellij run --";
     zrf = "zellij run --floating --";
-    za = "zellij attach -c default";
+    za = "f() { zellij attach ''\${1:-default} };f";
     zl = "zellij list-sessions";
     zk = "zellij kill-session";
     zka = "zellij kill-all-sessions";
