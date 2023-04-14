@@ -29,6 +29,15 @@
     "-- -" = "cd -";
     "-- --" = "cd -2";
     "-- ---" = "cd -3";
+
+    # zellij
+    zz = "zellij";
+    zr = "zellij run --";
+    zrf = "zellij run --floating --";
+    za = "zellij attach -c default";
+    zl = "zellij list-sessions";
+    zk = "zellij kill-session";
+    zka = "zellij kill-all-sessions";
   };
 
   initExtraFirst = ''
