@@ -8,6 +8,7 @@
       (builtins.readFile ./neovim/bufferline-config.lua)
       (builtins.readFile ./neovim/telescope-config.lua)
       (builtins.readFile ./neovim/formatter-config.lua)
+      "lsp.setup()" # Call LSP setup at the end
     ]
     ++ (
       if builtins.elem "typescript" enabledLanguages
@@ -151,8 +152,6 @@ in {
       lsp.on_attach(function(client, bufnr)
         lsp.default_keymaps({buffer = bufnr})
       end)
-
-      lsp.setup()
 
       -- vim-gitgutter setup
       vim.cmd('let g:gitgutter_enabled = 1')
