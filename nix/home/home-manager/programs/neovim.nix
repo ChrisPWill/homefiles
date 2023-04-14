@@ -71,6 +71,7 @@ in {
     vim-airline
     vim-fugitive
     nvim-web-devicons
+    nvim-tree-lua
 
     # Editing, text manipulation, and utilities
     mini-nvim
@@ -91,7 +92,13 @@ in {
     ''
       -- Global settings
       local opt = vim.opt
+      local g = vim.g;
+
       opt.termguicolors = true
+
+      -- Disable netrw
+      g.loaded_netrw = 1
+      g.loaded_netrwPlugin = 1
 
       -- Tabs
       opt.tabstop = 2
@@ -156,6 +163,13 @@ in {
 
       -- vim-airline setup
       vim.cmd('let g:airline_powerline_fonts = 1')
+
+      -- nvim-tree
+      require("nvim-tree").setup({
+        renderer = {
+          group_empty = true,
+        },
+      })
 
       -- enabled languages for later config
       local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
