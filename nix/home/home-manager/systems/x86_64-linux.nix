@@ -40,10 +40,6 @@
         };
       };
 
-      services = {
-        pueue.enable = true;
-      };
-
       xresources.extraConfig = ''
         !##############################################################################
         ! Global Colorscheme Notes
