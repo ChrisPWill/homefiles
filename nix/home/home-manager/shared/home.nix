@@ -24,6 +24,7 @@
       tealdeer
       alejandra
       lua-language-server
+      nil
     ]
     ++ extraPackages;
 }
