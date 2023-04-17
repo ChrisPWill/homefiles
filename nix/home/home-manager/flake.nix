@@ -1,19 +1,20 @@
 {
   description = "Shared Home Manager configuration for MacOS and Linux";
 
+  # Flake inputs
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
   };
 
+  # Flake outputs
   outputs = {
-    self,
     nixpkgs,
     home-manager,
     ...
-  } @ inputs: let
+  }: let
     # Import shared constants
-    shared = import ./shared/constants.nix;
+    shared = import ./shared/shared-config.nix;
 
     # Import machine configuration based on hostname
     hostConfig = hostname: system: let
@@ -54,9 +55,11 @@
         modules =
           [
             {
+              # Font configuration
               fonts.fontconfig.enable = true;
 
-              home = import ./shared/home.nix {
+              # Home configuration
+              home = import ./shared/home/settings.nix {
                 inherit (shared) userName;
                 inherit (systemConfig) homeDirPrefix;
                 inherit pkgs;
@@ -71,6 +74,7 @@
           ++ (hostConfig hostname system).extraModules; # Include extra modules from system and machine files
       };
   in {
+    # Define home configurations
     homeConfigurations = {
       "${shared.userName}@${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
       "${shared.userName}@${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;

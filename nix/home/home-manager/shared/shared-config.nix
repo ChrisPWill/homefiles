@@ -3,7 +3,6 @@
   linuxSystem = "x86_64-linux";
   userName = "cwilliams";
   userFullName = "Chris Williams";
-  userEmail = "cwilliams@atlassian.com";
   hostnames = {
     workMbp = "cwilliams-work-mbp";
     personalPc = "personal-pc";
