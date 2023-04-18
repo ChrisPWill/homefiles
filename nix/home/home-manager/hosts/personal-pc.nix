@@ -7,10 +7,13 @@
     "javascript"
     "typescript"
     "html"
+    "rust"
   ];
   extraPackages = with pkgs; [
+    cargo
     nodePackages.prettier
     nodePackages.typescript
     nodePackages.typescript-language-server
+    rustc
   ];
 }
