@@ -11,6 +11,7 @@
     inherit userFullName;
     inherit userEmail;
   };
+  home-manager = {enable = true;};
   neovim = import ./neovim.nix {
     inherit pkgs;
     inherit enabledLanguages;

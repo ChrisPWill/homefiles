@@ -4,7 +4,6 @@
 }: {
   homeDirPrefix = "/home";
   extraPrograms = {
-    home-manager = {enable = true;};
     bash = {
       enable = true;
     };
