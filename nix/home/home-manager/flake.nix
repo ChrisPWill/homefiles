@@ -47,7 +47,7 @@
       commonPrograms = import ./programs/common-programs.nix {
         inherit pkgs;
         enabledLanguages = combinedEnabledLanguages;
-        inherit (shared) userFullName;
+        userFullName = hostConfig.userFullName;
         userEmail = hostConfig.userEmail;
       };
     in
@@ -61,7 +61,7 @@
 
               # Home configuration
               home = import ./shared/home/settings.nix {
-                inherit (shared) userName;
+                userName = hostConfig.userName;
                 inherit (systemConfig) homeDirPrefix;
                 inherit pkgs;
                 extraPackages = systemConfig.extraPackages ++ hostConfig.extraPackages;
@@ -77,8 +77,8 @@
   in {
     # Define home configurations
     homeConfigurations = {
-      "${shared.userName}@${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
-      "${shared.userName}@${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
+      "${(hostConfigFor shared.hostnames.workMbp shared.darwinSystem).userName}@${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
+      "${(hostConfigFor shared.hostnames.personalPc shared.linuxSystem).userName}@${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
     };
   };
 }

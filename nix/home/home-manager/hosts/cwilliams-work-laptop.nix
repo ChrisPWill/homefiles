@@ -1,4 +1,6 @@
 {pkgs}: {
+  userName = "cwilliams";
+  userFullName = "Chris Williams";
   userEmail = "cwilliams@atlassian.com";
   extraModules = [];
   enabledLanguages = [
