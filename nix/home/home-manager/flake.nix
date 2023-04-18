@@ -17,7 +17,7 @@
     shared = import ./shared/shared-config.nix;
 
     # Import machine configuration based on hostname
-    hostConfig = hostname: system: let
+    hostConfigFor = hostname: system: let
       pkgs = pkgsFor system;
     in
       import ./hosts/${hostname}.nix {inherit pkgs;};
@@ -41,13 +41,14 @@
     # Define the Home Manager configuration for a specific system
     homeConfigFor = hostname: system: let
       systemConfig = systemValues hostname system;
+      hostConfig = hostConfigFor hostname system;
       pkgs = pkgsFor system;
-      combinedEnabledLanguages = lib.unique (shared.enabledLanguages ++ (hostConfig hostname system).enabledLanguages or []);
+      combinedEnabledLanguages = lib.unique (shared.enabledLanguages ++ hostConfig.enabledLanguages or []);
       commonPrograms = import ./programs/common-programs.nix {
         inherit pkgs;
         enabledLanguages = combinedEnabledLanguages;
         inherit (shared) userFullName;
-        userEmail = (hostConfig hostname system).userEmail;
+        userEmail = hostConfig.userEmail;
       };
     in
       home-manager.lib.homeManagerConfiguration {
@@ -63,7 +64,7 @@
                 inherit (shared) userName;
                 inherit (systemConfig) homeDirPrefix;
                 inherit pkgs;
-                extraPackages = systemConfig.extraPackages ++ (hostConfig hostname system).extraPackages;
+                extraPackages = systemConfig.extraPackages ++ hostConfig.extraPackages;
               };
 
               # Merge common and system-specific programs
@@ -71,7 +72,7 @@
             }
           ]
           ++ systemConfig.extraModules
-          ++ (hostConfig hostname system).extraModules; # Include extra modules from system and machine files
+          ++ hostConfig.extraModules; # Include extra modules from system and machine files
       };
   in {
     # Define home configurations
