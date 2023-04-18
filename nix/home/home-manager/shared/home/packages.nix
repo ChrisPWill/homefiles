@@ -7,6 +7,7 @@ with pkgs;
     eureka-ideas
     fd
     fx
+    gcc
     kondo
     (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
     powerline-go
