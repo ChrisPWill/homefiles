@@ -4,7 +4,7 @@
   userName = "cwilliams";
   userFullName = "Chris Williams";
   hostnames = {
-    workMbp = "cwilliams-work-mbp";
+    workMbp = "cwilliams-work-laptop";
     personalPc = "personal-pc";
   };
   enabledLanguages = [
