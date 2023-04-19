@@ -10,11 +10,12 @@
         window = {
           opacity = 0.9;
           decorations_theme_variant = "Dark";
+          decorations = "none";
         };
         scrolling.history = 20000;
         font = {
           normal.family = "FantasqueSansMono Nerd Font Mono";
-          size = 10.0;
+          size = 20.0;
         };
         cursor = {
           style.shape = "Beam";
