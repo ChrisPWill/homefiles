@@ -4,18 +4,19 @@
 }:
 with pkgs;
   [
+    (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
+    alejandra
     eureka-ideas
     fd
     fx
     gcc
     kondo
-    (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
+    lua-language-server
+    nil
     powerline-go
     rargs
     ripgrep
+    spotify-tui
     tealdeer
-    alejandra
-    lua-language-server
-    nil
   ]
   ++ extraPackages
