@@ -15,5 +15,6 @@
     nodePackages.typescript
     nodePackages.typescript-language-server
     rustc
+    rust-analyzer
   ];
 }

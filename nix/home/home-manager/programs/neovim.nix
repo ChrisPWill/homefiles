@@ -26,6 +26,11 @@
       else []
     )
     ++ (
+      if builtins.elem "rust" enabledLanguages
+      then [(builtins.readFile ./neovim/rust-language-server-config.lua)]
+      else []
+    )
+    ++ (
       if builtins.elem "dockerfile" enabledLanguages
       then [(builtins.readFile ./neovim/dockerfile-language-server-config.lua)]
       else []
