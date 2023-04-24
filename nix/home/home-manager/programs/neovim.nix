@@ -8,7 +8,6 @@
       (builtins.readFile ./neovim/bufferline-config.lua)
       (builtins.readFile ./neovim/telescope-config.lua)
       (builtins.readFile ./neovim/formatter-config.lua)
-      "lsp.setup()" # Call LSP setup at the end
     ]
     ++ (
       if builtins.elem "typescript" enabledLanguages
@@ -26,10 +25,17 @@
       else []
     )
     ++ (
+      if builtins.elem "rust" enabledLanguages
+      then [(builtins.readFile ./neovim/rust-language-server-config.lua)]
+      else []
+    )
+    ++ (
       if builtins.elem "dockerfile" enabledLanguages
       then [(builtins.readFile ./neovim/dockerfile-language-server-config.lua)]
-      else []
-    );
+      else [])
+        ++
+      (["lsp.setup()"]); # Call LSP setup at the end
+
   languageToTreesitterName = language:
     {
       # Add language name mappings here if treesitter uses a different name
