@@ -41,6 +41,7 @@
   };
 
   initExtraFirst = (if system == "x86_64-darwin" then ''
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels''\${NIX_PATH:+:}$NIX_PATH
   source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
   '' else "") + ''
@@ -74,7 +75,7 @@ else
 	compinit -C;
 fi;
 
-# zoxide
+# (z/autojump like cd command)
 eval "$(zoxide init zsh)"
 
 # Use cache to speed completion up and set cache folder path.
