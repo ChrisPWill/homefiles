@@ -40,7 +40,10 @@
     zka = "zellij kill-all-sessions";
   };
 
-  initExtraFirst = ''
+  initExtraFirst = (if system == "x86_64-darwin" then ''
+  export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels''\${NIX_PATH:+:}$NIX_PATH
+  source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+  '' else "") + ''
 #
 # General Settings {{{
 # -----------------------------------------------------------------------------
@@ -389,10 +392,7 @@ if [ -n "''\${commands[fzf-share]}" ]; then
   source "''\$(fzf-share)/key-bindings.zsh"
   source "''\$(fzf-share)/completion.zsh"
 fi
-  '' + (if system == "x86_64-darwin" then ''
-  export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels''\${NIX_PATH:+:}$NIX_PATH
-  source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-  '' else "");
+  '';
 
   profileExtra = ''
 # Defaults
