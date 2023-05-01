@@ -45,6 +45,7 @@
       pkgs = pkgsFor system;
       combinedEnabledLanguages = lib.unique (shared.enabledLanguages ++ hostConfig.enabledLanguages or []);
       commonPrograms = import ./programs/common-programs.nix {
+        inherit system;
         inherit pkgs;
         enabledLanguages = combinedEnabledLanguages;
         userFullName = hostConfig.userFullName;

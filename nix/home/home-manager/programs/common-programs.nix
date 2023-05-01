@@ -1,4 +1,5 @@
 {
+  system,
   pkgs,
   enabledLanguages,
   userFullName,
@@ -43,5 +44,5 @@
     enable = true;
     enableZshIntegration = true;
   };
-  zsh = import ./zsh.nix;
+  zsh = import ./zsh.nix {inherit system;};
 }
