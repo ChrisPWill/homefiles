@@ -98,8 +98,8 @@ with theme.normal; let
     MoreMsg.fg = white;
     NonText.fg = silver;
     Normal = {
-      fg = white;
-      bg = black;
+      fg = foreground;
+      bg = background;
     };
     NormalFloat = {
       fg = white;

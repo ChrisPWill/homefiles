@@ -41,18 +41,6 @@
       };
 
       xresources.extraConfig = ''
-        !##############################################################################
-        ! Global Colorscheme Notes
-        !##############################################################################
-        ! White (a snow white):         #f9f9f9
-        ! Black (a faded black):        #707070
-        ! Darker Gray:                  #adadad
-        ! Gray (a dusky gray):          #e0e0e0
-        ! Green:                        #abd8a5
-        ! Lighter Gray:                 #ebebeb
-        ! Red/orange:                   #FFA996
-        ! Darker Red (faded burgundy):  #a27b7f
-
         ! enable dynamic colors
         URxvt*dynamicColors: on
 
