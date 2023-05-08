@@ -58,17 +58,23 @@
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules =
+          # Common settings
           [
             {
-              # Font configuration
-              fonts.fontconfig.enable = true;
-
-              # Home configuration
               home = import ./shared/home/settings.nix {
                 userName = hostConfig.userName;
                 inherit (systemConfig) homeDirPrefix;
                 inherit pkgs;
                 extraPackages = systemConfig.extraPackages ++ hostConfig.extraPackages;
+              };
+            }
+            {
+              # Font configuration
+              fonts.fontconfig.enable = true;
+
+              # Extra config files
+              home.file = {
+                ".config/awesome/rc.lua".source = ./programs/awesome/rc.lua;
               };
 
               # Merge common and system-specific programs
