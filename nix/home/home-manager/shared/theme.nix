@@ -8,7 +8,7 @@
     green = "#859900";
     cyan = "#2aa198";
     orange = "#ffa996";
-    yellow = "#b58900";
+    yellow = "#d1bc36";
     red = "#dc322f";
     magenta = "#d33682";
   };
@@ -18,7 +18,7 @@
     blue = "#1b6497";
     green = "#6a6a6a";
     cyan = "#71dad2";
-    yellow = "#777777";
+    yellow = "#edda61";
     red = "#cb4b16";
     magenta = "#e481b1";
   };

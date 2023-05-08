@@ -85,6 +85,7 @@ in {
     vim-fugitive
     nvim-web-devicons
     nvim-tree-lua
+    nvim-colorizer-lua
 
     # Editing, text manipulation, and utilities
     mini-nvim
@@ -110,6 +111,7 @@ in {
       local opt = vim.opt
       local g = vim.g;
 
+      require 'colorizer'.setup()
       opt.termguicolors = true
 
       -- Disable netrw
