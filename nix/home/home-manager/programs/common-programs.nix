@@ -4,8 +4,9 @@
   enabledLanguages,
   userFullName,
   userEmail,
+  theme,
 }: {
-  alacritty = import ./alacritty.nix;
+  alacritty = import ./alacritty.nix {inherit theme;};
   bat = import ./bat.nix;
   exa = import ./exa.nix;
   fzf = import ./fzf.nix;

@@ -50,6 +50,7 @@
         enabledLanguages = combinedEnabledLanguages;
         userFullName = hostConfig.userFullName;
         userEmail = hostConfig.userEmail;
+        theme = import ./shared/theme.nix;
       };
     in
       home-manager.lib.homeManagerConfiguration {
