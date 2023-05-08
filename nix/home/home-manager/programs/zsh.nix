@@ -1,4 +1,4 @@
-{ system }: {
+{ system, theme }: {
   enable = true;
 
   history = {
@@ -129,7 +129,7 @@ bindkey "^I" expand-or-complete-with-dots
 # $2 = directory bgcolour
 generate_ps1() {
     setopt PROMPT_SUBST
-    PS1="%{[38;05;230;48;05;''\${1}m%} %(!.%S-ROOT-%s.%n) %{[38;05;''\${1};48;05;''\${2}m%}%{[00m%}%{[38;05;230;48;05;''\${2}m%} %0~ %{[00m%}%{[38;05;''\${2}m%} %{[00m%}"
+    PS1="%{''\${1}$fg[white]%} %(!.%S-ROOT-%s.%n) %{''\${2}''\${3}%}%{$reset_color%}%{''\${3}$fg[white]%} %0~ %{[00m%}%{''\${4}$bg[black]%}%{$reset_color%} "
 }
 
 autoload -U colors && colors
@@ -138,11 +138,11 @@ generate_ps1 26 196
 zle-keymap-select () {
 if [[ $TERM == "rxvt-unicode" || $TERM == "rxvt-unicode-256color" || $TERM == "xterm-256color" ]]; then
     if [ $KEYMAP = vicmd ]; then
-        generate_ps1 40 196
+        generate_ps1 $bg[green] $fg[green] $bg[red] $fg[red]
         () { return $__prompt_status }
         zle reset-prompt
     else
-        generate_ps1 26 196
+        generate_ps1 $bg[blue] $fg[blue] $bg[red] $fg[red]
         () { return $__prompt_status }
         zle reset-prompt
     fi
@@ -153,7 +153,7 @@ zle -N zle-keymap-select
 zle-line-init () {
     zle -K viins
     if [[ $TERM == "rxvt-unicode" || $TERM = "rxvt-unicode-256color" || $TERM == "xterm-256color" ]]; then
-        generate_ps1 26 196
+        generate_ps1 $bg[blue] $fg[blue] $bg[red] $fg[red]
         () { return $__prompt_status }
         zle reset-prompt
     fi

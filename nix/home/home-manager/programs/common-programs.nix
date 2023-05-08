@@ -25,5 +25,8 @@
     enable = true;
     enableZshIntegration = true;
   };
-  zsh = import ./zsh.nix {inherit system;};
+  zsh = import ./zsh.nix {
+    inherit system;
+    inherit theme;
+  };
 }
