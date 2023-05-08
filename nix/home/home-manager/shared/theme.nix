@@ -6,8 +6,8 @@
     white = "#e8e8e8";
     silver = "#c1c1d1";
     lightgray = "#c8c8c8";
-    dimgray = "#a8a8a8";
     gray = "#585858";
+    dimgray = "#383838";
     black = "#303030";
     blue = "#268bd2";
     green = "#859900";
