@@ -8,17 +8,18 @@
     };
     colors = {
       primary = {
-        background = theme.black;
-        foreground = theme.white;
+        background = theme.background;
+        foreground = theme.foreground;
       };
       normal = {
-        black = theme.black;
-        white = theme.white;
-        red = theme.red;
-        green = theme.green;
-        yellow = theme.yellow;
-        blue = theme.blue;
-        cyan = theme.cyan;
+        black = theme.normal.black;
+        white = theme.normal.white;
+        red = theme.normal.red;
+        green = theme.normal.green;
+        yellow = theme.normal.yellow;
+        blue = theme.normal.blue;
+        cyan = theme.normal.cyan;
+        magenta = theme.normal.magenta;
       };
     };
     scrolling.history = 20000;
