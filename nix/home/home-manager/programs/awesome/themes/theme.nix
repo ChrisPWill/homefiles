@@ -31,9 +31,9 @@ in ''
 
   theme.useless_gap         = dpi(0)
   theme.border_width        = dpi(1)
-  theme.border_color_normal = "${black}"
-  theme.border_color_active = "${blue}"
-  theme.border_color_marked = "${red}"
+  theme.border_normal = "${black}"
+  theme.border_active = "${blue}"
+  theme.border_marked = "${red}"
 
   -- There are other variable sets
   -- overriding the default one when
