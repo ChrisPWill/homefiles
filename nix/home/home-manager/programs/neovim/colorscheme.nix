@@ -106,8 +106,8 @@ with theme.normal; let
       bg = dimgray;
     };
     NormalNC = {
-      fg = white;
-      bg = black;
+      fg = foreground;
+      bg = background-defocused;
     };
     Pmenu = {
       fg = white;

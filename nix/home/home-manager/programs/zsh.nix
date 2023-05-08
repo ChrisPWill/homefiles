@@ -129,7 +129,7 @@ bindkey "^I" expand-or-complete-with-dots
 # $2 = directory bgcolour
 generate_ps1() {
     setopt PROMPT_SUBST
-    PS1="%{''\${1}$fg[white]%} %(!.%S-ROOT-%s.%n) %{''\${2}''\${3}%}%{$reset_color%}%{''\${3}$fg[white]%} %0~ %{[00m%}%{''\${4}$bg[black]%}%{$reset_color%} "
+    PS1="%{''\${1}$fg[white]%} %(!.%S-ROOT-%s.%n) %{''\${2}''\${3}%}%{$reset_color%}%{''\${3}$fg[white]%} %0~ %{[00m%}%{$reset_color''\${4}%}%{$reset_color%} "
 }
 
 autoload -U colors && colors

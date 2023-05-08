@@ -1,5 +1,6 @@
 {
-  background = "#262626";
+  background = "#202020";
+  background-defocused = "#262626";
   foreground = "#e8e8e8";
   normal = {
     white = "#e8e8e8";
