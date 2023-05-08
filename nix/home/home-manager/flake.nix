@@ -74,7 +74,7 @@
 
               # Extra config files
               home.file = {
-                ".config/awesome/rc.lua".source = ./programs/awesome/rc.lua;
+                ".config/awesome".source = ./programs/awesome;
               };
 
               # Merge common and system-specific programs
