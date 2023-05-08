@@ -15,6 +15,7 @@
   }: let
     # Import shared constants
     shared = import ./shared/shared-config.nix;
+    theme = import ./shared/theme.nix;
 
     # Import machine configuration based on hostname
     hostConfigFor = hostname: system: let
@@ -36,7 +37,7 @@
     systemValues = hostname: system: let
       pkgs = pkgsFor system;
     in
-      import ./systems/${system}.nix {inherit pkgs lib;};
+      import ./systems/${system}.nix {inherit pkgs lib theme;};
 
     # Define the Home Manager configuration for a specific system
     homeConfigFor = hostname: system: let
@@ -50,7 +51,7 @@
         enabledLanguages = combinedEnabledLanguages;
         userFullName = hostConfig.userFullName;
         userEmail = hostConfig.userEmail;
-        theme = import ./shared/theme.nix;
+        inherit theme;
       };
     in
       home-manager.lib.homeManagerConfiguration {

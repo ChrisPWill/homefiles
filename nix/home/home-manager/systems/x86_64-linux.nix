@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  theme,
 }: {
   homeDirPrefix = "/home";
   extraPrograms = {
@@ -56,42 +57,41 @@
         URxvt*dynamicColors: on
 
         ! 0: Black
-        URxvt*color0 : #303030
-        URxvt*color8 : #262626
+        URxvt*color0 : ${theme.normal.black}
+        URxvt*color8 : ${theme.light.black}
 
         ! 1: Red
-        URxvt*color1: #dc322f
-        ! 9: Orange
-        URxvt*color9: #cb4b16
+        URxvt*color1: ${theme.normal.red}
+        URxvt*color9: ${theme.light.red}
 
         ! 2: Green
-        URxvt*color2 : #859900
-        URxvt*color10 : #6a6a6a
+        URxvt*color2 : ${theme.normal.green}
+        URxvt*color10 : ${theme.light.green}
 
         ! 3. Yellow/Orange
-        URxvt*color3: #b58900
-        URxvt*color11: #777777
+        URxvt*color3: ${theme.normal.yellow}
+        URxvt*color11: ${theme.light.yellow}
 
         ! 4. Blue
-        URxvt*color4: #268bd2
-        URxvt*color12: #1b6497
+        URxvt*color4: ${theme.normal.blue}
+        URxvt*color12: ${theme.light.blue}
 
         ! 5. Magenta
-        URxvt*color5 : #d33682
-        URxvt*color13 : #e481b1
+        URxvt*color5 : ${theme.normal.magenta}
+        URxvt*color13 : ${theme.light.magenta}
 
         ! 6. Cyan
-        URxvt*color6 : #2aa198
-        URxvt*color14 : #71dad2
+        URxvt*color6 : ${theme.normal.cyan}
+        URxvt*color14 : ${theme.light.cyan}
 
         ! 7. White
-        URxvt*color7 : #e8e8e8
-        URxvt*color15 : #f6f6f6
+        URxvt*color7 : ${theme.normal.white}
+        URxvt*color15 : ${theme.light.white}
 
-        URxvt*background: #262626
-        URxvt*foreground: #919191
-        URxvt*colorUL: #268bd2
-        URxvt*borderColor: #262626
+        URxvt*background: ${theme.background}
+        URxvt*foreground: ${theme.foreground}
+        URxvt*colorUL: ${theme.normal.blue}
+        URxvt*borderColor: ${theme.background}
 
         !##############################################################################
         ! Fonts

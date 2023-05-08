@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  theme,
 }: {
   homeDirPrefix = "/Users";
   extraPrograms = {};
