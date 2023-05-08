@@ -74,7 +74,8 @@
 
               # Extra config files
               home.file = {
-                ".config/awesome".source = ./programs/awesome;
+                ".config/awesome/rc.lua".source = ./programs/awesome/rc.lua;
+                ".config/awesome/themes/theme.lua".text = import ./programs/awesome/themes/theme.nix {inherit theme;};
               };
 
               # Merge common and system-specific programs
