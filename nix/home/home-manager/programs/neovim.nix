@@ -4,6 +4,9 @@
   enabledLanguages ? [],
   theme,
 }: let
+  generateLanguageConfig = language: path: if builtins.elem language enabledLanguages
+    then [(builtins.readFile path)]
+    else [];
   luaConfigs =
     [
       (builtins.readFile ./neovim/formatter-config.lua)
@@ -11,32 +14,12 @@
       (builtins.readFile ./neovim/telescope-config.lua)
       (builtins.readFile ./neovim/formatter-config.lua)
     ]
-    ++ (
-      if builtins.elem "typescript" enabledLanguages
-      then [(builtins.readFile ./neovim/tsserver-config.lua)]
-      else []
-    )
-    ++ (
-      if builtins.elem "lua" enabledLanguages
-      then [(builtins.readFile ./neovim/lua-language-server-config.lua)]
-      else []
-    )
-    ++ (
-      if builtins.elem "nix" enabledLanguages
-      then [(builtins.readFile ./neovim/nix-language-server-config.lua)]
-      else []
-    )
-    ++ (
-      if builtins.elem "rust" enabledLanguages
-      then [(builtins.readFile ./neovim/rust-language-server-config.lua)]
-      else []
-    )
-    ++ (
-      if builtins.elem "dockerfile" enabledLanguages
-      then [(builtins.readFile ./neovim/dockerfile-language-server-config.lua)]
-      else [])
-        ++
-      (["lsp.setup()"]); # Call LSP setup at the end
+    ++ generateLanguageConfig "typescript" ./neovim/tsserver-config.lua
+    ++ generateLanguageConfig "lua" ./neovim/lua-language-server-config.lua
+    ++ generateLanguageConfig "nix" ./neovim/nix-language-server-config.lua
+    ++ generateLanguageConfig "rust" ./neovim/rust-language-server-config.lua
+    ++ generateLanguageConfig "dockerfile" ./neovim/dockerfile-language-server-config.lua
+    ++ (["lsp.setup()"]); # Call LSP setup at the end
 
   languageToTreesitterName = language:
     {
