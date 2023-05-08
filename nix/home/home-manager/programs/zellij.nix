@@ -1,6 +1,8 @@
 {
   enable = true;
   settings = {
+    scroll_buffer_size = 10000;
+    copy_on_select = false;
     theme = "custom";
     themes.custom = {
       fg = "#D8DEE9";
