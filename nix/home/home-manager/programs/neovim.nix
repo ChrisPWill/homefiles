@@ -1,6 +1,7 @@
 {
   pkgs,
   enabledLanguages ? [],
+  theme,
 }: let
   luaConfigs =
     [
@@ -96,8 +97,19 @@ in {
   extraConfig = ''
     set number
     set background=dark
+    " Color configuration
+    highlight Normal guibg=${theme.background} guifg=${theme.foreground}
+    highlight LineNr guifg=${theme.light.black}
+    highlight NonText guifg=${theme.light.black}
+    highlight CursorLine guibg=${theme.normal.black}
+    highlight CursorLineNr guifg=${theme.light.blue} gui=bold
+    highlight MatchParen guibg=${theme.normal.black} guifg=${theme.light.blue} gui=bold
+    highlight Pmenu guibg=${theme.normal.black} guifg=${theme.light.white}
+    highlight PmenuSel guibg=${theme.light.blue} guifg=${theme.normal.white} gui=bold
+    " Work around for telescope color issue
+    hi NormalFloat ctermfg=LightGrey
+
     set updatetime=100
-    colorscheme default
 
     " Work around for telescope colour issue
     :hi NormalFloat ctermfg=LightGrey

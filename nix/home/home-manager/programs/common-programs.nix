@@ -18,6 +18,7 @@
   neovim = import ./neovim.nix {
     inherit pkgs;
     inherit enabledLanguages;
+    inherit theme;
   };
   vscode = import ./vscode.nix;
   zellij = import ./zellij.nix;
