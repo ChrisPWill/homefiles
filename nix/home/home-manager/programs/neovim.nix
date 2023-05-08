@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   enabledLanguages ? [],
   theme,
 }: let
@@ -103,7 +104,7 @@ in {
 
     " Work around for telescope colour issue
     :hi NormalFloat ctermfg=LightGrey
-  '' + (import ./neovim/theme.nix {inherit theme;}).themeConfig;
+  '' + (import ./neovim/colorscheme.nix {inherit theme; inherit lib;});
 
   extraLuaConfig =
     ''

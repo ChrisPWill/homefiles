@@ -1,6 +1,7 @@
 {
   system,
   pkgs,
+  lib,
   enabledLanguages,
   userFullName,
   userEmail,
@@ -17,6 +18,7 @@
   home-manager = {enable = true;};
   neovim = import ./neovim.nix {
     inherit pkgs;
+    inherit lib;
     inherit enabledLanguages;
     inherit theme;
   };
