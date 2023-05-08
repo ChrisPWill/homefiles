@@ -1,21 +1,21 @@
-{
+{theme}: {
   enable = true;
   settings = {
     scroll_buffer_size = 10000;
     copy_on_select = false;
     theme = "custom";
     themes.custom = {
-      fg = "#D8DEE9";
-      bg = "#2E3440";
-      black = "#3B4252";
-      red = "#BF616A";
-      green = "#A3BE8C";
-      yellow = "#EBCB8B";
-      blue = "#81A1C1";
-      magenta = "#B48EAD";
-      cyan = "#88C0D0";
-      white = "#E5E9F0";
-      orange = "#D08770";
+      fg = theme.foreground;
+      bg = theme.background;
+      black = theme.normal.black;
+      red = theme.normal.red;
+      green = theme.normal.green;
+      yellow = theme.normal.yellow;
+      blue = theme.normal.blue;
+      magenta = theme.normal.magenta;
+      cyan = theme.normal.cyan;
+      white = theme.normal.white;
+      orange = theme.normal.orange;
     };
   };
 }

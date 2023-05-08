@@ -21,7 +21,7 @@
     inherit theme;
   };
   vscode = import ./vscode.nix;
-  zellij = import ./zellij.nix;
+  zellij = import ./zellij.nix {inherit theme;};
   zoxide = {
     enable = true;
     enableZshIntegration = true;
