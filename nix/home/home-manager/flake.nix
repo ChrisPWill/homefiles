@@ -23,6 +23,9 @@
     in
       import ./hosts/${hostname}.nix {inherit pkgs;};
 
+    workMbpHostConfig = hostConfigFor shared.hostnames.workMbp shared.darwinSystem;
+    personalPcHostConfig = hostConfigFor shared.hostnames.personalPc shared.linuxSystem;
+
     # Select the correct nixpkgs based on the system
     pkgsFor = system:
       import nixpkgs {
@@ -88,8 +91,8 @@
   in {
     # Define home configurations
     homeConfigurations = {
-      "${(hostConfigFor shared.hostnames.workMbp shared.darwinSystem).userName}@${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
-      "${(hostConfigFor shared.hostnames.personalPc shared.linuxSystem).userName}@${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
+      "${workMbpHostConfig.userName}@${shared.hostnames.workMbp}" = homeConfigFor shared.hostnames.workMbp shared.darwinSystem;
+      "${personalPcHostConfig.userName}@${shared.hostnames.personalPc}" = homeConfigFor shared.hostnames.personalPc shared.linuxSystem;
     };
   };
 }
