@@ -32,6 +32,7 @@ in ''
   theme.useless_gap         = dpi(0)
   theme.border_width        = dpi(1)
   theme.border_normal = "${black}"
+  theme.border_focus = "${gray}"
   theme.border_active = "${blue}"
   theme.border_marked = "${red}"
 
