@@ -71,6 +71,8 @@
             };
           };
 
+          programs.zsh.enable = true;
+
           users.users.cwilliams = {
             isNormalUser = true;
             description = "Chris Williams";
