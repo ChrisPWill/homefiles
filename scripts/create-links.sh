@@ -24,12 +24,14 @@ echo -e "---------------------"
 if test -f "/etc/NIXOS"; then
   # For NixOS
   # nixos files
+  echo "NixOS detected"
   for f in $BASE_DIR/nix/etc/nixos/*; do
-    configFile=$(basename $f)
-    link_and_backup_destination "nix/etc/nixos/$configFile" "/etc/nixos/$configFile"
+    nixConfigToLink=$(basename $f)
+    link_and_backup_destination "nix/etc/nixos/$nixConfigToLink" "/etc/nixos/$nixConfigToLink"
   done
 else
   # For non-NixOS
+  echo "NixOS not detected"
   link_and_backup_destination "non-nix/etc/nix" "/etc/nix"
 fi
 
