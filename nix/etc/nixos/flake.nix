@@ -19,7 +19,7 @@
       modules = [
         ./hardware-configuration.nix
         ./home-manager.nix
-        {
+        ({
           config,
           pkgs,
           ...
@@ -90,7 +90,7 @@
           nix.settings = {
             experimental-features = ["nix-command" "flakes"];
           };
-        }
+        })
       ];
     };
   };
