@@ -17,8 +17,7 @@
     nixosConfigurations.personal-pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./hardware-configuration.nix
-        ./home-manager.nix
+        /etc/nixos/hardware-configuration.nix
         ({
           config,
           pkgs,
