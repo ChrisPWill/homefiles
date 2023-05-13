@@ -6,6 +6,7 @@ BASE_DIR=$( cd -- "$SCRIPT_DIR/.." &> /dev/null && pwd )
 function link_and_backup_destination {
     if ! [ -L "$2" ]; then
         [ -f "$2" ] && echo "Backing up $2 to $2.backup" && mv "$2" "$2.backup"
+        [ -d "$2" ] && echo "Backing up $2 to $2.backup" && mv "$2" "$2.backup"
     fi
     echo "${BASE_DIR}/$1"; echo ==\> "$2"
     ln -sf "${BASE_DIR}/$1" "$2"

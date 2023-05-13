@@ -19,8 +19,6 @@ nix-channel --add https://nixos.org/channels/nixpkgs-unstable
 nix-channel --add https://github.com/LnL7/nix-darwin/archive/master.tar.gz darwin
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
-bash
 nix-shell '<home-manager>' -A install
-home-manager switch
 
 home-manager switch
