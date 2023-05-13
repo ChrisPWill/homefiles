@@ -83,6 +83,11 @@
 
           nixpkgs.config.allowUnfree = true;
 
+          virtualisation.virtualbox.guest = {
+            enable = true;
+            x11 = true;
+          };
+
           environment.systemPackages = with pkgs; [
           ];
 
