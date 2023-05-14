@@ -39,4 +39,5 @@ fi
 echo -e "Now linking home files:"
 echo -e "-----------------------"
 
+mkdir -p $HOME/.config
 link_and_backup_destination "home-manager" "$HOME/.config/home-manager"
