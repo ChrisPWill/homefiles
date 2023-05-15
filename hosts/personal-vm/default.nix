@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+let
   hostName = "personal-vm";
   stateVersion = "22.11";
   utils = import ../utils.nix;
@@ -7,9 +7,12 @@ in {
   inherit hostName;
   inherit stateVersion;
   extraOverlays = [];
-  extraModules = [
+  extraModules = {
+    pkgs,
+    system,
+  }: [
     {
-      networking.hostName = hostName;
+      networking.hostName = "hostName:${system}";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 

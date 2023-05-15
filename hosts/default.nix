@@ -1,3 +1,3 @@
-{pkgs, ...}: [
-  (import ./personal-vm {inherit pkgs;})
+[
+  (import ./personal-vm)
 ]

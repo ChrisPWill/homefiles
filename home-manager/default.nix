@@ -1,8 +1,10 @@
 {
   lib,
   nixpkgs,
+  home-manager,
   hostConfigs,
   systemConfigs,
+  user,
   ...
 }: let
   getPkgs = system:
@@ -13,22 +15,14 @@
       };
       overlays = [];
     };
-  mkNixosConfig = {
+  mkHomeConfig = {
     hostConfig,
     systemConfig,
   }: let
     pkgs = getPkgs systemConfig.system;
-    system = systemConfig.system;
   in
-    nixpkgs.lib.nixosSystem {
+    home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      system = systemConfig.system;
-      modules =
-        [
-          ./configuration.nix
-        ]
-        ++ systemConfig.extraModules {inherit pkgs system;}
-        ++ hostConfig.extraModules;
     };
   hostAndSystemConfigs = lib.concatMap (systemConfig:
     map (hostConfig: {
@@ -38,12 +32,12 @@
     hostConfigs)
   systemConfigs;
 in
-  builtins.listToAttrs (map (nixosInput @ {
+  builtins.listToAttrs (map (homeInput @ {
       hostConfig,
       systemConfig,
       ...
     }: {
-      name = "${hostConfig.hostName}:${systemConfig.system}";
-      value = mkNixosConfig nixosInput;
+      name = "${user.userName}@${hostConfig.hostName}:${systemConfig.system}";
+      value = mkHomeConfig homeInput;
     })
     hostAndSystemConfigs)
