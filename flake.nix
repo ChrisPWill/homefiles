@@ -9,13 +9,13 @@
     self,
     nixpkgs,
   }: let
-    hostConfigs = import ./hosts;
+    getHostConfigs = import ./hosts;
     systemConfigs = import ./systems;
   in {
     nixosConfigurations = (import ./nixos) {
       inherit (nixpkgs) lib;
       inherit inputs nixpkgs;
-      inherit hostConfigs systemConfigs;
+      inherit getHostConfigs systemConfigs;
     };
   };
 }

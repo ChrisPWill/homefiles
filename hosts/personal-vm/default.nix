@@ -11,12 +11,11 @@ in {
     {
       networking.hostName = hostName;
 
-      users.users.cwilliams = utils.userToNixosUser {
-        inherit pkgs;
-        user = sharedUsers.cwilliams;
-      };
+      users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 
       system.stateVersion = stateVersion;
+
+      programs.zsh.enable = true;
     }
     ./hardware-configuration.nix
   ];

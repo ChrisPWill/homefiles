@@ -1,10 +1,18 @@
 {
   lib,
   nixpkgs,
-  hostConfigs,
+  getHostConfigs,
   systemConfigs,
   ...
 }: let
+  getPkgs = system:
+    import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+      overlays = [];
+    };
   mkNixosConfig = {
     hostConfig,
     systemConfig,
@@ -23,7 +31,7 @@
       inherit hostConfig;
       inherit systemConfig;
     })
-    hostConfigs)
+    (getHostConfigs {pkgs = getPkgs systemConfig.system;}))
   systemConfigs;
 in
   builtins.listToAttrs (map (nixosInput @ {
