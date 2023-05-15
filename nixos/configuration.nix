@@ -1,15 +1,10 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
   networking = {
-    hostName = "personal-vm";
     networkmanager.enable = true;
   };
 
@@ -45,7 +40,6 @@
     isNormalUser = true;
     description = "Chris Williams";
     extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
   };
 
   # Allow unfree packages

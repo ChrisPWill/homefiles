@@ -1,5 +1,6 @@
 {
   lib,
+  nixpkgs,
   hostConfigs,
   systemConfigs,
   ...
@@ -7,7 +8,16 @@
   mkNixosConfig = {
     hostConfig,
     systemConfig,
-  }: {};
+  }:
+    nixpkgs.lib.nixosSystem {
+      system = systemConfig.system;
+      modules =
+        [
+          ./configuration.nix
+        ]
+        ++ systemConfig.extraModules
+        ++ hostConfig.extraModules;
+    };
   hostAndSystemConfigs = lib.concatMap (systemConfig: map (hostConfig: hostConfig // systemConfig) hostConfigs) systemConfigs;
 in
   builtins.listToAttrs (map (nixosInput @ {
