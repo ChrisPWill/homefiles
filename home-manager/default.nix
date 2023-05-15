@@ -14,6 +14,8 @@
   }: let
     pkgs = sharedUtils.getPkgs {inherit nixpkgs systemConfig;};
 
+    # Shared constants
+    theme = import ./theme.nix;
   in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
