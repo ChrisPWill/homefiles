@@ -1,10 +1,10 @@
 let
-  hostName = (import ../../shared/constants.nix).hosts.personalVm;
+  host = (import ../../shared/constants.nix).hosts.personalVm;
   stateVersion = "22.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;
 in {
-  inherit hostName;
+  inherit host;
   inherit stateVersion;
   extraOverlays = [];
   extraModules = {
@@ -13,7 +13,7 @@ in {
     ...
   }: [
     {
-      networking.hostName = "${hostName}_${system}";
+      networking.hostName = "${host}_${system}";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 

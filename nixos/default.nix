@@ -39,7 +39,7 @@ in
       systemConfig,
       ...
     }: {
-      name = "${hostConfig.hostName}_${systemConfig.system}";
+      name = "${hostConfig.host}_${systemConfig.system}";
       value = mkNixosConfig nixosInput;
     })
     hostAndSystemConfigs)
