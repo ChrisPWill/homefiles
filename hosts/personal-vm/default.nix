@@ -1,5 +1,5 @@
 let
-  hostName = "personal-vm";
+  hostName = (import ../../shared/constants.nix).hosts.personalVm;
   stateVersion = "22.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;
@@ -10,9 +10,10 @@ in {
   extraModules = {
     pkgs,
     system,
+    ...
   }: [
     {
-      networking.hostName = "hostName:${system}";
+      networking.hostName = "${hostName}_${system}";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 

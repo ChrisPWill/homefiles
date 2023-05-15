@@ -19,6 +19,7 @@
   }: let
     pkgs = getPkgs systemConfig.system;
     system = systemConfig.system;
+    extraModuleInherits = {inherit pkgs lib system;};
   in
     nixpkgs.lib.nixosSystem {
       inherit pkgs;
@@ -27,8 +28,8 @@
         [
           ./configuration.nix
         ]
-        ++ systemConfig.extraModules {inherit pkgs system;}
-        ++ hostConfig.extraModules;
+        ++ systemConfig.extraModules extraModuleInherits
+        ++ hostConfig.extraModules extraModuleInherits;
     };
   hostAndSystemConfigs = lib.concatMap (systemConfig:
     map (hostConfig: {
@@ -43,7 +44,7 @@ in
       systemConfig,
       ...
     }: {
-      name = "${hostConfig.hostName}:${systemConfig.system}";
+      name = "${hostConfig.hostName}_${systemConfig.system}";
       value = mkNixosConfig nixosInput;
     })
     hostAndSystemConfigs)

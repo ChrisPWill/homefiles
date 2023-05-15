@@ -1,6 +1,8 @@
-{
-  system = "x86_64-linux";
-  extraModules = [
+let
+  linuxSystem = (import ../../shared/constants.nix).systems.linuxSystem;
+in {
+  system = linuxSystem;
+  extraModules = {lib, ...}: [
     {
       services.xserver = {
         enable = true;
@@ -13,6 +15,7 @@
           enable = true;
         };
       };
+      nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
   ];
 }

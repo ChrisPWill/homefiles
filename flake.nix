@@ -17,7 +17,7 @@
   }: let
     hostConfigs = import ./hosts;
     systemConfigs = import ./systems;
-    userConfigs = import ./shared/users.nix;
+    # userConfigs = import ./shared/users.nix;
     inherits = {
       inherit (nixpkgs) lib;
       inherit inputs nixpkgs home-manager;
@@ -26,9 +26,9 @@
   in {
     nixosConfigurations = (import ./nixos) inherits;
 
-    homeConfigurations = import ./home-manager (inherits
-      // {
-        user = userConfigs.cwilliams;
-      });
+    # homeConfigurations = import ./home-manager (inherits
+    #   // {
+    #     user = userConfigs.cwilliams;
+    #   });
   };
 }
