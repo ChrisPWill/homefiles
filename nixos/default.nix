@@ -18,14 +18,20 @@
         ++ systemConfig.extraModules
         ++ hostConfig.extraModules;
     };
-  hostAndSystemConfigs = lib.concatMap (systemConfig: map (hostConfig: hostConfig // systemConfig) hostConfigs) systemConfigs;
+  hostAndSystemConfigs = lib.concatMap (systemConfig:
+    map (hostConfig: {
+      inherit hostConfig;
+      inherit systemConfig;
+    })
+    hostConfigs)
+  systemConfigs;
 in
   builtins.listToAttrs (map (nixosInput @ {
       hostConfig,
       systemConfig,
       ...
     }: {
-      name = hostConfig.hostName + ";" + systemConfig.system;
+      name = hostConfig.hostName + ":" + systemConfig.system;
       value = mkNixosConfig nixosInput;
     })
     hostAndSystemConfigs)
