@@ -33,6 +33,6 @@
       vi_mode_style.shape = "Block";
       vi_mode_style.blinking = "On";
     };
-    selection.save_to_clipboard = false;
+    selection.save_to_clipboard = true;
   };
 }

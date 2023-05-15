@@ -13,7 +13,7 @@ in {
     ...
   }: [
     {
-      networking.hostName = "${host}_${system}";
+      networking.hostName = "${host}-${system}";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 
