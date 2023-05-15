@@ -3,7 +3,7 @@
   linuxSystem = "x86_64-linux";
   hostnames = {
     workMbp = "cwilliams-work-laptop";
-    personalPc = "personal-pc";
+    personalPc = "personal-vm";
   };
   enabledLanguages = [
     "diff"
