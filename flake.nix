@@ -11,11 +11,12 @@
   }: let
     getHostConfigs = import ./hosts;
     systemConfigs = import ./systems;
-  in {
-    nixosConfigurations = (import ./nixos) {
+    inherits = {
       inherit (nixpkgs) lib;
       inherit inputs nixpkgs;
       inherit getHostConfigs systemConfigs;
     };
+  in {
+    nixosConfigurations = (import ./nixos) inherits;
   };
 }
