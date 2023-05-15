@@ -19,7 +19,7 @@
     # - will wrap some of this into new config files
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
-    homeSystemConfig = import ./systems/${systemConfig.system} {inherit pkgs lib theme;};
+    homeSystemConfig = import ./systems/${systemConfig.system}.nix {inherit pkgs lib theme;};
 
     # Shared constants
     theme = import ./theme.nix;
@@ -30,8 +30,8 @@
       inherit lib;
       inherit pkgs;
       enabledLanguages = combinedEnabledLanguages;
-      userFullName = hostConfig.userFullName;
-      userEmail = hostConfig.userEmail;
+      userFullName = homeHostConfig.userFullName;
+      userEmail = homeHostConfig.userEmail;
       inherit theme;
     };
   in
@@ -58,7 +58,7 @@
             };
 
             # Merge common and system-specific programs
-            programs = lib.mkForce (lib.mergeAttrs commonPrograms systemConfig.extraPrograms);
+            programs = lib.mkForce (lib.mergeAttrs commonPrograms homeSystemConfig.extraPrograms);
           }
         ]
         ++ homeSystemConfig.extraModules
