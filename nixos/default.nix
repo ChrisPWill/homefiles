@@ -5,19 +5,14 @@
   systemConfigs,
   ...
 }: let
-  getPkgs = system:
-    import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [];
-    };
+  sharedUtils = import ../shared/utils.nix;
   mkNixosConfig = {
     hostConfig,
     systemConfig,
   }: let
-    pkgs = getPkgs systemConfig.system;
+    pkgs = sharedUtils.getPkgs {
+      inherit nixpkgs systemConfig;
+    };
     system = systemConfig.system;
     extraModuleInherits = {inherit pkgs lib system;};
   in

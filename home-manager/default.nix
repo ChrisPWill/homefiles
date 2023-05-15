@@ -7,19 +7,13 @@
   user,
   ...
 }: let
-  getPkgs = system:
-    import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-      overlays = [];
-    };
+  sharedUtils = import ../shared/utils.nix;
   mkHomeConfig = {
     hostConfig,
     systemConfig,
   }: let
-    pkgs = getPkgs systemConfig.system;
+    pkgs = sharedUtils.getPkgs {inherit nixpkgs systemConfig;};
+
   in
     home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
