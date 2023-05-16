@@ -9,11 +9,11 @@ in {
   extraOverlays = [];
   extraModules = {
     pkgs,
-    system,
+    systemConfig,
     ...
   }: [
     {
-      networking.hostName = "${host}-${system}";
+      networking.hostName = "${host}-${systemConfig.name}";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 

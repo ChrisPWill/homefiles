@@ -77,7 +77,7 @@ in
       systemConfig,
       ...
     }: {
-      name = "${user.userName}@${hostConfig.host}-${systemConfig.system}";
+      name = "${user.userName}@${hostConfig.host}-${systemConfig.name}";
       value = mkHomeConfig homeInput;
     })
     hostAndSystemConfigs)

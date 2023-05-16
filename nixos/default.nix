@@ -14,7 +14,7 @@
       inherit nixpkgs systemConfig;
     };
     system = systemConfig.system;
-    extraModuleInherits = {inherit pkgs lib system;};
+    extraModuleInherits = {inherit pkgs lib systemConfig;};
   in
     nixpkgs.lib.nixosSystem {
       inherit pkgs;
@@ -39,7 +39,7 @@ in
       systemConfig,
       ...
     }: {
-      name = "${hostConfig.host}-${systemConfig.system}";
+      name = "${hostConfig.host}-${systemConfig.name}";
       value = mkNixosConfig nixosInput;
     })
     hostAndSystemConfigs)
