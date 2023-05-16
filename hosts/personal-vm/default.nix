@@ -1,6 +1,6 @@
 let
   host = (import ../../shared/constants.nix).hosts.personalVm;
-  stateVersion = "23.05";
+  stateVersion = "22.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;
 in {
