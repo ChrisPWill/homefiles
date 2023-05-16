@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   lib,
   enabledLanguages ? [],
   theme,
@@ -32,6 +33,7 @@
     }
     .${language}
     or language;
+  unstableVim = pkgs-unstable.vimPlugins;
 in {
   enable = true;
   defaultEditor = true;
@@ -54,11 +56,11 @@ in {
     which-key-nvim
 
     # LSP, linters, and language tooling
-    lsp-zero-nvim
+    unstableVim.lsp-zero-nvim
     nvim-lspconfig
     (nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
     trouble-nvim
-    formatter-nvim
+    unstableVim.formatter-nvim
 
     # Notifications and messages
     nvim-notify
@@ -76,7 +78,7 @@ in {
     nvim-colorizer-lua
 
     # Editing, text manipulation, and utilities
-    mini-nvim
+    unstableVim.mini-nvim
     nvim-surround
 
     # Extras

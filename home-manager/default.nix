@@ -1,6 +1,7 @@
 {
   lib,
   nixpkgs,
+  nixpkgs-unstable,
   home-manager,
   hostConfigs,
   systemConfigs,
@@ -14,6 +15,7 @@
     systemConfig,
   }: let
     pkgs = sharedUtils.getPkgs {inherit nixpkgs systemConfig;};
+    pkgs-unstable = sharedUtils.getPkgs { nixpkgs = nixpkgs-unstable; inherit systemConfig; };
 
     # Temporary for porting from existing config
     # - will wrap some of this into new config files
@@ -29,6 +31,7 @@
       system = systemConfig.system;
       inherit lib;
       inherit pkgs;
+      inherit pkgs-unstable;
       enabledLanguages = combinedEnabledLanguages;
       userFullName = homeHostConfig.userFullName;
       userEmail = homeHostConfig.userEmail;
@@ -43,7 +46,7 @@
             home = import ./shared/home/settings.nix {
               userName = homeHostConfig.userName;
               inherit (homeSystemConfig) homeDirPrefix;
-              inherit pkgs;
+              inherit pkgs pkgs-unstable;
               extraPackages = homeSystemConfig.extraPackages ++ homeHostConfig.extraPackages;
             };
           }

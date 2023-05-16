@@ -2,6 +2,7 @@
   userName,
   homeDirPrefix,
   pkgs,
+  pkgs-unstable,
   extraPackages ? [],
 }: {
   username = userName;
@@ -11,5 +12,5 @@
     EDITOR = "nvim";
   };
 
-  packages = import ./packages.nix {inherit pkgs extraPackages;};
+  packages = import ./packages.nix {inherit pkgs pkgs-unstable extraPackages;};
 }

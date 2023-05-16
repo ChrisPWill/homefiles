@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   extraPackages ? [],
 }:
 with pkgs;
@@ -11,7 +12,7 @@ with pkgs;
     fx
     gcc
     kondo
-    lua-language-server
+    pkgs-unstable.lua-language-server
     nil
     powerline-go
     rargs
