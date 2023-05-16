@@ -57,7 +57,7 @@ in {
 
     # LSP, linters, and language tooling
     unstableVim.lsp-zero-nvim
-    nvim-lspconfig
+    unstableVim.nvim-lspconfig
     (nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
     trouble-nvim
     unstableVim.formatter-nvim
