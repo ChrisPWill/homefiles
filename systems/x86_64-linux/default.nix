@@ -3,7 +3,13 @@ let
 in {
   name = "x64linux";
   system = linuxSystem;
-  extraModules = {lib, ...}: [
+  extraModules = {
+    pkgs,
+    lib,
+    theme,
+    user,
+    ...
+  }: [
     {
       services.xserver = {
         enable = true;
@@ -18,5 +24,6 @@ in {
       };
       nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
+    ./hyprland
   ];
 }

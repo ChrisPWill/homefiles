@@ -3,6 +3,7 @@
   nixpkgs,
   nixpkgs-unstable,
   home-manager,
+  theme,
   hostConfigs,
   systemConfigs,
   user,
@@ -15,16 +16,16 @@
     systemConfig,
   }: let
     pkgs = sharedUtils.getPkgs {inherit nixpkgs systemConfig;};
-    pkgs-unstable = sharedUtils.getPkgs { nixpkgs = nixpkgs-unstable; inherit systemConfig; };
+    pkgs-unstable = sharedUtils.getPkgs {
+      nixpkgs = nixpkgs-unstable;
+      inherit systemConfig;
+    };
 
     # Temporary for porting from existing config
     # - will wrap some of this into new config files
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
     homeSystemConfig = import ./systems/${systemConfig.system}.nix {inherit pkgs lib theme;};
-
-    # Shared constants
-    theme = import ./theme.nix;
 
     combinedEnabledLanguages = lib.unique (sharedHomeConfig.enabledLanguages ++ homeHostConfig.enabledLanguages or []);
     commonPrograms = import ./programs/common-programs.nix {

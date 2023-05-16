@@ -20,13 +20,17 @@
     hostConfigs = import ./hosts;
     systemConfigs = import ./systems;
     userConfigs = import ./shared/users.nix;
+    theme = import ./shared/theme.nix;
     inherits = {
       inherit (nixpkgs) lib;
-      inherit inputs nixpkgs nixpkgs-unstable home-manager;
+      inherit inputs nixpkgs nixpkgs-unstable home-manager theme;
       inherit hostConfigs systemConfigs;
     };
   in {
-    nixosConfigurations = (import ./nixos) inherits;
+    nixosConfigurations = import ./nixos (inherits
+      // {
+        user = userConfigs.cwilliams;
+      });
 
     homeConfigurations = import ./home-manager (inherits
       // {
