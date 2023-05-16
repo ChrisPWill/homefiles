@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   nixpkgs,
   hostConfigs,
@@ -16,7 +17,7 @@
       inherit nixpkgs systemConfig;
     };
     system = systemConfig.system;
-    extraModuleInherits = {inherit pkgs lib systemConfig user theme;};
+    extraModuleInherits = {inherit inputs pkgs lib systemConfig user theme;};
   in
     nixpkgs.lib.nixosSystem {
       inherit pkgs;

@@ -4,6 +4,7 @@ in {
   name = "x64linux";
   system = linuxSystem;
   extraModules = {
+    inputs,
     pkgs,
     lib,
     theme,
@@ -24,6 +25,7 @@ in {
       };
       nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
+    inputs.hyprland.nixosModules.default
     ./hyprland
   ];
 }

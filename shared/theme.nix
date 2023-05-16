@@ -1,7 +1,7 @@
 {
   utils = {
     # Converts #xxxxxx to rgb(xxxxxx)
-    toRgb = color: builtins.replaceStrings ["#" "rgb()"] color + ")";
+    toRgb = color: (builtins.replaceStrings ["#"] ["rgb("] color) + ")";
   };
   background = "#202020";
   background-defocused = "#262626";

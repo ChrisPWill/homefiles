@@ -1,25 +1,25 @@
 {pkgs, ...}: let
   user = (import ../../../shared/users.nix).cwilliams;
-  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-
-  hyprland =
-    (import flake-compat {
-      src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-    })
-    .defaultNix;
 in {
-  imports = [hyprland.nixosModules.default];
+  security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    seatd
     wayland
+    wlr-randr
   ];
+
+  environment.sessionVariables = {
+    GDK_BACKEND = "wayland";
+    WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
 
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    gtkUsePortal = true;
   };
 
   programs.hyprland.enable = true;

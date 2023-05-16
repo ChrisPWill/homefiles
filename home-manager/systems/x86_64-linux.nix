@@ -28,7 +28,10 @@
 
   extraModules = [
     {
-      xdg.configFile."hypr/hyprland.conf".text = import ../dotfiles/hyprland.nix {inherit theme;};
+      home.file.".config/hypr/hyprland.conf" = {
+        enable = true;
+        text = import ../dotfiles/hyprland.nix {inherit theme;};
+      };
 
       xsession = {
         enable = true;
