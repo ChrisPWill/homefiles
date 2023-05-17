@@ -26,7 +26,7 @@ in {
           name = "yellow: module attributes, types, function call parameters";
           scope = [
             "constant.type-constructor.elm"
-            "entity.name.class.lua"
+            "entity.name.class"
             "entity.name.function.asciidoc"
             "keyword.control.at-rule"
             "markup.heading.blocktitle.asciidoc"
@@ -221,7 +221,7 @@ in {
             "variable.line-break.asciidoc"
             "variable.other.anonymous.elixir punctuation.definition.variable.elixir"
           ];
-          settings.foreground = lcolors.blue;
+          settings.foreground = colors.blue;
         }
         {
           name = "foreground: punctuation and noise";
