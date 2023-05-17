@@ -15,7 +15,10 @@
     systemConfig,
   }: let
     pkgs = sharedUtils.getPkgs {inherit nixpkgs systemConfig;};
-    pkgs-unstable = sharedUtils.getPkgs { nixpkgs = nixpkgs-unstable; inherit systemConfig; };
+    pkgs-unstable = sharedUtils.getPkgs {
+      nixpkgs = nixpkgs-unstable;
+      inherit systemConfig;
+    };
 
     # Temporary for porting from existing config
     # - will wrap some of this into new config files
