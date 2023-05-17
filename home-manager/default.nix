@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   nixpkgs,
   nixpkgs-unstable,
@@ -25,7 +26,7 @@
     # - will wrap some of this into new config files
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
-    homeSystemConfig = import ./systems/${systemConfig.system}.nix {inherit pkgs lib theme;};
+    homeSystemConfig = import ./systems/${systemConfig.system}.nix {inherit inputs pkgs lib theme;};
 
     combinedEnabledLanguages = lib.unique (sharedHomeConfig.enabledLanguages ++ homeHostConfig.enabledLanguages or []);
     commonPrograms = import ./programs/common-programs.nix {

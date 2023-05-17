@@ -3,6 +3,7 @@
   colors = theme.normal;
 in ''
   monitor =,preferred,auto,1
+  monitor =HDMI-A-1,disable
 
   input {
       kb_layout=us
@@ -24,16 +25,9 @@ in ''
       blur_passes=2
   }
 
-  animations {
-      enabled=1
-      animation=windows,1,7,default
-      animation=borders,1,10,default
-      animation=fadein,1,10,default
-      animation=workspaces,1,6,default
-  }
-
   # application launching
   bind=SUPER,return,exec,alacritty # Open terminal
+  bind=SUPER,r,exec,wofi --show drun -o DP-2 # Application launcher
 
   # VIM navigation for windows
   bind=SUPER,h,movefocus,l

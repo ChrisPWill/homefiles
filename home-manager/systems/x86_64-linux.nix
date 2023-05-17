@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   theme,
@@ -27,12 +28,13 @@
   extraPackages = [];
 
   extraModules = [
+    inputs.hyprland.homeManagerModules.default
     {
-      home.file.".config/hypr/hyprland.conf" = {
+      wayland.windowManager.hyprland = {
         enable = true;
-        text = import ../dotfiles/hyprland.nix {inherit theme;};
+        nvidiaPatches = true;
+        extraConfig = import ../dotfiles/hyprland.nix {inherit theme;};
       };
-
       xsession = {
         enable = true;
         windowManager = {

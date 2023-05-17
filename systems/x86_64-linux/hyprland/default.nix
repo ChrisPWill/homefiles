@@ -4,15 +4,17 @@ in {
   security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
+    bemenu
     seatd
     wayland
     wlr-randr
   ];
 
-  environment.sessionVariables = {
+  environment.sessionVariables = rec {
+    GBM_BACKEND = "nvidia-drm";
     GDK_BACKEND = "wayland";
-    WLR_RENDERER_ALLOW_SOFTWARE = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
+    MOZ_ENABLE_WAYLAND = "1";
   };
 
   services.dbus.enable = true;
@@ -22,8 +24,11 @@ in {
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  programs.hyprland.enable = true;
-  programs.xwayland.enable = true;
+  programs.hyprland = {
+    enable = true;
+
+    nvidiaPatches = true;
+  };
 
   services.greetd = {
     enable = true;
