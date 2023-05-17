@@ -46,8 +46,9 @@ in ''
   # Set wallpaper
   # exec-once=swaybg -i ~/.wallpaper.* -m fill &
 
-  # Start waybar
-  # exec-once=waybar &
+  # Start eww
+  exec-once=eww daemon
+  exec-once=eww open bar
 
   # Default workspaces based on monitor
   # workspace=DP-3,1
