@@ -24,7 +24,7 @@
     inherit enabledLanguages;
     inherit theme;
   };
-  vscode = import ./vscode.nix;
+  vscode = import ./vscode.nix {inherit theme;};
   zellij = import ./zellij.nix {inherit theme;};
   zoxide = {
     enable = true;
