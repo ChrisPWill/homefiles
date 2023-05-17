@@ -29,6 +29,7 @@
     green = "#6a6a6a";
     cyan = "#71dad2";
     yellow = "#edda61";
+    orange = "#f5b1a2";
     lightred = "#fc728f";
     red = "#cb4b16";
     magenta = "#e481b1";
