@@ -3,6 +3,7 @@
   nixpkgs,
   nixpkgs-unstable,
   home-manager,
+  theme,
   hostConfigs,
   systemConfigs,
   user,
@@ -25,9 +26,6 @@
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
     homeSystemConfig = import ./systems/${systemConfig.system}.nix {inherit pkgs lib theme;};
-
-    # Shared constants
-    theme = import ./theme.nix;
 
     combinedEnabledLanguages = lib.unique (sharedHomeConfig.enabledLanguages ++ homeHostConfig.enabledLanguages or []);
     commonPrograms = import ./programs/common-programs.nix {

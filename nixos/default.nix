@@ -1,8 +1,11 @@
 {
+  inputs,
   lib,
   nixpkgs,
   hostConfigs,
   systemConfigs,
+  user,
+  theme,
   ...
 }: let
   sharedUtils = import ../shared/utils.nix;
@@ -14,11 +17,11 @@
       inherit nixpkgs systemConfig;
     };
     system = systemConfig.system;
-    extraModuleInherits = {inherit pkgs lib systemConfig;};
+    extraModuleInherits = {inherit inputs pkgs lib systemConfig user theme;};
   in
     nixpkgs.lib.nixosSystem {
       inherit pkgs;
-      system = systemConfig.system;
+      inherit system;
       modules =
         [
           ./configuration.nix
