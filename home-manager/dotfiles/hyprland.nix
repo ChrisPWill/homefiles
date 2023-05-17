@@ -4,6 +4,8 @@
 in ''
   monitor =,preferred,auto,1
   monitor =HDMI-A-1,disable
+  monitor =HDMI-A-2,1920x1080,0x300,1
+  monitor =DP-2,2560x1440,1920x0,1
 
   input {
       kb_layout=us
