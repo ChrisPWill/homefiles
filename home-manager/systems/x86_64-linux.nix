@@ -3,6 +3,7 @@
   pkgs,
   lib,
   theme,
+  ...
 }: {
   homeDirPrefix = "/home";
   extraPrograms = {
