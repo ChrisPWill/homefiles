@@ -1,6 +1,7 @@
 {
   hosts = {
     workMbp = "cwilliams-work-laptop";
+    personalPc = "personal-pc";
     personalVm = "personal-vm";
   };
   systems = {

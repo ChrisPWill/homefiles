@@ -4,7 +4,9 @@
   theme,
 }: {
   homeDirPrefix = "/Users";
-  extraPrograms = {};
+  extraPrograms = {
+    vscode = import ../programs/vscode.nix {inherit theme;};
+  };
   extraPackages = [];
   extraModules = [];
 }
