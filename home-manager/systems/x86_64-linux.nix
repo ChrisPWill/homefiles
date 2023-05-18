@@ -32,8 +32,8 @@
   extraModules = [
     {
       xdg.configFile."eww/scripts".source = ../programs/eww/scripts;
-      xdg.configFile."eww/eww.scss".text = import ../programs/eww/eww.scss.nix {inherit theme;};
-      xdg.configFile."eww/eww.yuck".text = import ../programs/eww/eww.yuck.nix {};
+      # xdg.configFile."eww/eww.scss".text = import ../programs/eww/eww.scss.nix {inherit theme;};
+      # xdg.configFile."eww/eww.yuck".text = import ../programs/eww/eww.yuck.nix {};
     }
     inputs.hyprland.homeManagerModules.default
     {

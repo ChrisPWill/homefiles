@@ -50,7 +50,8 @@ in ''
 
   # Start eww
   exec-once=eww daemon
-  exec-once=eww open bar
+  exec-once=eww open bar1
+  exec-once=eww open bar2
 
   # Default workspaces based on monitor
   # workspace=DP-3,1

@@ -17,6 +17,7 @@
     inherit userEmail;
   };
   home-manager = {enable = true;};
+  jq.enable = true;
   neovim = import ./neovim/neovim.nix {
     inherit pkgs;
     inherit pkgs-unstable;

@@ -15,8 +15,10 @@ with pkgs;
     pkgs-unstable.lua-language-server
     nil
     powerline-go
+    python311
     rargs
     ripgrep
+    socat
     spotify-tui
     tealdeer
   ]
