@@ -2,30 +2,34 @@
   toRgb = theme.utils.toRgb;
   colors = theme.normal;
 in ''
-  monitor =,preferred,auto,1
-  monitor =HDMI-A-1,disable
-  monitor =HDMI-A-2,1920x1080,0x300,1
-  monitor =DP-2,2560x1440,1920x0,1
+  monitor=,preferred,auto,1
+  monitor=HDMI-A-1,disable
+  monitor=HDMI-A-2,1920x1080,0x300,1
+  monitor=DP-2,2560x1440,1920x0,1
 
   input {
-      kb_layout=us
-      follow_mouse=1
+    kb_layout=us
+    follow_mouse=1
   }
 
   general {
-      gaps_in=5
-      gaps_out=5
-      border_size=2
-      col.active_border=${toRgb (colors.green)}
-      col.inactive_border=${toRgb (colors.red)}
+    gaps_in=3
+    gaps_out=3
+    border_size=2
+    col.active_border=${toRgb (colors.green)}
+    col.inactive_border=${toRgb (colors.red)}
   }
 
   decoration {
-      rounding=5
-      blur=true
-      blur_size=3
-      blur_passes=2
+    rounding=5
+    blur=true
+    blur_size=3
+    blur_passes=2
   }
+
+  bezier=overshot,0.05,0.9,0.1,1.1
+  animation=workspaces,1,8,overshot,fade
+  animation=windows,1,3,overshot,slide
 
   # application launching
   bind=SUPER,return,exec,alacritty # Open terminal

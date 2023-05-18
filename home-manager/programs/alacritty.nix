@@ -2,7 +2,7 @@
   enable = true;
   settings = {
     window = {
-      opacity = 0.98;
+      opacity = 0.80;
       decorations_theme_variant = "Dark";
       decorations = "none";
     };
