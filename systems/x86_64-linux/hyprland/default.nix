@@ -8,6 +8,7 @@ in {
     seatd
     wayland
     wlr-randr
+    swaylock-effects
   ];
 
   environment.sessionVariables = rec {
