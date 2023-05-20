@@ -1,8 +1,9 @@
 {theme}: ''
   $bg: rgba(${theme.background},0.1);
   $fg: ${theme.foreground};
+  $green: ${theme.normal.green};
   $shadow: rgba(#000000,0.3);
-  $border_col: rgba(#cccccc,0.18);
+  $border_col: rgba(${theme.normal.lightgray},0.18);
   $best_so_far: rgba(255,255,255,0.1);
 
   .bar1 {
@@ -18,6 +19,24 @@
 
   .v-bar {
   	margin: 8px 2px 0px 2px;
+  }
+
+  .window-title {
+  	background-color: $bg;
+    color: $fg;
+  	border-radius: 10px;
+  	box-shadow: 2px 2px 2px $shadow;
+    font-size: 14px;
+    margin: 0px 5px 2px 10px;
+  	padding: 2px 10px 2px 10px;
+  	min-height: 25px;
+  }
+
+  .inactive-window-title {
+  	border: 1px solid $border_col;
+  }
+  .active-window-title {
+  	border: 1px solid $green;
   }
 
   .workspaces {

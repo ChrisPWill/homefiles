@@ -7,6 +7,10 @@
     `python3 ./scripts/workspaces.py listen 1 v 5`
   )
 
+  (deflisten show_window_title_1
+    `python3 ./scripts/active_windows.py listen 0`
+  )
+
   (defwindow bar1
   	:monitor 0
   	:windowtype "dock"
@@ -19,8 +23,16 @@
     :stacking "fg"
 
   	(box :class "h-bar"
-      (box :class "workspaces hworkspaces" :halign "start"
+         :halign "start"
+         :space-evenly false
+      (box :class "workspaces hworkspaces"
+           :halign "start"
         (literal :content show_workspaces_1)
+      )
+      (box
+           :halign "start"
+           :valign "center"
+        (literal :content show_window_title_1)
       )
     )
   )

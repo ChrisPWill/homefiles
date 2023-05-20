@@ -17,7 +17,7 @@ in ''
     gaps_out=3
     border_size=2
     col.active_border=${toRgb (colors.green)}
-    col.inactive_border=${toRgb (colors.red)}
+    col.inactive_border=${toRgb (colors.lightgray)}
   }
 
   decoration {
