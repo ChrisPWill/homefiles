@@ -3,6 +3,11 @@
     isNormalUser = true;
     shell = pkgs.${user.shell};
     description = user.fullName;
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = [
+      "audio"
+      "docker"
+      "networkmanager"
+      "wheel"
+    ];
   };
 }
