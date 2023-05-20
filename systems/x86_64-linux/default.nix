@@ -30,12 +30,10 @@ in {
         gperftools
       ];
 
+      hardware.opengl.driSupport32Bit = true;
       virtualisation.docker = {
         enableNvidia = true;
-        rootless = {
-          enable = true;
-          setSocketVariable = true;
-        };
+        enable = true;
       };
     }
     inputs.hyprland.nixosModules.default
