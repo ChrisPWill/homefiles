@@ -11,6 +11,7 @@
     "graphql"
     "terraform"
   ];
+  extraPrograms = {};
   extraPackages = with pkgs; [
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.prettier

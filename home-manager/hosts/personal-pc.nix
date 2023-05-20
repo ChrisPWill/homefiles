@@ -4,5 +4,14 @@
   userEmail = "chris@chrispwill.com";
   extraModules = [];
   enabledLanguages = [];
-  extraPackages = with pkgs; [qbittorrent];
+  extraPrograms = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+    };
+  };
+  extraPackages = with pkgs; [
+    discord
+    qbittorrent
+  ];
 }

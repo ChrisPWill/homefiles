@@ -63,7 +63,7 @@
             };
 
             # Merge common and system-specific programs
-            programs = lib.mkForce (lib.mergeAttrs commonPrograms homeSystemConfig.extraPrograms);
+            programs = lib.mkForce (lib.mergeAttrs commonPrograms (lib.mergeAttrs homeSystemConfig.extraPrograms homeHostConfig.extraPrograms));
           }
         ]
         ++ homeSystemConfig.extraModules

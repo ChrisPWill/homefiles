@@ -9,6 +9,7 @@
     "html"
     "rust"
   ];
+  extraPrograms = {};
   extraPackages = with pkgs; [
     cargo
     nodePackages.prettier
