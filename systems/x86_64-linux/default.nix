@@ -29,6 +29,11 @@ in {
       environment.systemPackages = with pkgs; [
         gperftools
       ];
+
+      virtualisation.docker.rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     }
     inputs.hyprland.nixosModules.default
     ./hyprland
