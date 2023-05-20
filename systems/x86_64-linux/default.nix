@@ -23,6 +23,7 @@ in {
           enable = true;
         };
       };
+      services.gvfs.enable = true;
       nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
     {

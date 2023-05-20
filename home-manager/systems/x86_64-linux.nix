@@ -27,6 +27,7 @@
 
   extraPackages = with pkgs; [
     eww-wayland
+    gnome.nautilus
   ];
 
   extraModules = [
