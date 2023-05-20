@@ -51,5 +51,11 @@ in {
     }
     inputs.hyprland.nixosModules.default
     ./hyprland
+    {
+      environment.systemPackages = with pkgs; [
+        bitwarden
+        bitwarden-cli
+      ];
+    }
   ];
 }
