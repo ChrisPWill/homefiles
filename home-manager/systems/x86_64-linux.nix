@@ -28,6 +28,7 @@
   extraPackages = with pkgs; [
     eww-wayland
     gnome.nautilus
+    gnome.sushi
   ];
 
   extraModules = [
