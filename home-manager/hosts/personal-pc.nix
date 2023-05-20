@@ -5,10 +5,6 @@
   extraModules = [];
   enabledLanguages = [];
   extraPrograms = {
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-    };
   };
   extraPackages = with pkgs; [
     discord

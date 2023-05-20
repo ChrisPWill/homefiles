@@ -22,5 +22,11 @@ in {
       programs.zsh.enable = true;
     }
     ./hardware-configuration.nix
+    {
+      programs.steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+      };
+    }
   ];
 }
