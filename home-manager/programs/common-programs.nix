@@ -11,6 +11,7 @@
   alacritty = import ./alacritty.nix {inherit theme;};
   bat = import ./bat.nix;
   exa = import ./exa.nix;
+  feh.enable = true;
   fzf = import ./fzf.nix;
   git = import ./git.nix {
     inherit userFullName;
@@ -18,6 +19,9 @@
   };
   home-manager = {enable = true;};
   jq.enable = true;
+  mpv = {
+    enable = true;
+  };
   neovim = import ./neovim/neovim.nix {
     inherit pkgs;
     inherit pkgs-unstable;
