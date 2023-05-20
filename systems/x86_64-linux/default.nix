@@ -30,9 +30,12 @@ in {
         gperftools
       ];
 
-      virtualisation.docker.rootless = {
-        enable = true;
-        setSocketVariable = true;
+      virtualisation.docker = {
+        enableNvidia = true;
+        rootless = {
+          enable = true;
+          setSocketVariable = true;
+        };
       };
     }
     inputs.hyprland.nixosModules.default
