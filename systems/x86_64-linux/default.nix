@@ -25,6 +25,11 @@ in {
       };
       nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
+    {
+      environment.systemPackages = with pkgs; [
+        gperftools
+      ];
+    }
     inputs.hyprland.nixosModules.default
     ./hyprland
   ];
