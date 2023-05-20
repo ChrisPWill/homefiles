@@ -45,6 +45,8 @@ in ''
   bind=SUPER,c,killactive,
   bind=SUPER,space,togglefloating,
   bind=SUPER,m,exit,
+  bind=SUPER,q,exec,sleep 1 && hyprctl dispatch dpms off
+  bind=SUPERSHIFT,q,exec,sleep 1 && hyprctl dispatch dpms on
 
   # Enable alacritty transparency
   windowrule=opacity 0.85,alacritty
