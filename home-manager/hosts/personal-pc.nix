@@ -4,5 +4,5 @@
   userEmail = "chris@chrispwill.com";
   extraModules = [];
   enabledLanguages = [];
-  extraPackages = with pkgs; [];
+  extraPackages = with pkgs; [qbittorrent];
 }
