@@ -99,7 +99,7 @@ with theme.normal; let
     NonText.fg = silver;
     Normal = {
       fg = foreground;
-      bg = background;
+      bg = "NONE";
     };
     NormalFloat = {
       fg = white;
