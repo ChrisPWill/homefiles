@@ -14,6 +14,7 @@ with pkgs;
     kondo
     pkgs-unstable.lua-language-server
     nil
+    nodePackages.prettier
     powerline-go
     python311
     rargs

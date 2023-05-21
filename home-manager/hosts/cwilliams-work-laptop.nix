@@ -14,7 +14,6 @@
   extraPrograms = {};
   extraPackages = with pkgs; [
     nodePackages.dockerfile-language-server-nodejs
-    nodePackages.prettier
     nodePackages.typescript
     nodePackages.typescript-language-server
     wget

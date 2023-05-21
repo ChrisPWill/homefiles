@@ -13,11 +13,14 @@
       };
     }
   ];
-  enabledLanguages = [];
+  enabledLanguages = [
+    "rust"
+  ];
   extraPrograms = {
   };
   extraPackages = with pkgs; [
     discord
     qbittorrent
+    rust-analyzer
   ];
 }
