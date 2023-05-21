@@ -49,6 +49,7 @@
           ignore-empty-password = true;
         };
       };
+      services.flameshot.enable = true;
       services.swayidle = {
         enable = true;
         events = [

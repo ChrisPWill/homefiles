@@ -97,8 +97,10 @@ with theme.normal; let
     MsgSeparator.fg = dimgray;
     MoreMsg.fg = white;
     NonText.fg = silver;
+    # Main background, set to NONE for transparency.
     Normal = {
       fg = foreground;
+      # bg = background;
       bg = "NONE";
     };
     NormalFloat = {
@@ -107,7 +109,8 @@ with theme.normal; let
     };
     NormalNC = {
       fg = foreground;
-      bg = background-defocused;
+      # bg = background-defocused;
+      bg = "NONE";
     };
     Pmenu = {
       fg = white;

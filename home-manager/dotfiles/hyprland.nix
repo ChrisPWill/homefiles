@@ -34,6 +34,7 @@ in ''
   # application launching
   bind=SUPER,return,exec,alacritty # Open terminal
   bind=SUPER,r,exec,wofi --show drun -o DP-2 # Application launcher
+  bind=SUPER,PrtSc,exec,flameshot gui
 
   # VIM navigation for windows
   bind=SUPER,h,movefocus,l
