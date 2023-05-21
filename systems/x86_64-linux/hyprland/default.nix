@@ -2,13 +2,13 @@
   user = (import ../../../shared/users.nix).cwilliams;
 in {
   security.polkit.enable = true;
+  security.pam.services.swaylock = {};
 
   environment.systemPackages = with pkgs; [
     bemenu
     seatd
     wayland
     wlr-randr
-    swaylock-effects
   ];
 
   environment.sessionVariables = rec {

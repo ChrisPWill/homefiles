@@ -37,6 +37,45 @@
       xdg.configFile."eww/eww.scss".text = import ../programs/eww/eww.scss.nix {inherit theme;};
       xdg.configFile."eww/eww.yuck".text = import ../programs/eww/eww.yuck.nix {};
     }
+    # locks
+    {
+      programs.swaylock = {
+        enable = true;
+        settings = {
+          color = "#764783";
+          daemonize = true;
+          clock = true;
+          ignore-empty-password = true;
+        };
+      };
+      services.swayidle = {
+        enable = true;
+        events = [
+          {
+            event = "lock";
+            command = "${pkgs.swaylock}/bin/swaylock";
+          }
+          {
+            event = "before-sleep";
+            command = "${pkgs.swaylock}/bin/swaylock";
+          }
+          {
+            event = "after-resume";
+            command = "${pkgs.hyprland}/bin/hyprctl \"dispatcher dpms on\"";
+          }
+        ];
+        timeouts = [
+          {
+            timeout = 600;
+            command = "${pkgs.swaylock}/bin/swaylock";
+          }
+          {
+            timeout = 1200;
+            command = "${pkgs.hyprland}/bin/hyprctl \"dispatcher dpms off\"";
+          }
+        ];
+      };
+    }
     inputs.hyprland.homeManagerModules.default
     {
       wayland.windowManager.hyprland = {
