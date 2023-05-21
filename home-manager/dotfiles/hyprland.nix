@@ -52,7 +52,9 @@ in ''
   windowrule=opacity 0.85,alacritty
 
   # Set wallpaper
-  # exec-once=swaybg -i ~/.wallpaper.* -m fill &
+  exec-once=swaybg -i ~/.config/wallpapers/safe.* -m fill &
+  bind=SUPERSHIFT,F11,exec,swaybg -i ~/.config/wallpapers/safe.* -m fill &
+  bind=SUPERSHIFT,F12,exec,swaybg -i ~/.config/wallpapers/anime.* -m fill &
 
   # Start eww
   exec-once=eww daemon

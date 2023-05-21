@@ -29,6 +29,7 @@
     eww-wayland
     gnome.nautilus
     gnome.sushi
+    swaybg
   ];
 
   extraModules = [
