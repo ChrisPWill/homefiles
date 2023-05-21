@@ -15,6 +15,10 @@
   ];
   enabledLanguages = [
     "rust"
+    "javascript"
+    "typescript"
+    "html"
+    "graphql"
   ];
   extraPrograms = {
   };
@@ -22,5 +26,8 @@
     discord
     qbittorrent
     rust-analyzer
+    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.typescript
+    nodePackages.typescript-language-server
   ];
 }
