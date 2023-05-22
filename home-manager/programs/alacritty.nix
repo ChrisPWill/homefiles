@@ -1,8 +1,12 @@
-{theme}: {
+{
+  transparency ? "0.8",
+  theme,
+  ...
+}: {
   enable = true;
   settings = {
     window = {
-      opacity = 0.80;
+      opacity = transparency;
       decorations_theme_variant = "Dark";
       decorations = "none";
     };

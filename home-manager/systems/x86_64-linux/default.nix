@@ -15,6 +15,11 @@ in {
     wofi.enable = true;
     bash.enable = true;
 
+    alacritty = import (programsPath + "/alacritty.nix") {
+      transparency = 0.8;
+      inherit theme;
+    };
+
     urxvt = {
       enable = true;
       fonts = ["xft:FantasqueSansMono Nerd Font Mono:size=10"];
