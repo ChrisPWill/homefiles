@@ -3,6 +3,7 @@
   pkgs,
   lib,
   theme,
+  programsPath,
   ...
 }: {
   homeDirPrefix = "/home";
@@ -22,7 +23,7 @@
       };
     };
 
-    firefox = import ../programs/firefox.nix;
+    firefox = import (programsPath + "/firefox.nix");
   };
 
   extraPackages = with pkgs; [
@@ -35,9 +36,9 @@
   extraModules =
     [
       {
-        xdg.configFile."eww/scripts".source = ../programs/eww/scripts;
-        xdg.configFile."eww/eww.scss".text = import ../programs/eww/eww.scss.nix {inherit theme;};
-        xdg.configFile."eww/eww.yuck".text = import ../programs/eww/eww.yuck.nix {};
+        xdg.configFile."eww/scripts".source = programsPath + "/eww/scripts";
+        xdg.configFile."eww/eww.scss".text = import (programsPath + "/eww/eww.scss.nix") {inherit theme;};
+        xdg.configFile."eww/eww.yuck".text = import (programsPath + "/eww/eww.yuck.nix") {};
       }
       {
         xsession = {

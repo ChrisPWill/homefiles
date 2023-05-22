@@ -2,11 +2,12 @@
   pkgs,
   lib,
   theme,
+  programsPath,
   ...
 }: {
   homeDirPrefix = "/Users";
   extraPrograms = {
-    vscode = import ../programs/vscode.nix {inherit theme;};
+    vscode = import (programsPath + "/vscode.nix") {inherit theme;};
   };
   extraPackages = [];
   extraModules = [];

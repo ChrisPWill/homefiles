@@ -26,7 +26,10 @@
     # - will wrap some of this into new config files
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
-    homeSystemConfig = import ./systems/${systemConfig.system} {inherit inputs pkgs lib theme;};
+    homeSystemConfig = import ./systems/${systemConfig.system} {
+      inherit inputs pkgs lib theme;
+      programsPath = ./programs;
+    };
 
     combinedEnabledLanguages = lib.unique (sharedHomeConfig.enabledLanguages ++ homeHostConfig.enabledLanguages or []);
     commonPrograms = import ./programs/common-programs.nix {
