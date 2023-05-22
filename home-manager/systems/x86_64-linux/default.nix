@@ -4,11 +4,10 @@
   lib,
   theme,
   programsPath,
-  displayServerType,
   windowManager,
   ...
 }: let
-  wmModules = import (./window-managers + "/${windowManager}");
+  wmModules = import (./window-managers + "/${windowManager}") {inherit inputs pkgs theme;};
 in {
   homeDirPrefix = "/home";
   extraPrograms = {
@@ -40,6 +39,7 @@ in {
     gnome.nautilus
     gnome.sushi
     swaybg
+    ranger
   ];
 
   extraModules =
