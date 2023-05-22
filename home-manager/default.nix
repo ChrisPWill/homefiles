@@ -29,6 +29,7 @@
     homeSystemConfig = import ./systems/${systemConfig.system} {
       inherit inputs pkgs lib theme;
       programsPath = ./programs;
+      windowManager = homeHostConfig.windowManager;
     };
 
     combinedEnabledLanguages = lib.unique (sharedHomeConfig.enabledLanguages ++ homeHostConfig.enabledLanguages or []);

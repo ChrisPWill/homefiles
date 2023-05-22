@@ -4,8 +4,12 @@
   lib,
   theme,
   programsPath,
+  displayServerType,
+  windowManager,
   ...
-}: {
+}: let
+  wmModules = import (./window-managers + "/${windowManager}");
+in {
   homeDirPrefix = "/home";
   extraPrograms = {
     wofi.enable = true;
@@ -51,5 +55,5 @@
         xresources.extraConfig = import ./xresources.nix {inherit theme;};
       }
     ]
-    ++ (import ./x86_64-linux/hyprland);
+    ++ wmModules;
 }

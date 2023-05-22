@@ -30,4 +30,5 @@
     nodePackages.typescript
     nodePackages.typescript-language-server
   ];
+  windowManager = "hyprland";
 }
