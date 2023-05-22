@@ -36,11 +36,6 @@
   extraModules =
     [
       {
-        xdg.configFile."eww/scripts".source = programsPath + "/eww/scripts";
-        xdg.configFile."eww/eww.scss".text = import (programsPath + "/eww/eww.scss.nix") {inherit theme;};
-        xdg.configFile."eww/eww.yuck".text = import (programsPath + "/eww/eww.yuck.nix") {};
-      }
-      {
         xsession = {
           enable = true;
           windowManager = {

@@ -4,6 +4,12 @@
   theme,
   ...
 }: [
+  # eww
+  {
+    xdg.configFile."eww/scripts".source = ./eww/scripts;
+    xdg.configFile."eww/eww.scss".text = ./eww/eww.scss.nix {inherit theme;};
+    xdg.configFile."eww/eww.yuck".text = import ./eww/eww.yuck.nix {};
+  }
   # locks
   {
     programs.swaylock = {
