@@ -1,4 +1,8 @@
-{theme, ...}: let
+{
+  pkgs,
+  theme,
+  ...
+}: let
   toRgb = theme.utils.toRgb;
   colors = theme.normal;
 in ''
@@ -41,13 +45,19 @@ in ''
   bind=SUPER,j,movefocus,d
   bind=SUPER,k,movefocus,u
   bind=SUPER,l,movefocus,r
+  bind=SUPERSHIFT,right,resizeactive,10 0
+  bind=SUPERSHIFT,left,resizeactive,-10 0
+  bind=SUPERSHIFT,up,resizeactive,0 -10
+  bind=SUPERSHIFT,down,resizeactive,0 10
 
   # window management
   bind=SUPER,c,killactive,
   bind=SUPER,space,togglefloating,
   bind=SUPER,m,exit,
-  bind=SUPER,q,exec,swaylock
   bindm=SUPER,mouse:272,movewindow
+
+  # locks and login
+  bind=SUPER,q,exec,swaylock
 
   # Enable alacritty transparency
   windowrule=opacity 0.85,alacritty

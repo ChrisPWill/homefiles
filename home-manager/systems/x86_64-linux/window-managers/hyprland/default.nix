@@ -55,7 +55,7 @@
     wayland.windowManager.hyprland = {
       enable = true;
       nvidiaPatches = true;
-      extraConfig = import ./hyprland.nix {inherit theme;};
+      extraConfig = import ./hyprland.nix {inherit pkgs theme;};
     };
   }
 ]
