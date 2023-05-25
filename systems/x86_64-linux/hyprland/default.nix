@@ -16,6 +16,13 @@ in {
   ];
 
   environment.sessionVariables = rec {
+    __GL_GSYNC_ALLOWED = "0";
+    __GL_VRR_ALLOWED = "0";
+    WLR_DRM_NO_ATOMIC = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     GDK_BACKEND = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -27,6 +34,7 @@ in {
     enable = true;
     wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    gtkUsePortal = true;
   };
 
   programs.hyprland = {
