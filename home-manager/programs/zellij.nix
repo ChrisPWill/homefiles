@@ -2,7 +2,7 @@
   enable = true;
   settings = {
     scroll_buffer_size = 10000;
-    copy_on_select = false;
+    copy_on_select = true;
     pane_frames = false;
     theme = "custom";
     themes.custom = {
