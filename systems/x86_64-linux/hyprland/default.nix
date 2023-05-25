@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   user = (import ../../../shared/users.nix).cwilliams;
 in {
   security.polkit.enable = true;
@@ -27,6 +31,7 @@ in {
 
   programs.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
     nvidiaPatches = true;
   };
