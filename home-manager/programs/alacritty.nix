@@ -1,11 +1,18 @@
 {
+  pkgs,
   transparency ? "0.8",
   theme,
+  systemIsDarwin ? false,
   ...
 }: {
   enable = true;
+  package = pkgs.alacritty;
   settings = {
     window = {
+      option_as_alt =
+        if systemIsDarwin
+        then "OnlyLeft"
+        else null;
       opacity = transparency;
       decorations_theme_variant = "Dark";
       decorations = "none";

@@ -167,12 +167,12 @@ in {
       )
 
       -- LSP
-      local lsp = require('lsp-zero').preset({})
+      local lsp = require('lsp-zero').preset("manual-setup")
 
       lsp.on_attach(function(client, bufnr)
         whichkey.register({
-          ["<C-]>"] = { "<C-I>", "Go to newer jump" },
-          ["<C-[>"] = { "<C-O>", "Go to older jump" },
+          ["<M-]>"] = { "<C-I>", "Go to newer jump" },
+          ["<M-[>"] = { "<C-O>", "Go to older jump" },
           K = {
             name = "LSP",
             a = { vim.lsp.buf.code_action, "Code Action", },

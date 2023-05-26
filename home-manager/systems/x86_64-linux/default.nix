@@ -17,6 +17,7 @@ in {
     alacritty = import (programsPath + "/alacritty.nix") {
       transparency = 0.8;
       inherit theme;
+      inherit pkgs;
     };
 
     urxvt = {

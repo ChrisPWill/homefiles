@@ -27,7 +27,7 @@
     sharedHomeConfig = import ./shared/shared-config.nix;
     homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
     homeSystemConfig = import ./systems/${systemConfig.system} {
-      inherit inputs pkgs lib theme;
+      inherit inputs pkgs pkgs-unstable lib theme;
       programsPath = ./programs;
       windowManager = homeHostConfig.windowManager;
     };
