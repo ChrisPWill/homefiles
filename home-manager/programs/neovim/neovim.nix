@@ -119,6 +119,8 @@ in {
       opt.shiftwidth = 2
       opt.expandtab = true
 
+      -- which-key
+      local whichkey = require('which-key');
 
       -- Mini plugins
       require('mini.bracketed').setup()
@@ -158,9 +160,22 @@ in {
       local lsp = require('lsp-zero').preset('manual-setup')
 
       lsp.on_attach(function(client, bufnr)
-        lsp.default_keymaps({
-          buffer = bufnr,
-          preserver_mappings = false
+        whichkey.register({
+          ["<leader>"] = {
+            k = {
+              name = "LSP",
+              a = { vim.lsp.buf.code_action, "Code Action", },
+              K = { vim.lsp.buf.hover, "Show LSP Info", },
+              R = { vim.lsp.buf.rename, "Rename using LSP", },
+              d = { vim.lsp.buf.definition, "Open LSP Definition", },
+              F = { function() vim.lsp.buf.format({ async = false, timeout_ms = 10000, }) end, "Format", },
+              i = { vim.lsp.buf.implementation, "Open LSP Implementation", },
+              n = { vim.diagnostic.goto_next, "Goto next LSP Diagnostic", },
+              p = { vim.diagnostic.goto_prev, "Goto previous LSP Diagnostic", },
+              r = { require('telescope.builtin').lsp_references, "Show LSP References", },
+              t = { "<cmd>Telescope diagnostics<cr>", "Show LSP diagnostics", },
+            },
+          },
         })
       end)
 
