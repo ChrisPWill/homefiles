@@ -11,7 +11,6 @@
     else [];
   luaConfigs =
     [
-      (builtins.readFile ./config/which-key.lua)
       (builtins.readFile ./config/nvim-tree.lua)
       (builtins.readFile ./config/orgmode.lua)
       (builtins.readFile ./config/formatter.lua)
@@ -120,6 +119,11 @@ in {
       opt.expandtab = true
 
       -- which-key
+      require("which-key").setup({})
+      vim.keymap.set('n', '<M-k>', '<cmd>WhichKey<cr>', { noremap = true })
+      vim.keymap.set('v', '<M-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
+      vim.keymap.set('i', '<M-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
+      vim.keymap.set('c', '<M-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
       local whichkey = require('which-key');
 
       -- Mini plugins
