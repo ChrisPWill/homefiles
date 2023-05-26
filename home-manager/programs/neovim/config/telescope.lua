@@ -1,4 +1,5 @@
 -- Telescope configuration
+require('telescope').load_extension('notify')
 -- Set up telescope key mappings
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {})

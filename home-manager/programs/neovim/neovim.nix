@@ -4,6 +4,7 @@
   lib,
   enabledLanguages ? [],
   theme,
+  ...
 }: let
   generateLanguageConfig = language: path:
     if builtins.elem language enabledLanguages
@@ -24,7 +25,7 @@
     ++ generateLanguageConfig "rust" "rust-language-server-config.lua"
     ++ generateLanguageConfig "dockerfile" "dockerfile-language-server-config.lua"
     ++ ["lsp.setup()"] # Call LSP setup at the end
-    ++ ["whichkey.setup()"]; # Call whichkey setup at the end
+    ++ ["whichkey.setup({})"]; # Call whichkey setup at the end
 
   languageToTreesitterName = language:
     {
@@ -118,6 +119,11 @@ in {
       opt.smartindent = true
       opt.shiftwidth = 2
       opt.expandtab = true
+
+      -- Notify
+      require("notify").setup({
+        background_colour = "${theme.background}",
+      })
 
       -- which-key
       local whichkey = require("which-key")
