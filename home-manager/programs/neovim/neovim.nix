@@ -158,7 +158,10 @@ in {
       local lsp = require('lsp-zero').preset('manual-setup')
 
       lsp.on_attach(function(client, bufnr)
-        lsp.default_keymaps({buffer = bufnr})
+        lsp.default_keymaps({
+          buffer = bufnr,
+          preserver_mappings = false
+        })
       end)
 
       -- enabled languages for later config
