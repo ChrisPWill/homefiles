@@ -23,7 +23,8 @@
     ++ generateLanguageConfig "nix" "nix-language-server-config.lua"
     ++ generateLanguageConfig "rust" "rust-language-server-config.lua"
     ++ generateLanguageConfig "dockerfile" "dockerfile-language-server-config.lua"
-    ++ ["lsp.setup()"]; # Call LSP setup at the end
+    ++ ["lsp.setup()"] # Call LSP setup at the end
+    ++ ["whichkey.setup()"]; # Call whichkey setup at the end
 
   languageToTreesitterName = language:
     {
@@ -119,12 +120,11 @@ in {
       opt.expandtab = true
 
       -- which-key
-      require("which-key").setup({})
+      local whichkey = require("which-key")
       vim.keymap.set('n', '<M-k>', '<cmd>WhichKey<cr>', { noremap = true })
       vim.keymap.set('v', '<M-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
       vim.keymap.set('i', '<M-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
       vim.keymap.set('c', '<M-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
-      local whichkey = require('which-key');
 
       -- Mini plugins
       require('mini.bracketed').setup()
@@ -161,27 +161,29 @@ in {
       )
 
       -- LSP
-      local lsp = require('lsp-zero').preset('manual-setup')
+      local lsp = require('lsp-zero').preset({})
 
       lsp.on_attach(function(client, bufnr)
         whichkey.register({
-          ["<leader>"] = {
-            k = {
-              name = "LSP",
-              a = { vim.lsp.buf.code_action, "Code Action", },
-              K = { vim.lsp.buf.hover, "Show LSP Info", },
-              R = { vim.lsp.buf.rename, "Rename using LSP", },
-              d = { vim.lsp.buf.definition, "Open LSP Definition", },
-              F = { function() vim.lsp.buf.format({ async = false, timeout_ms = 10000, }) end, "Format", },
-              i = { vim.lsp.buf.implementation, "Open LSP Implementation", },
-              n = { vim.diagnostic.goto_next, "Goto next LSP Diagnostic", },
-              p = { vim.diagnostic.goto_prev, "Goto previous LSP Diagnostic", },
-              r = { require('telescope.builtin').lsp_references, "Show LSP References", },
-              t = { "<cmd>Telescope diagnostics<cr>", "Show LSP diagnostics", },
-            },
+          ["<C-]>"] = { "<C-I>", "Go to newer jump" },
+          ["<C-[>"] = { "<C-O>", "Go to older jump" },
+          K = {
+            name = "LSP",
+            a = { vim.lsp.buf.code_action, "Code Action", },
+            K = { vim.lsp.buf.hover, "Show LSP Info", },
+            R = { vim.lsp.buf.rename, "Rename using LSP", },
+            d = { vim.lsp.buf.definition, "Open LSP Definition", },
+            F = { function() vim.lsp.buf.format({ async = false, timeout_ms = 10000, }) end, "Format", },
+            i = { vim.lsp.buf.implementation, "Open LSP Implementation", },
+            n = { vim.diagnostic.goto_next, "Goto next LSP Diagnostic", },
+            p = { vim.diagnostic.goto_prev, "Goto previous LSP Diagnostic", },
+            r = { require('telescope.builtin').lsp_references, "Show LSP References", },
+            t = { "<cmd>Telescope diagnostics<cr>", "Show LSP diagnostics", },
           },
         })
       end)
+
+      lsp.setup_servers({'tsserver'})
 
       -- enabled languages for later config
       local enabledLanguages = vim.json.decode('${builtins.toJSON enabledLanguages}')
