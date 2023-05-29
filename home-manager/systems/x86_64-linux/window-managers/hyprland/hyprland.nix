@@ -7,9 +7,8 @@
   colors = theme.normal;
 in ''
   monitor=,preferred,auto,1
-  monitor=HDMI-A-1,disable
-  monitor=HDMI-A-2,1920x1080,0x300,1
-  monitor=DP-2,2560x1440,1920x0,1
+  monitor=DP-3,2560x1440,0x0,1
+  monitor=DP-2,3840x2160,2560x360,1
 
   input {
     kb_layout=us
@@ -73,8 +72,8 @@ in ''
   exec-once=eww open bar2
 
   # Default workspaces based on monitor
-  # workspace=DP-3,1
-  # workspace=HDMI-A-1,10
+  workspace=DP-3,6
+  workspace=DP-2,1
 
   # Switch to workspace
   bind=SUPER,1,workspace,1
