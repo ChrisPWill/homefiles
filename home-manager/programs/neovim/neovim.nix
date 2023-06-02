@@ -127,10 +127,10 @@ in {
 
       -- which-key
       local whichkey = require("which-key")
-      vim.keymap.set('n', '<M-k>', '<cmd>WhichKey<cr>', { noremap = true })
-      vim.keymap.set('v', '<M-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
-      vim.keymap.set('i', '<M-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
-      vim.keymap.set('c', '<M-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
+      vim.keymap.set('n', '<A-k>', '<cmd>WhichKey<cr>', { noremap = true })
+      vim.keymap.set('v', '<A-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
+      vim.keymap.set('i', '<A-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
+      vim.keymap.set('c', '<A-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
 
       -- Mini plugins
       require('mini.bracketed').setup()
@@ -171,8 +171,8 @@ in {
 
       lsp.on_attach(function(client, bufnr)
         whichkey.register({
-          ["<M-]>"] = { "<C-I>", "Go to newer jump" },
-          ["<M-[>"] = { "<C-O>", "Go to older jump" },
+          ["<A-]>"] = { "<C-I>", "Go to newer jump" },
+          ["<A-[>"] = { "<C-O>", "Go to older jump" },
           K = {
             name = "LSP",
             A = { vim.lsp.buf.code_action, "Code Action", },

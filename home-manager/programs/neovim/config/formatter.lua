@@ -65,8 +65,8 @@ require("formatter").setup {
 }
 
 
-vim.keymap.set('n', '<M-f>', 'Format<CR>', { noremap = true })
-vim.keymap.set('n', '<M-F>', 'FormatWrite<CR>', { noremap = true })
+vim.keymap.set('n', '<A-f>', 'Format<CR>', { noremap = true })
+vim.keymap.set('n', '<A-F>', 'FormatWrite<CR>', { noremap = true })
 vim.cmd([[
   augroup FormatAutogroup
     autocmd!
