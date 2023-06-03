@@ -34,12 +34,15 @@ in {
     enable = true;
     wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    gtkUsePortal = true;
   };
 
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
 
     nvidiaPatches = true;
   };
