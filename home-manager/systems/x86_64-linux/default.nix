@@ -22,7 +22,7 @@ in {
 
     urxvt = {
       enable = true;
-      fonts = ["xft:FantasqueSansMono Nerd Font Mono:size=10"];
+      fonts = ["xft:FantasqueSansM Nerd Font Mono:size=10"];
       scroll = {
         bar.enable = false;
         keepPosition = true;

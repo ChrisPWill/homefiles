@@ -5,7 +5,7 @@
 }:
 with pkgs;
   [
-    (pkgs.nerdfonts.override {fonts = ["FantasqueSansMono"];})
+    (pkgs-unstable.nerdfonts.override {fonts = ["FantasqueSansMono"];})
     alejandra
     eureka-ideas
     fd

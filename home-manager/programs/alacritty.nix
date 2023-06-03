@@ -35,7 +35,7 @@
     };
     scrolling.history = 20000;
     font = {
-      normal.family = "FantasqueSansMono Nerd Font Mono";
+      normal.family = "FantasqueSansM Nerd Font Mono";
       size = 20.0;
     };
     cursor = {

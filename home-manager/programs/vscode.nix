@@ -5,7 +5,7 @@ in {
   enable = true;
   userSettings = {
     editor = {
-      fontFamily = "'FantasqueSansMono Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
+      fontFamily = "'FantasqueSansM Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
       defaultFormatter = "esbenp.prettier-vscode";
       formatOnSave = true;
 
