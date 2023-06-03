@@ -9,7 +9,7 @@
   extraPrograms = {
     alacritty = import (programsPath + "/alacritty.nix") {
       pkgs = pkgs-unstable;
-      transparency = 0.95;
+      transparency = 0.90;
       inherit theme;
       systemIsDarwin = true;
     };
