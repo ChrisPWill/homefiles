@@ -12,17 +12,6 @@ in {
     ...
   }: [
     {
-      services.xserver = {
-        enable = true;
-        displayManager = {
-          defaultSession = "none+awesome";
-          lightdm.enable = true;
-        };
-
-        windowManager.awesome = {
-          enable = true;
-        };
-      };
       services.gvfs.enable = true;
       nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
     }
