@@ -11,6 +11,7 @@ in {
   environment.systemPackages = with pkgs; [
     bemenu
     seatd
+    swayidle
     wayland
     wlr-randr
   ];

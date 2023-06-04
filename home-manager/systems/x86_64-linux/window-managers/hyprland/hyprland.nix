@@ -71,6 +71,9 @@ in ''
   exec-once=eww open bar1
   exec-once=eww open bar2
 
+  # Idle
+  exec-once=swayidle
+
   # Default workspaces based on monitor
   workspace=DP-3,6
   workspace=DP-2,1
