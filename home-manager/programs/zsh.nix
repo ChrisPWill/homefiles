@@ -393,14 +393,6 @@ if [ -n "''\${commands[fzf-share]}" ]; then
   source "''\$(fzf-share)/key-bindings.zsh"
   source "''\$(fzf-share)/completion.zsh"
 fi
-  '';
-
-  profileExtra = ''
-# Defaults
-EDITOR='nvim'
-
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # nvm
 lazy_load_nvm() {
@@ -418,6 +410,14 @@ nvm() {
   lazy_load_nvm
   node $@
 }
+  '';
+
+  profileExtra = ''
+# Defaults
+EDITOR='nvim'
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
 
 VISUAL='nvim'
   '';
