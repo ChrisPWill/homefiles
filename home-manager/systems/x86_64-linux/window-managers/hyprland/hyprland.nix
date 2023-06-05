@@ -35,36 +35,36 @@ in ''
   animation=windows,1,3,overshot,slide
 
   # application launching
-  bind=SUPER,return,exec,alacritty # Open terminal
-  bind=SUPER,r,exec,wofi --show drun -o DP-2 # Application launcher
-  bind=SUPER,PrtSc,exec,flameshot gui
+  bind=CTRL_ALT,return,exec,alacritty # Open terminal
+  bind=CTRL_ALT,r,exec,wofi --show drun -o DP-2 # Application launcher
+  bind=CTRL_ALT,PrtSc,exec,flameshot gui
 
   # VIM navigation for windows
-  bind=SUPER,h,movefocus,l
-  bind=SUPER,j,movefocus,d
-  bind=SUPER,k,movefocus,u
-  bind=SUPER,l,movefocus,r
-  bind=SUPERSHIFT,right,resizeactive,10 0
-  bind=SUPERSHIFT,left,resizeactive,-10 0
-  bind=SUPERSHIFT,up,resizeactive,0 -10
-  bind=SUPERSHIFT,down,resizeactive,0 10
+  bind=CTRL_ALT,h,movefocus,l
+  bind=CTRL_ALT,j,movefocus,d
+  bind=CTRL_ALT,k,movefocus,u
+  bind=CTRL_ALT,l,movefocus,r
+  bind=CTRL_ALT_SHIFT,right,resizeactive,10 0
+  bind=CTRL_ALT_SHIFT,left,resizeactive,-10 0
+  bind=CTRL_ALT_SHIFT,up,resizeactive,0 -10
+  bind=CTRL_ALT_SHIFT,down,resizeactive,0 10
 
   # window management
-  bind=SUPER,c,killactive,
-  bind=SUPER,space,togglefloating,
-  bind=SUPER,m,exit,
-  bindm=SUPER,mouse:272,movewindow
+  bind=CTRL_ALT,c,killactive,
+  bind=CTRL_ALT,space,togglefloating,
+  bind=CTRL_ALT,m,exit,
+  bindm=CTRL_ALT,mouse:272,movewindow
 
   # locks and login
-  bind=SUPER,q,exec,swaylock
+  bind=CTRL_ALT,q,exec,swaylock
 
   # Enable alacritty transparency
   windowrule=opacity 0.85,alacritty
 
   # Set wallpaper
   exec-once=swaybg -i ~/.config/wallpapers/safe.* -m fill &
-  bind=SUPERSHIFT,F11,exec,swaybg -i ~/.config/wallpapers/safe.* -m fill &
-  bind=SUPERSHIFT,F12,exec,swaybg -i ~/.config/wallpapers/anime.* -m fill &
+  bind=CTRL_ALT_SHIFT,F11,exec,swaybg -i ~/.config/wallpapers/safe.* -m fill &
+  bind=CTRL_ALT_SHIFT,F12,exec,swaybg -i ~/.config/wallpapers/anime.* -m fill &
 
   # Start eww
   exec-once=eww daemon
@@ -76,26 +76,26 @@ in ''
   workspace=DP-2,1
 
   # Switch to workspace
-  bind=SUPER,1,workspace,1
-  bind=SUPER,2,workspace,2
-  bind=SUPER,3,workspace,3
-  bind=SUPER,4,workspace,4
-  bind=SUPER,5,workspace,5
-  bind=SUPER,6,workspace,6
-  bind=SUPER,7,workspace,7
-  bind=SUPER,8,workspace,8
-  bind=SUPER,9,workspace,9
-  bind=SUPER,0,workspace,10
+  bind=CTRL_ALT,1,workspace,1
+  bind=CTRL_ALT,2,workspace,2
+  bind=CTRL_ALT,3,workspace,3
+  bind=CTRL_ALT,4,workspace,4
+  bind=CTRL_ALT,5,workspace,5
+  bind=CTRL_ALT,6,workspace,6
+  bind=CTRL_ALT,7,workspace,7
+  bind=CTRL_ALT,8,workspace,8
+  bind=CTRL_ALT,9,workspace,9
+  bind=CTRL_ALT,0,workspace,10
 
   # Move to workspace
-  bind=SUPERSHIFT,1,movetoworkspace,1
-  bind=SUPERSHIFT,2,movetoworkspace,2
-  bind=SUPERSHIFT,3,movetoworkspace,3
-  bind=SUPERSHIFT,4,movetoworkspace,4
-  bind=SUPERSHIFT,5,movetoworkspace,5
-  bind=SUPERSHIFT,6,movetoworkspace,6
-  bind=SUPERSHIFT,7,movetoworkspace,7
-  bind=SUPERSHIFT,8,movetoworkspace,8
-  bind=SUPERSHIFT,9,movetoworkspace,9
-  bind=SUPERSHIFT,0,movetoworkspace,10
+  bind=CTRL_ALT_SHIFT,1,movetoworkspace,1
+  bind=CTRL_ALT_SHIFT,2,movetoworkspace,2
+  bind=CTRL_ALT_SHIFT,3,movetoworkspace,3
+  bind=CTRL_ALT_SHIFT,4,movetoworkspace,4
+  bind=CTRL_ALT_SHIFT,5,movetoworkspace,5
+  bind=CTRL_ALT_SHIFT,6,movetoworkspace,6
+  bind=CTRL_ALT_SHIFT,7,movetoworkspace,7
+  bind=CTRL_ALT_SHIFT,8,movetoworkspace,8
+  bind=CTRL_ALT_SHIFT,9,movetoworkspace,9
+  bind=CTRL_ALT_SHIFT,0,movetoworkspace,10
 ''
