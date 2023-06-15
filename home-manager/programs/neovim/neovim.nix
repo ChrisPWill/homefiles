@@ -128,10 +128,22 @@ in {
 
       -- which-key
       local whichkey = require("which-key")
-      vim.keymap.set('n', '<A-k>', '<cmd>WhichKey<cr>', { noremap = true })
-      vim.keymap.set('v', '<A-k>', "<cmd>WhichKey ''' v<CR>", { noremap = true })
-      vim.keymap.set('i', '<A-k>', "<cmd>WhichKey ''' i<CR>", { noremap = true })
-      vim.keymap.set('c', '<A-k>', "<cmd>WhichKey ''' c<CR>", { noremap = true })
+
+      whichkey.register({
+        ["<A-k>"] = { "<cmd>WhichKey<cr>", "Which Key" },
+      }, { mode = "n" })
+
+      whichkey.register({
+        ["<A-k>"] = { "<cmd>WhichKey ''' v<CR>", "Which Key (visual)" },
+      }, { mode = "v" })
+
+      whichkey.register({
+        ["<A-k>"] = { "<cmd>WhichKey ''' i<CR>", "Which Key (insert)" },
+      }, { mode = "i" })
+
+      whichkey.register({
+        ["<A-k>"] = { "<cmd>WhichKey ''' c<CR>", "Which Key (command)" },
+      }, { mode = "c" })
 
       -- Mini plugins
       require('mini.bracketed').setup()
@@ -163,9 +175,10 @@ in {
       -- LSP, linters, and other language tooling configuration
       -- Linter
       require("trouble").setup {}
-      vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-        {silent = true, noremap = true}
-      )
+
+      whichkey.register({
+        ["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble (listing errors etc.)" },
+      }, { mode = "n" })
 
       -- LSP
       local lsp = require('lsp-zero').preset("manual-setup")
