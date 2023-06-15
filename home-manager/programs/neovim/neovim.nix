@@ -12,12 +12,12 @@
     else [];
   luaConfigs =
     [
-      (builtins.readFile ./config/nvim-tree.lua)
-      (builtins.readFile ./config/orgmode.lua)
-      (builtins.readFile ./config/formatter.lua)
-      (builtins.readFile ./config/bufferline.lua)
-      (builtins.readFile ./config/telescope.lua)
-      (builtins.readFile ./config/formatter.lua)
+      (builtins.readFile ./plugin-config/nvim-tree.lua)
+      (builtins.readFile ./plugin-config/orgmode.lua)
+      (builtins.readFile ./plugin-config/formatter.lua)
+      (builtins.readFile ./plugin-config/bufferline.lua)
+      (builtins.readFile ./plugin-config/telescope.lua)
+      (builtins.readFile ./plugin-config/formatter.lua)
     ]
     ++ generateLanguageConfig "typescript" "tsserver-config.lua"
     ++ generateLanguageConfig "lua" "lua-language-server-config.lua"
