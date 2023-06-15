@@ -6,14 +6,15 @@
   theme,
   ...
 }: let
-  languageServerPaths = {
+  languageServerConfigFiles = {
     typescript = "tsserver-config.lua";
     lua = "lua-language-server-config.lua";
     nix = "nix-language-server-config.lua";
     rust = "rust-language-server-config.lua";
     dockerfile = "dockerfile-language-server-config.lua";
   };
-  generateLanguageConfig = language: path: [(builtins.readFile (./language-servers + ("/" + path)))];
+  languagesWithLanguageServer = builtins.filter (x: builtins.hasAttr x languageServerConfigFiles) enabledLanguages;
+  generateLanguageConfigPath = file: (builtins.readFile (./language-servers + ("/" + file)));
   luaConfigs =
     [
       (builtins.readFile ./plugin-config/nvim-tree.lua)
@@ -23,7 +24,7 @@
       (builtins.readFile ./plugin-config/telescope.lua)
       (builtins.readFile ./plugin-config/formatter.lua)
     ]
-    ++ builtins.concatMap (language: generateLanguageConfig language (languageServerPaths.${language})) (builtins.filter (x: builtins.hasAttr x languageServerPaths) enabledLanguages)
+    ++ builtins.map (language: generateLanguageConfigPath (languageServerConfigFiles.${language})) languagesWithLanguageServer
     ++ ["lsp.setup()"] # Call LSP setup at the end
     ++ ["whichkey.setup({})"]; # Call whichkey setup at the end
 
