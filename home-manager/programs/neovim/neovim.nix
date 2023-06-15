@@ -13,8 +13,7 @@
     rust = "rust-language-server-config.lua";
     dockerfile = "dockerfile-language-server-config.lua";
   };
-    generateLanguageConfig = language: path:
-    [(builtins.readFile (./language-servers + ("/" + path)))];
+  generateLanguageConfig = language: path: [(builtins.readFile (./language-servers + ("/" + path)))];
   luaConfigs =
     [
       (builtins.readFile ./plugin-config/nvim-tree.lua)
@@ -129,9 +128,9 @@ in {
       -- which-key
       local whichkey = require("which-key")
       vim.keymap.set('n', '<A-k>', '<cmd>WhichKey<cr>', { noremap = true })
-      vim.keymap.set('v', '<A-k>', "<cmd>WhichKey ''\'' v<CR>", { noremap = true })
-      vim.keymap.set('i', '<A-k>', "<cmd>WhichKey ''\'' i<CR>", { noremap = true })
-      vim.keymap.set('c', '<A-k>', "<cmd>WhichKey ''\'' c<CR>", { noremap = true })
+      vim.keymap.set('v', '<A-k>', "<cmd>WhichKey ''' v<CR>", { noremap = true })
+      vim.keymap.set('i', '<A-k>', "<cmd>WhichKey ''' i<CR>", { noremap = true })
+      vim.keymap.set('c', '<A-k>', "<cmd>WhichKey ''' c<CR>", { noremap = true })
 
       -- Mini plugins
       require('mini.bracketed').setup()
