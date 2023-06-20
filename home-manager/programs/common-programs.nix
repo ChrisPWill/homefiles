@@ -22,13 +22,6 @@
   mpv = {
     enable = true;
   };
-  neovim = import ./neovim/neovim.nix {
-    inherit pkgs;
-    inherit pkgs-unstable;
-    inherit lib;
-    inherit enabledLanguages;
-    inherit theme;
-  };
   zellij = import ./zellij.nix {inherit theme;};
   zoxide = {
     enable = true;

@@ -4,6 +4,7 @@
   lib,
   enabledLanguages ? [],
   theme,
+  enableCopilot ? false,
   ...
 }: let
   languageServerConfigFiles = {
@@ -36,6 +37,30 @@
     .${language}
     or language;
   unstableVim = pkgs-unstable.vimPlugins;
+  copilotConfig =
+    if enableCopilot
+    then ''
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+      require('copilot_cmp').setup()
+      cmp.setup({
+        sources = {
+          {name = 'copilot'},
+          {name = 'nvim_lsp'},
+        },
+        mapping = {
+          ['<CR>'] = cmp.mapping.confirm({
+            -- documentation says this is important.
+            -- I don't know why.
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+          })
+        }
+      })
+    ''
+    else "";
 in {
   enable = true;
   defaultEditor = true;
@@ -44,48 +69,54 @@ in {
   vimAlias = true;
   vimdiffAlias = true;
 
-  plugins = with pkgs.vimPlugins; [
-    # Completion and snippets
-    cmp-nvim-lsp
-    luasnip
-    nvim-cmp
+  plugins = with pkgs.vimPlugins;
+    [
+      # Completion and snippets
+      cmp-nvim-lsp
+      luasnip
+      nvim-cmp
 
-    # Movement, navigation, and finding
-    flit-nvim
-    leap-nvim
-    telescope-nvim
-    fzf-vim
-    which-key-nvim
+      # Movement, navigation, and finding
+      flit-nvim
+      leap-nvim
+      telescope-nvim
+      fzf-vim
+      which-key-nvim
 
-    # LSP, linters, and language tooling
-    unstableVim.lsp-zero-nvim
-    unstableVim.nvim-lspconfig
-    (unstableVim.nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
-    trouble-nvim
-    unstableVim.formatter-nvim
+      # LSP, linters, and language tooling
+      unstableVim.lsp-zero-nvim
+      unstableVim.nvim-lspconfig
+      (unstableVim.nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
+      trouble-nvim
+      unstableVim.formatter-nvim
 
-    # Notifications and messages
-    nvim-notify
+      # Notifications and messages
+      nvim-notify
 
-    # User Interface Components
-    nui-nvim
-    bufferline-nvim
-    noice-nvim
-    vim-illuminate
-    vim-gitgutter
-    vim-airline
-    vim-fugitive
-    nvim-web-devicons
-    nvim-tree-lua
-    nvim-colorizer-lua
+      # User Interface Components
+      nui-nvim
+      bufferline-nvim
+      noice-nvim
+      vim-illuminate
+      vim-gitgutter
+      vim-airline
+      vim-fugitive
+      nvim-web-devicons
+      nvim-tree-lua
+      nvim-colorizer-lua
 
-    # Editing, text manipulation, and utilities
-    unstableVim.mini-nvim
-    nvim-surround
+      # Editing, text manipulation, and utilities
+      unstableVim.mini-nvim
+      nvim-surround
 
-    # Extras
-    orgmode
-  ];
+      # Extras
+      orgmode
+    ]
+    ++ (
+      if enableCopilot
+      then [unstableVim.copilot-lua unstableVim.copilot-cmp]
+      else []
+    );
 
   extraConfig =
     ''
@@ -218,7 +249,10 @@ in {
 
       -- lspconfig for later config
       local lspconfig = require('lspconfig')
+      -- cmp for later config
+      local cmp = require('cmp')
 
     ''
-    + (builtins.concatStringsSep "\n" luaConfigs);
+    + (builtins.concatStringsSep "\n" luaConfigs)
+    + copilotConfig;
 }

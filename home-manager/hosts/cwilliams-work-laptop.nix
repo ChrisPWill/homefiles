@@ -1,9 +1,12 @@
-{pkgs}: {
-  userName = "cwilliams";
-  userFullName = "Chris Williams";
-  userEmail = "cwilliams@atlassian.com";
-  extraModules = [];
-  enabledLanguages = [
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  sharedEnabledLanguages,
+  theme,
+  ...
+}: let
+  hostEnabledLanguages = [
     "dockerfile"
     "javascript"
     "typescript"
@@ -11,7 +14,23 @@
     "graphql"
     "terraform"
   ];
-  extraPrograms = {};
+  enabledLanguages = sharedEnabledLanguages ++ hostEnabledLanguages;
+in {
+  userName = "cwilliams";
+  userFullName = "Chris Williams";
+  userEmail = "cwilliams@atlassian.com";
+  extraModules = [];
+  inherit enabledLanguages;
+  extraPrograms = {
+    neovim = import ../programs/neovim/neovim.nix {
+      inherit pkgs;
+      inherit pkgs-unstable;
+      inherit lib;
+      inherit enabledLanguages;
+      inherit theme;
+      enableCopilot = true;
+    };
+  };
   extraPackages = with pkgs; [
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.typescript

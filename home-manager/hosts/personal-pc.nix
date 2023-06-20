@@ -1,4 +1,20 @@
-{pkgs}: {
+{
+  pkgs,
+  pkgs-unstable,
+  lib,
+  sharedEnabledLanguages,
+  theme,
+  ...
+}: let
+  hostEnabledLanguages = [
+    "rust"
+    "javascript"
+    "typescript"
+    "html"
+    "graphql"
+  ];
+  enabledLanguages = sharedEnabledLanguages ++ hostEnabledLanguages;
+in {
   userName = "cwilliams";
   userFullName = "Chris Williams";
   userEmail = "chris@chrispwill.com";
@@ -13,14 +29,15 @@
       };
     }
   ];
-  enabledLanguages = [
-    "rust"
-    "javascript"
-    "typescript"
-    "html"
-    "graphql"
-  ];
+  inherit enabledLanguages;
   extraPrograms = {
+    neovim = import ../programs/neovim/neovim.nix {
+      inherit pkgs;
+      inherit pkgs-unstable;
+      inherit lib;
+      inherit enabledLanguages;
+      inherit theme;
+    };
   };
   extraPackages = with pkgs; [
     discord

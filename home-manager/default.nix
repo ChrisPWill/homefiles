@@ -25,7 +25,13 @@
     # Temporary for porting from existing config
     # - will wrap some of this into new config files
     sharedHomeConfig = import ./shared/shared-config.nix;
-    homeHostConfig = import ./hosts/${hostConfig.host}.nix {inherit pkgs;};
+    homeHostConfig = import ./hosts/${hostConfig.host}.nix {
+      inherit pkgs;
+      inherit pkgs-unstable;
+      inherit lib;
+      sharedEnabledLanguages = sharedHomeConfig.enabledLanguages;
+      inherit theme;
+    };
     homeSystemConfig = import ./systems/${systemConfig.system} {
       inherit inputs pkgs pkgs-unstable lib theme;
       programsPath = ./programs;
