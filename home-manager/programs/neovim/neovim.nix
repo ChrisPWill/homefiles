@@ -13,6 +13,7 @@
     nix = "nix-language-server-config.lua";
     rust = "rust-language-server-config.lua";
     dockerfile = "dockerfile-language-server-config.lua";
+    yaml = "yaml-language-server-config.lua";
   };
   languagesWithLanguageServer = builtins.filter (x: builtins.hasAttr x languageServerConfigFiles) enabledLanguages;
   generateLanguageConfigPath = file: (builtins.readFile (./language-servers + ("/" + file)));
