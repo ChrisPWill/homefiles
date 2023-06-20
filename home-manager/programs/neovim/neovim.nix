@@ -57,7 +57,8 @@
             -- I don't know why.
             behavior = cmp.ConfirmBehavior.Replace,
             select = false,
-          })
+          }),
+          ['<C-Space>'] = cmp.mapping.complete(),
         }
       })
     ''
