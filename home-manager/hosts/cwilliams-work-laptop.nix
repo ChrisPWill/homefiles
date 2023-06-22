@@ -13,6 +13,7 @@
     "html"
     "graphql"
     "terraform"
+    "yaml"
   ];
   enabledLanguages = sharedEnabledLanguages ++ hostEnabledLanguages;
 in {
@@ -35,6 +36,7 @@ in {
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.typescript
     nodePackages.typescript-language-server
+    nodePackages.yaml-language-server
     wget
   ];
 }
