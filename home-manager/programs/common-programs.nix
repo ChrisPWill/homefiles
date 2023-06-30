@@ -22,7 +22,7 @@
   mpv = {
     enable = true;
   };
-  zellij = import ./zellij.nix {inherit theme;};
+  zellij = import ./zellij.nix {inherit theme pkgs-unstable;};
   zoxide = {
     enable = true;
     enableZshIntegration = true;
