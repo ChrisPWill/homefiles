@@ -25,6 +25,7 @@
       (builtins.readFile ./plugin-config/bufferline.lua)
       (builtins.readFile ./plugin-config/telescope.lua)
       (builtins.readFile ./plugin-config/formatter.lua)
+      (builtins.readFile ./plugin-config/movement-plugins.lua)
     ]
     ++ builtins.map (language: generateLanguageConfigPath (languageServerConfigFiles.${language})) languagesWithLanguageServer
     ++ ["lsp.setup()"] # Call LSP setup at the end
