@@ -22,5 +22,6 @@ with pkgs;
     socat
     spotify-tui
     tealdeer
+    xsv
   ]
   ++ extraPackages
