@@ -73,3 +73,7 @@ vim.cmd([[
     autocmd BufWritePost * FormatWrite
   augroup END
 ]])
+vim.cmd([[
+  command! WriteNoFormat noautocmd write
+  command! WNF noautocmd write
+]])
