@@ -8,11 +8,12 @@
   ...
 }: let
   languageServerConfigFiles = {
-    typescript = "tsserver-config.lua";
+    dockerfile = "dockerfile-language-server-config.lua";
+    json = "json-language-server-config.lua";
     lua = "lua-language-server-config.lua";
     nix = "nix-language-server-config.lua";
     rust = "rust-language-server-config.lua";
-    dockerfile = "dockerfile-language-server-config.lua";
+    typescript = "tsserver-config.lua";
     yaml = "yaml-language-server-config.lua";
   };
   languagesWithLanguageServer = builtins.filter (x: builtins.hasAttr x languageServerConfigFiles) enabledLanguages;

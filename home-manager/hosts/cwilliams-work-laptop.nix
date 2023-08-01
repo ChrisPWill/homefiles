@@ -9,10 +9,11 @@
   hostEnabledLanguages = [
     "dockerfile"
     "javascript"
-    "typescript"
     "html"
     "graphql"
+    "json"
     "terraform"
+    "typescript"
     "yaml"
   ];
   enabledLanguages = sharedEnabledLanguages ++ hostEnabledLanguages;
@@ -36,6 +37,7 @@ in {
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.typescript
     nodePackages.typescript-language-server
+    nodePackages.vscode-json-languageserver
     nodePackages.yaml-language-server
     wget
   ];
