@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    darwin.url = "github:lnl7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +16,7 @@
   outputs = inputs @ {
     self,
     hyprland,
+    darwin,
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
@@ -30,6 +33,12 @@
   in {
     nixosConfigurations = import ./nixos (inherits
       // {
+        user = userConfigs.cwilliams;
+      });
+
+    darwinConfigurations = import ./darwin (inherits
+      // {
+        inherit darwin;
         user = userConfigs.cwilliams;
       });
 

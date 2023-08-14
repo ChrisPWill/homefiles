@@ -10,4 +10,8 @@
       "wheel"
     ];
   };
+  userToDarwinUser = user: pkgs: {
+    shell = pkgs.${user.shell};
+    description = user.fullName;
+  };
 }

@@ -6,6 +6,7 @@
   };
   systems = {
     darwinSystem = "x86_64-darwin";
+    darwinArmSystem = "aarch64-darwin";
     linuxSystem = "x86_64-linux";
   };
 }
