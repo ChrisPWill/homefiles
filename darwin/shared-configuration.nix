@@ -15,7 +15,15 @@
       "firefox"
       "raycast"
     ];
-    taps = [];
+  };
+
+  services = {
+    yabai = {
+      enable = true;
+    };
+    skhd = {
+      enable = true;
+    };
   };
 
   system.keyboard = {
