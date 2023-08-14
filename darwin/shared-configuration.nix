@@ -9,6 +9,20 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
 
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "uninstall";
+    };
+    casks = [
+      "alacritty"
+      "firefox"
+      "raycast"
+    ];
+    taps = [];
+  };
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
