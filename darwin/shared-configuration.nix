@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  config,
-  ...
-}: {
+{...}: {
   services.nix-daemon.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
@@ -23,6 +17,7 @@
     ];
     taps = [];
   };
+
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToEscape = true;

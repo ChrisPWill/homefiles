@@ -420,5 +420,5 @@ EDITOR='nvim'
 export PATH="$HOME/.cargo/bin:$PATH"
 
 VISUAL='nvim'
-  '';
+  '' + (if system == "aarch64-darwin" then "eval \"$(/opt/homebrew/bin/brew shellenv)\"" else "");
 }
