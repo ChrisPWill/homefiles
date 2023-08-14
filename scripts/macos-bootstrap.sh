@@ -15,3 +15,6 @@ nix --extra-experimental-features "flakes nix-command" build ".#darwinConfigurat
 
 ./result/sw/bin/darwin-rebuild switch --flake ".#cwilliams-work-laptop-aarch64darwin"
 
+nix --extra-experimental-features "flakes nix-command" run nixpkgs#home-manager -- --flake .
+
+
