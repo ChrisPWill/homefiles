@@ -161,7 +161,7 @@
       ApplePressAndHoldEnabled = false;
       AppleFontSmoothing = 1;
       _HIHideMenuBar = false;
-      InitialKeyRepeat = 10;
+      InitialKeyRepeat = 15;
       KeyRepeat = 1;
       "com.apple.mouse.tapBehavior" = 1;
       "com.apple.swipescrolldirection" = true;
