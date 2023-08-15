@@ -25,7 +25,7 @@
 
   services = {
     yabai = {
-      enable = true;
+      enable = false;
       config = {
         focus_follows_mouse = "autoraise";
         mouse_follows_focus = "off";
@@ -39,7 +39,7 @@
       };
     };
     skhd = {
-      enable = true;
+      enable = false;
       skhdConfig = ''
         # focus window
         # here the || was added so the selection cycles and doesn't stop at the end or beginning
@@ -100,7 +100,7 @@
         ctrl + alt - x : yabai -m space --mirror x-axis
 
         # toggle window fullscreen zoom
-        ctrl + alt - space : yabai -m window --toggle zoom-fullscreen
+        shift + ctrl + alt - space : yabai -m window --toggle zoom-fullscreen
 
         # toggle window native fullscreen
         # alt - space : yabai -m window --toggle native-fullscreen
@@ -160,7 +160,7 @@
       AppleKeyboardUIMode = 3;
       ApplePressAndHoldEnabled = false;
       AppleFontSmoothing = 1;
-      _HIHideMenuBar = true;
+      _HIHideMenuBar = false;
       InitialKeyRepeat = 10;
       KeyRepeat = 1;
       "com.apple.mouse.tapBehavior" = 1;
