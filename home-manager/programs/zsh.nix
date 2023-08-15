@@ -1,10 +1,11 @@
 { system, theme }: {
   enable = true;
+  dotDir = ".config/zsh";
 
   history = {
     size = 10000;
     save = 10000;
-    path = "$HOME/.zshinfo";
+    path = "$HOME/.config/zsh/.zshinfo";
     share = true;
 
     ignoreSpace = true;
