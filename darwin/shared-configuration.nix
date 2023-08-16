@@ -20,6 +20,7 @@
       "obsidian"
       "raycast"
       "scroll-reverser"
+      "spotify"
     ];
   };
 
