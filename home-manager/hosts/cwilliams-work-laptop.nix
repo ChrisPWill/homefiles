@@ -21,7 +21,16 @@ in {
   userName = "cwilliams";
   userFullName = "Chris Williams";
   userEmail = "cwilliams@atlassian.com";
-  extraModules = [];
+  extraModules = [
+    {
+      programs.zsh = {
+        enable = true;
+        shellAliases = {
+          node18 = "nix develop ~/.dev-env/node18 -c zsh";
+        };
+      };
+    }
+  ];
   inherit enabledLanguages;
   extraPrograms = {
     neovim = import ../programs/neovim/neovim.nix {
