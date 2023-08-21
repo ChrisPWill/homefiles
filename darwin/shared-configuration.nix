@@ -21,6 +21,7 @@
       "raycast"
       "scroll-reverser"
       "spotify"
+      "visual-studio-code"
     ];
   };
 
