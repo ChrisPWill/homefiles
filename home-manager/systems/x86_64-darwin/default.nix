@@ -13,7 +13,10 @@
       inherit theme;
       systemIsDarwin = true;
     };
-    vscode = import (programsPath + "/vscode.nix") {inherit theme;};
+    vscode = import (programsPath + "/vscode.nix") {
+      inherit theme;
+      pkgs = pkgs-unstable;
+    };
   };
   extraPackages = [];
   extraModules = [];

@@ -1,8 +1,13 @@
-{theme}: let
+{
+  theme,
+  pkgs,
+  ...
+}: let
   colors = theme.normal;
   lcolors = theme.light;
 in {
   enable = true;
+  package = pkgs.vscode;
   userSettings = {
     editor = {
       fontFamily = "'FantasqueSansM Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace";
