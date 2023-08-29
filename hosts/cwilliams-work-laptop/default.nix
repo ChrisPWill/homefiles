@@ -18,9 +18,19 @@ in {
 
       users.users.cwilliams = utils.userToDarwinUser sharedUsers.cwilliams pkgs;
 
-      system.stateVersion = if systemConfig.system == darwinArmSystem then 4 else stateVersion;
+      system.stateVersion =
+        if systemConfig.system == darwinArmSystem
+        then 4
+        else stateVersion;
 
       programs.zsh.enable = true;
+
+      homebrew = {
+        enable = true;
+        casks = [
+          "loom"
+        ];
+      };
     }
   ];
 }

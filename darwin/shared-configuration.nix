@@ -16,7 +16,6 @@
       "docker"
       "firefox"
       "insomnia"
-      "loom"
       "obsidian"
       "raycast"
       "scroll-reverser"
