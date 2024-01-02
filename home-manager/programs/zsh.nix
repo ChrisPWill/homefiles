@@ -411,6 +411,28 @@ nvm() {
   lazy_load_nvm
   node $@
 }
+
+function vimdifffiles() {
+    local commit_range="$1" # Capture the commit range argument
+
+    # Check if commit range is provided
+    if [[ -z "$commit_range" ]]; then
+        echo "Please specify a commit range. For example: vimdifffiles HEAD~2..HEAD~1"
+        return 1
+    fi
+
+    # Get a list of modified files in the commit range
+    local files=($(git diff --name-only $commit_range))
+
+    # Check if there are any modified files
+    if [[ ''\${#files[@]} -eq 0 ]]; then
+        echo "No modified files found in the specified commit range."
+        return 1
+    fi
+
+    # Open the modified files in neovim
+    nvim -p "''\${files[@]}"
+}
   '';
 
   profileExtra = ''
