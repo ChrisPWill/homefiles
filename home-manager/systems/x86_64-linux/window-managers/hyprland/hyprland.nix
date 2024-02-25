@@ -7,8 +7,8 @@
   colors = theme.normal;
 in ''
   monitor=,preferred,auto,1
-  monitor=HDMI-A-2,2560x1440,0x0,1
-  monitor=DP-2,3840x2160,2560x360,1
+  monitor=DP-1,3840x2160,0x0,1
+  monitor=DP-2,2560x1440,2560x360,1
 
   input {
     kb_layout=us
