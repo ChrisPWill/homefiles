@@ -10,6 +10,11 @@ in ''
   monitor=DP-1,3840x2160,0x0,1
   monitor=DP-2,2560x1440,2560x360,1
 
+  misc {
+    mouse_move_enables_dpms = true
+    key_press_enables_dpms = true
+  }
+
   input {
     kb_layout=us
     follow_mouse=1
@@ -75,8 +80,8 @@ in ''
   exec-once=swayidle
 
   # Default workspaces based on monitor
-  workspace=DP-3,6
-  workspace=DP-2,1
+  workspace=DP-1,1
+  workspace=DP-2,6
 
   # Switch to workspace
   bind=CTRL_ALT,1,workspace,1
