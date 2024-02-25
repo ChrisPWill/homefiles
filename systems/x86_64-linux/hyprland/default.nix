@@ -35,6 +35,7 @@ in {
     enable = true;
     # wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    config.common.default = "gtk";
   };
 
   programs.hyprland = {
@@ -45,7 +46,7 @@ in {
       hidpi = true;
     };
 
-    nvidiaPatches = true;
+    # enableNvidiaPatches = true;
   };
 
   services.greetd = {

@@ -1,6 +1,6 @@
 let
   host = (import ../../shared/constants.nix).hosts.personalPc;
-  stateVersion = "22.11";
+  stateVersion = "23.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;
 in {
@@ -14,6 +14,7 @@ in {
   }: [
     {
       networking.hostName = "${host}-${systemConfig.name}";
+      networking.hostId = "579220d5";
 
       users.users.cwilliams = utils.userToNixosUser sharedUsers.cwilliams pkgs;
 
@@ -22,11 +23,6 @@ in {
       programs.zsh.enable = true;
     }
     ./hardware-configuration.nix
-    {
-      programs.steam = {
-        enable = true;
-        remotePlay.openFirewall = true;
-      };
-    }
   ];
+  extraNixpkgsConfig = {};
 }

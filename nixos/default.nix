@@ -20,11 +20,16 @@
     extraModuleInherits = {inherit inputs pkgs lib systemConfig user theme;};
   in
     nixpkgs.lib.nixosSystem {
-      inherit pkgs;
       inherit system;
       specialArgs = {inherit inputs;};
       modules =
         [
+          ({pkgs, ... }: {
+	    nixpkgs.config = lib.mkMerge [
+	      systemConfig.extraNixpkgsConfig
+	      hostConfig.extraNixpkgsConfig
+	    ];
+	  })
           ./configuration.nix
         ]
         ++ systemConfig.extraModules extraModuleInherits

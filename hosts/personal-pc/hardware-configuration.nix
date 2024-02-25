@@ -12,36 +12,47 @@
     initrd = {
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod"];
       kernelModules = [];
-      secrets."/crypto_keyfile.bin" = null;
-      luks.devices."luks-78327d31-eab0-4906-b151-8bd71a56d78f".device = "/dev/disk/by-uuid/78327d31-eab0-4906-b151-8bd71a56d78f";
+      luks.devices = {
+        "cryptRoot".device = "/dev/disk/by-uuid/fce35182-af3a-4389-af54-527041ba8595";
+      };
     };
-    kernelModules = ["kvm-amd"];
+    kernelModules = ["kvm-amd amdgpu"];
     extraModulePackages = [];
 
     loader = {
       systemd-boot.enable = true;
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
+      efi.canTouchEfiVariables = true;
     };
   };
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/527fc146-2405-40d3-bfb3-256219c83add";
-      fsType = "ext4";
+  fileSystems."/" =
+    { device = "zroot/ROOT/default";
+      fsType = "zfs";
     };
 
-    "/boot/efi" = {
-      device = "/dev/disk/by-uuid/9830-B4C3";
+  fileSystems."/home" =
+    { device = "zroot/data/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/nix" =
+    { device = "zroot/nix";
+      fsType = "zfs";
+    };
+
+  fileSystems."/var" =
+    { device = "zroot/var";
+      fsType = "zfs";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/9830-B4C3";
       fsType = "vfat";
     };
-  };
 
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/7b1695c9-1e19-4f81-9ac9-c37754f6fe27";}
-  ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/31889efe-0b68-41c6-ad49-e324d816891a"; }
+    ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

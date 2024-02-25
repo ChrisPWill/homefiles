@@ -22,7 +22,6 @@ in {
         enable = true;
         support32Bit = true;
       };
-      nixpkgs.config.pulseaudio = true;
       environment.systemPackages = with pkgs; [
         pavucontrol
         pulseaudio
@@ -48,4 +47,7 @@ in {
       ];
     }
   ];
+  extraNixpkgsConfig = {
+    pulseaudio = true;
+  };
 }

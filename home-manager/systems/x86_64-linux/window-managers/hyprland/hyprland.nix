@@ -25,9 +25,9 @@ in ''
 
   decoration {
     rounding=5
-    blur=true
-    blur_size=3
-    blur_passes=2
+    # blur=true
+    # blur_size=3
+    # blur_passes=2
   }
 
   bezier=overshot,0.05,0.9,0.1,1.1

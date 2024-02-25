@@ -7,7 +7,7 @@
 }: {
   username = userName;
   homeDirectory = "${homeDirPrefix}/${userName}";
-  stateVersion = "22.11";
+  stateVersion = "23.11";
   sessionVariables = {
     EDITOR = "nvim";
   };
