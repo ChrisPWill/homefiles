@@ -83,6 +83,7 @@ in {
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = true;
 
+  services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config.allowUnfree = true;
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;

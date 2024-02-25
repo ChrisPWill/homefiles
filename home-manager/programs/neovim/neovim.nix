@@ -88,11 +88,11 @@ in {
       which-key-nvim
 
       # LSP, linters, and language tooling
-      # unstableVim.lsp-zero-nvim
-      # unstableVim.nvim-lspconfig
-      # (unstableVim.nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
+      unstableVim.lsp-zero-nvim
+      unstableVim.nvim-lspconfig
+      unstableVim.nvim-treesitter.withAllGrammars
       trouble-nvim
-      # unstableVim.formatter-nvim
+      unstableVim.formatter-nvim
 
       # Notifications and messages
       nvim-notify
@@ -110,7 +110,7 @@ in {
       nvim-colorizer-lua
 
       # Editing, text manipulation, and utilities
-      # unstableVim.mini-nvim
+      unstableVim.mini-nvim
       nvim-surround
 
       # Extras
