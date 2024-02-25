@@ -29,6 +29,13 @@ in {
         };
       };
     }
+    {
+      home.file = {
+        ".config/libvert/qemu.conf" = {
+          source = ../programs/qemu/qemu.conf;
+        };
+      };
+    }
   ];
   inherit enabledLanguages;
   extraPrograms = {
