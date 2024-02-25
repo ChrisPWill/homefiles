@@ -15,6 +15,7 @@ in {
     initrd = {
       availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod"];
       kernelModules = [
+        "amdgpu"
         "vfio_pci"
         "vfio"
         "vfio_iommu_type1"
@@ -80,10 +81,9 @@ in {
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableRedistributableFirmware = true;
 
-  # Nvidia drivers
   nixpkgs.config.allowUnfree = true;
-  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.modesetting.enable = true;
