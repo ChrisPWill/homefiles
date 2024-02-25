@@ -29,6 +29,11 @@ in {
         extraGroups = ["libvirtd"];
       };
       programs.virt-manager.enable = true;
+      # virt-manager fails without these
+      environment.systemPackages = with pkgs; [
+        glib
+        gnome3.adwaita-icon-theme # default gnome cursors
+      ];
       virtualisation.libvirtd = {
         enable = true;
         qemu = {
