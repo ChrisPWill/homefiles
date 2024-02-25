@@ -45,6 +45,7 @@ in {
             packages = [
               (pkgs.OVMF.override {
                 tpmSupport = true;
+                secureBoot = true;
               })
               .fd
             ];
