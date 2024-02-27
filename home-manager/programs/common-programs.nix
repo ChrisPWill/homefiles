@@ -23,7 +23,7 @@
     enable = true;
   };
   nushell = import ./nushell.nix;
-  zellij = import ./zellij.nix {inherit theme pkgs-unstable;};
+  zellij = import ./zellij.nix {inherit theme pkgs;};
   zoxide = {
     enable = true;
     enableZshIntegration = true;

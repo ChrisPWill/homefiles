@@ -1,9 +1,9 @@
 {
   theme,
-  pkgs-unstable,
+  pkgs,
 }: {
   enable = true;
-  package = pkgs-unstable.zellij;
+  package = pkgs.zellij;
   settings = {
     scroll_buffer_size = 10000;
     copy_on_select = true;
