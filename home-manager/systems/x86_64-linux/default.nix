@@ -33,6 +33,10 @@ in {
     };
 
     firefox = import (programsPath + "/firefox.nix");
+
+    chromium = {
+      enable = true;
+    };
   };
 
   extraPackages = with pkgs; [
