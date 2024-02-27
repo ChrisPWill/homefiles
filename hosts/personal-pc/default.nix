@@ -21,6 +21,10 @@ in {
       system.stateVersion = stateVersion;
 
       programs.zsh.enable = true;
+      programs.steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+      };
     }
     ./hardware-configuration.nix
     # libvert/QEMU config
