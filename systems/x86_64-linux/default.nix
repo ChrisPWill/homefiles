@@ -32,7 +32,17 @@ in {
         gperftools
       ];
 
-      hardware.opengl.driSupport32Bit = true;
+      hardware.opengl = {
+        driSupport32Bit = true;
+        # Vulkan
+        driSupport = true;
+
+        extraPackages = with pkgs; [
+          # VAAPI
+          vaapiVdpau
+          libvdpau-va-gl
+        ];
+      };
       virtualisation.docker = {
         enableNvidia = true;
         enable = true;
