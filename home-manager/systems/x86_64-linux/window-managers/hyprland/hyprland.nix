@@ -9,6 +9,7 @@ in ''
   monitor=,preferred,auto,1
   monitor=DP-1,3840x2160,0x0,1
   monitor=DP-2,2560x1440,2560x360,1
+  env=WLR_DRM_DEVICES,/dev/dri/card0
 
   misc {
     mouse_move_enables_dpms = true
