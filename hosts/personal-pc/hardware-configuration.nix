@@ -35,7 +35,7 @@ in
       kernelParams = [
         # enable IOMMU
         "amd_iommu=on"
-        ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs)
+        # ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs)
       ];
       extraModulePackages = [];
 

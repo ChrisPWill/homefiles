@@ -48,7 +48,6 @@ in {
         enable = true;
       };
     }
-    inputs.hyprland.nixosModules.default
     ./hyprland
     {
       environment.systemPackages = with pkgs; [
