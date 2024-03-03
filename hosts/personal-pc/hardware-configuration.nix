@@ -22,10 +22,10 @@ in
           "vfio_iommu_type1"
           "vfio_virqfd"
 
-          "nvidia"
-          "nvidia_modeset"
-          "nvidia_uvm"
-          "nvidia_drm"
+          # "nvidia"
+          # "nvidia_modeset"
+          # "nvidia_uvm"
+          # "nvidia_drm"
         ];
         luks.devices = {
           "cryptRoot".device = "/dev/disk/by-uuid/fce35182-af3a-4389-af54-527041ba8595";
@@ -84,11 +84,15 @@ in
     hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     hardware.enableRedistributableFirmware = true;
 
-    services.xserver.videoDrivers = ["amdgpu" "nvidia"];
+    services.xserver.videoDrivers = [
+      "amdgpu"
+      # Disable nvidia for now until I can select it reliably for Factorio
+      # "nvidia"
+    ];
+    # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # hardware.nvidia.modesetting.enable = true;
     nixpkgs.config.allowUnfree = true;
     hardware.opengl.enable = true;
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-    hardware.nvidia.modesetting.enable = true;
 
     # Logitech
     hardware.logitech.wireless = {
