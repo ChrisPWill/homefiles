@@ -90,7 +90,7 @@ in {
       # LSP, linters, and language tooling
       unstableVim.lsp-zero-nvim
       unstableVim.nvim-lspconfig
-      (unstableVim.nvim-treesitter.withPlugins (p: builtins.map languageToTreesitterName enabledLanguages))
+      unstableVim.nvim-treesitter.withAllGrammars
       trouble-nvim
       unstableVim.formatter-nvim
 
@@ -117,7 +117,7 @@ in {
       orgmode
     ]
     ++ (
-      if enableCopilot
+      if false && enableCopilot
       then [unstableVim.copilot-lua unstableVim.copilot-cmp]
       else []
     );

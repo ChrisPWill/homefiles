@@ -22,7 +22,6 @@ in {
         enable = true;
         support32Bit = true;
       };
-      nixpkgs.config.pulseaudio = true;
       environment.systemPackages = with pkgs; [
         pavucontrol
         pulseaudio
@@ -33,13 +32,22 @@ in {
         gperftools
       ];
 
-      hardware.opengl.driSupport32Bit = true;
+      hardware.opengl = {
+        driSupport32Bit = true;
+        # Vulkan
+        driSupport = true;
+
+        extraPackages = with pkgs; [
+          # VAAPI
+          vaapiVdpau
+          libvdpau-va-gl
+        ];
+      };
       virtualisation.docker = {
         enableNvidia = true;
         enable = true;
       };
     }
-    inputs.hyprland.nixosModules.default
     ./hyprland
     {
       environment.systemPackages = with pkgs; [
@@ -48,4 +56,7 @@ in {
       ];
     }
   ];
+  extraNixpkgsConfig = {
+    pulseaudio = true;
+  };
 }

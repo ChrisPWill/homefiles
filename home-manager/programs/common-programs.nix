@@ -10,7 +10,7 @@
 }: {
   alacritty = import ./alacritty.nix {inherit theme;};
   bat = import ./bat.nix;
-  exa = import ./exa.nix;
+  eza = import ./eza.nix;
   feh.enable = true;
   fzf = import ./fzf.nix;
   git = import ./git.nix {
@@ -23,7 +23,7 @@
     enable = true;
   };
   nushell = import ./nushell.nix;
-  zellij = import ./zellij.nix {inherit theme pkgs-unstable;};
+  zellij = import ./zellij.nix {inherit theme pkgs;};
   zoxide = {
     enable = true;
     enableZshIntegration = true;

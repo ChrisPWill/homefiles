@@ -50,11 +50,10 @@
       ];
     };
   }
-  inputs.hyprland.homeManagerModules.default
   {
     wayland.windowManager.hyprland = {
       enable = true;
-      nvidiaPatches = true;
+      # enableNvidiaPatches = true;
       extraConfig = import ./hyprland.nix {inherit pkgs theme;};
     };
   }

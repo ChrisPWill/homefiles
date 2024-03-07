@@ -13,7 +13,7 @@ with pkgs;
     gcc
     kondo
     pkgs-unstable.lua-language-server
-    obsidian
+    # obsidian
     nil
     nodePackages.prettier
     powerline-go
