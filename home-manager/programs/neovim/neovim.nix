@@ -117,7 +117,7 @@ in {
       orgmode
     ]
     ++ (
-      if false && enableCopilot
+      if enableCopilot
       then [unstableVim.copilot-lua unstableVim.copilot-cmp]
       else []
     );
