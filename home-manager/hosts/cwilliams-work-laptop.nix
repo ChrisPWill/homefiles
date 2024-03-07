@@ -30,6 +30,12 @@ in {
         };
       };
     }
+    {
+      xdg.configFile."nvim/parser".source = "${pkgs.symlinkJoin {
+        name = "treesitter-parsers";
+        paths = (pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars).dependencies;
+      }}/parser";
+    }
   ];
   inherit enabledLanguages;
   extraPrograms = {
