@@ -88,8 +88,8 @@ in {
       which-key-nvim
 
       # LSP, linters, and language tooling
-      unstableVim.lsp-zero-nvim
-      unstableVim.nvim-lspconfig
+      lsp-zero-nvim
+      nvim-lspconfig
       nvim-treesitter.withAllGrammars
       trouble-nvim
       unstableVim.formatter-nvim
