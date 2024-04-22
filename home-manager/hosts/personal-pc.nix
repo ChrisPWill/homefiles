@@ -55,6 +55,7 @@ in {
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.yaml-language-server
+    jetbrains.rust-rover
   ];
   windowManager = "hyprland";
 }
