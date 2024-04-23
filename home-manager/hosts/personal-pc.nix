@@ -39,6 +39,9 @@ in {
   ];
   inherit enabledLanguages;
   extraPrograms = {
+    helix = {
+      enable = true;
+    };
     neovim = import ../programs/neovim/neovim.nix {
       inherit pkgs;
       inherit pkgs-unstable;
@@ -55,7 +58,6 @@ in {
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.yaml-language-server
-    jetbrains.rust-rover
   ];
   windowManager = "hyprland";
 }
