@@ -75,6 +75,13 @@
             # Merge common and system-specific programs
             programs = lib.mkForce (lib.mergeAttrs commonPrograms (lib.mergeAttrs homeSystemConfig.extraPrograms homeHostConfig.extraPrograms));
           }
+          # Neovim treesitter fix
+          {
+            xdg.configFile."nvim/parser".source = "${pkgs.symlinkJoin {
+              name = "treesitter-parsers";
+              paths = (pkgs.vimPlugins.nvim-treesitter.withAllGrammars).dependencies;
+            }}/parser";
+          }
         ]
         ++ homeSystemConfig.extraModules
         ++ homeHostConfig.extraModules; # Include extra modules from system and machine files

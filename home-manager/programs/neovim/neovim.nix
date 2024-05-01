@@ -90,7 +90,7 @@ in {
       # LSP, linters, and language tooling
       unstableVim.lsp-zero-nvim
       unstableVim.nvim-lspconfig
-      unstableVim.nvim-treesitter.withAllGrammars
+      unstableVim.nvim-treesitter
       trouble-nvim
       unstableVim.formatter-nvim
 
