@@ -39,22 +39,26 @@ in {
   ];
   inherit enabledLanguages;
   extraPrograms = {
+    helix = {
+      enable = true;
+    };
     neovim = import ../programs/neovim/neovim.nix {
       inherit pkgs;
       inherit pkgs-unstable;
       inherit lib;
       inherit enabledLanguages;
       inherit theme;
+      enableCopilot = true;
     };
   };
   extraPackages = with pkgs; [
     discord
     qbittorrent
-    rust-analyzer
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.yaml-language-server
+    pkgs-unstable.rust-analyzer
+    pkgs-unstable.nodePackages.dockerfile-language-server-nodejs
+    pkgs-unstable.nodePackages.typescript
+    pkgs-unstable.nodePackages.typescript-language-server
+    pkgs-unstable.nodePackages.yaml-language-server
   ];
   windowManager = "hyprland";
 }

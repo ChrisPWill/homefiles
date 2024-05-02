@@ -61,6 +61,26 @@
             select = false,
           }),
           ['<C-Space>'] = cmp.mapping.complete(),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
         }
       })
     ''
@@ -88,9 +108,9 @@ in {
       which-key-nvim
 
       # LSP, linters, and language tooling
-      lsp-zero-nvim
-      nvim-lspconfig
-      nvim-treesitter.withAllGrammars
+      unstableVim.lsp-zero-nvim
+      unstableVim.nvim-lspconfig
+      unstableVim.nvim-treesitter
       trouble-nvim
       unstableVim.formatter-nvim
 
@@ -255,6 +275,7 @@ in {
       local lspconfig = require('lspconfig')
       -- cmp for later config
       local cmp = require('cmp')
+
 
     ''
     + (builtins.concatStringsSep "\n" luaConfigs)
