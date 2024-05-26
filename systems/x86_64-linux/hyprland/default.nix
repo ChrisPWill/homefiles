@@ -14,6 +14,7 @@ in {
     swayidle
     wayland
     wlr-randr
+    xdg-desktop-portal-hyprland
   ];
 
   environment.sessionVariables = {
