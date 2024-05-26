@@ -39,8 +39,8 @@ in {
   ];
   inherit enabledLanguages;
   extraPrograms = {
-    helix = {
-      enable = true;
+    helix = import ../programs/helix.nix {
+      pkgs = pkgs-unstable;
     };
     neovim = import ../programs/neovim/neovim.nix {
       inherit pkgs;
