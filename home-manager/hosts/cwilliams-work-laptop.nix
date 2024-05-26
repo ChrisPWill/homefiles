@@ -41,6 +41,9 @@ in {
       inherit theme;
       enableCopilot = true;
     };
+    helix = import ../programs/helix.nix {
+      pkgs = pkgs-unstable;
+    };
   };
   extraPackages = with pkgs; [
     nodePackages.dockerfile-language-server-nodejs
