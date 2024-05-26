@@ -59,7 +59,11 @@ in ''
   bind=CTRL_ALT,c,killactive,
   bind=CTRL_ALT,space,togglefloating,
   bind=CTRL_ALT,m,exit,
+  bind=CTRL_ALT,f,fullscreen,0
+  bind=CTRL_ALT,p,pin,
   bindm=CTRL_ALT,mouse:272,movewindow
+  bindm=CTRL_ALT,mouse:273,resizewindow
+
 
   # locks and login
   bind=CTRL_ALT,q,exec,swaylock
@@ -83,6 +87,16 @@ in ''
   # Default workspaces based on monitor
   workspace=DP-1,1
   workspace=DP-2,6
+  workspace=1,monitor:DP-1, default:true
+  workspace=2,monitor:DP-1
+  workspace=3,monitor:DP-1
+  workspace=4,monitor:DP-1
+  workspace=5,monitor:DP-1
+  workspace=6,monitor:DP-2, default:true
+  workspace=7,monitor:DP-2
+  workspace=8,monitor:DP-2
+  workspace=9,monitor:DP-2
+  workspace=0,monitor:DP-2
 
   # Switch to workspace
   bind=CTRL_ALT,1,workspace,1
