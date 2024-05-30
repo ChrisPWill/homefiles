@@ -60,6 +60,7 @@ in ''
   bind=CTRL_ALT,space,togglefloating,
   bind=CTRL_ALT,m,exit,
   bind=CTRL_ALT,f,fullscreen,0
+  bind=CTRL_ALT_SHIFT,f,fakefullscreen,0
   bind=CTRL_ALT,p,pin,
   bindm=CTRL_ALT,mouse:272,movewindow
   bindm=CTRL_ALT,mouse:273,resizewindow
