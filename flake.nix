@@ -25,7 +25,6 @@
     systemConfigs = import ./systems;
     userConfigs = import ./shared/users.nix;
     theme = import ./shared/theme.nix;
-    constants = import ./shared/constants.nix;
     inherits = {
       inherit (nixpkgs) lib;
       inherit inputs nixpkgs nixpkgs-unstable home-manager theme;
@@ -33,10 +32,18 @@
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = builtins.attrValues constants.systems;
+      systems = [
+        "x86_64-darwin"
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
 
       flake = {
-        hosts = builtins.attrValues constants.hosts;
+        hosts = [
+          "cwilliams-work-laptop"
+          "personal-pc"
+          "personal-vm"
+        ];
 
         nixosConfigurations = import ./nixos (inherits
           // {

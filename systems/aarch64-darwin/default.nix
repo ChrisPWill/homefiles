@@ -1,11 +1,13 @@
-let
-  darwinArmSystem = (import ../../shared/constants.nix).systems.darwinArmSystem;
-in {
+{
   name = "aarch64darwin";
-  system = darwinArmSystem;
-  extraModules = {pkgs, lib, ...}: [
+  system = "aarch64-darwin";
+  extraModules = {
+    pkgs,
+    lib,
+    ...
+  }: [
     {
-      nixpkgs.hostPlatform = lib.mkDefault darwinArmSystem;
+      nixpkgs.hostPlatform = lib.mkDefault "aarch64-darwin";
       environment.systemPackages = with pkgs; [
         home-manager
       ];

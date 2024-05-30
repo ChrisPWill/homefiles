@@ -1,6 +1,6 @@
 let
-  host = (import ../../shared/constants.nix).hosts.workMbp;
-  darwinArmSystem = (import ../../shared/constants.nix).systems.darwinArmSystem;
+  host = "cwilliams-work-laptop";
+  darwinArmSystem = "aarch64-darwin";
   stateVersion = "22.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;
