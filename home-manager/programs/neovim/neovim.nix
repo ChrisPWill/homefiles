@@ -235,6 +235,18 @@ in {
         ["<leader>xx"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble (listing errors etc.)" },
       }, { mode = "n" })
 
+      -- Clipboard
+      whichkey.register({
+        ["<leader>y"] = { "+y", "Copy to clipboard" },
+        ["<leader>p"] = { "+p", "Paste from clipboard" },
+        ["<leader>p"] = { "+P", "Paste before from clipboard" },
+      }, { mode = "n" })
+      whichkey.register({
+        ["<leader>y"] = { "+y", "Copy to clipboard" },
+        ["<leader>p"] = { "+p", "Paste from clipboard" },
+        ["<leader>p"] = { "+P", "Paste before from clipboard" },
+      }, { mode = "v" })
+
       -- LSP
       local lsp = require('lsp-zero').preset("manual-setup")
 
