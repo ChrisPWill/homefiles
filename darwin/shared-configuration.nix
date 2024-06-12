@@ -21,6 +21,7 @@
       "scroll-reverser"
       "spotify"
       "visual-studio-code"
+      "nikitabobko/tap/aerospace"
     ];
   };
 

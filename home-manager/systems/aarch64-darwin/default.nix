@@ -15,5 +15,9 @@
     };
   };
   extraPackages = [];
-  extraModules = [];
+  extraModules = [
+    {
+      home.file.".aerospace.toml".source = ./aerospace.toml;
+    }
+  ];
 }
