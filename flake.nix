@@ -10,6 +10,7 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs @ {
@@ -18,6 +19,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    flake-parts,
   }: let
     hostConfigs = import ./hosts;
     systemConfigs = import ./systems;
@@ -28,21 +30,39 @@
       inherit inputs nixpkgs nixpkgs-unstable home-manager theme;
       inherit hostConfigs systemConfigs;
     };
-  in {
-    nixosConfigurations = import ./nixos (inherits
-      // {
-        user = userConfigs.cwilliams;
-      });
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "x86_64-darwin"
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
 
-    darwinConfigurations = import ./darwin (inherits
-      // {
-        inherit darwin;
-        user = userConfigs.cwilliams;
-      });
+      flake = {
+        hosts = [
+          "cwilliams-work-laptop"
+          "personal-pc"
+          "personal-vm"
+        ];
 
-    homeConfigurations = import ./home-manager (inherits
-      // {
-        user = userConfigs.cwilliams;
-      });
-  };
+        nixosConfigurations = import ./nixos (inherits
+          // {
+            user = userConfigs.cwilliams;
+          });
+
+        darwinConfigurations = import ./darwin (inherits
+          // {
+            inherit darwin;
+            user = userConfigs.cwilliams;
+          });
+
+        homeConfigurations = import ./home-manager (inherits
+          // {
+            user = userConfigs.cwilliams;
+          });
+      };
+
+      perSystem = {config, ...}: {
+      };
+    };
 }

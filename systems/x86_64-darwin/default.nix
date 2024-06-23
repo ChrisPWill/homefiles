@@ -1,11 +1,9 @@
-let
-  darwinSystem = (import ../../shared/constants.nix).systems.darwinSystem;
-in {
+{
   name = "x64darwin";
-  system = darwinSystem;
+  system = "x86_64-darwin";
   extraModules = {lib, ...}: [
     {
-      nixpkgs.hostPlatform = lib.mkDefault darwinSystem;
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-darwin";
     }
   ];
 }

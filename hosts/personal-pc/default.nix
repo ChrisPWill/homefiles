@@ -1,5 +1,5 @@
 let
-  host = (import ../../shared/constants.nix).hosts.personalPc;
+  host = "personal-pc";
   stateVersion = "23.11";
   utils = import ../utils.nix;
   sharedUsers = import ../../shared/users.nix;

@@ -1,8 +1,6 @@
-let
-  linuxSystem = (import ../../shared/constants.nix).systems.linuxSystem;
-in {
+{
   name = "x64linux";
-  system = linuxSystem;
+  system = "x86_64-linux";
   extraModules = {
     inputs,
     pkgs,
@@ -13,7 +11,7 @@ in {
   }: [
     {
       services.gvfs.enable = true;
-      nixpkgs.hostPlatform = lib.mkDefault linuxSystem;
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     }
     {
       # Enable audio
